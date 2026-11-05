@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Andrew Basile</title>
+<link rel="canonical" href="https://andrewbasile.work/">
+<meta name="description" content="Andrew Basile, content strategist and product marketer. Short-form strategy, launch campaigns, and the AI skills and automations behind them.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Built from the Figma frame "andrewbasile.com / Desktop": 1440 canvas, 130px gutters, white page, hairline rules, one spring-green accent used only for pops. Single light theme by design. */
+:root{
+  --ink:#111111; --muted:#6e6e6a; --rule:#e4e4e0; --band:#f7f7f5; --green:#00ea74; --bg:#ffffff;
+  --phone:#17181a; --phone-edge:#3a3c40;
+  --font:'Figtree',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --gutter:max(16px,env(safe-area-inset-left,0px));
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1440px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px),calc((100% - 1180px)/2));padding-right:max(16px,env(safe-area-inset-right,0px),calc((100% - 1180px)/2))}
+.g{color:var(--green)}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;line-height:1;white-space:nowrap;transition:transform .2s ease,background .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.fill{background:var(--green);color:var(--ink)}
+.btn.line{border:1px solid var(--ink)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:16px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.03em}
+.mark i{width:9px;height:9px;background:var(--green);transform:rotate(45deg);display:block}
+.links{display:flex;gap:28px;font-weight:500;font-size:15px;color:var(--muted)}
+.links a:hover{color:var(--ink)}
+@media (max-width:1000px){.links{display:none}}
+
+/* Hero */
+.hero .wrap{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:0 40px;align-items:end;min-height:min(780px,88vh);padding-block:0;padding-left:0}
+.hero-copy{padding-left:57px}
+.portrait{height:min(700px,80vh);position:relative;overflow:hidden;align-self:end}
+.portrait img{position:absolute;left:0;bottom:-6%;height:106%;width:auto;max-width:none}
+.hero-copy{padding-block:clamp(40px,8vh,124px) 44px;display:flex;flex-direction:column;gap:36px;align-self:center}
+.hero h1{font-weight:500;font-size:clamp(84px,14.6vw,210px);line-height:.84;letter-spacing:-.065em;margin:0}
+.hero .role{font-weight:600;font-size:19px;margin:14px 0 0}
+.hero p.lede{color:var(--muted);font-size:18px;line-height:1.5;max-width:480px;margin:14px 0 0}
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;min-height:0}
+  .portrait{height:min(420px,60vw);order:2}
+  .hero-copy{order:1;padding-block:40px 8px;padding-left:max(16px,env(safe-area-inset-left,0px))}
+}
+
+/* About */
+.about .wrap{display:grid;grid-template-columns:minmax(0,480px) minmax(0,640px);gap:60px;padding-block:88px;align-items:start}
+.about h2{font-weight:600;font-size:clamp(30px,3.2vw,42px);line-height:1.08;letter-spacing:-.035em;margin:0;max-width:480px}
+.about h2 .g{display:inline-block;line-height:1.08}
+.about-body{display:flex;flex-direction:column;gap:20px;min-width:0}
+.about-body p{margin:0;color:var(--muted)}
+.open{display:flex;gap:12px;align-items:flex-start;background:var(--band);border-radius:14px;padding:16px 20px;max-width:600px;color:var(--ink);font-size:16px;line-height:1.5}
+.open i{flex:none;width:9px;height:9px;border-radius:50%;background:var(--green);margin-top:8px}
+@media (max-width:900px){.about .wrap{grid-template-columns:1fr;gap:28px;padding-block:56px}}
+hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
+
+/* Chapter heading */
+.chapter{padding-block:88px}
+.chapter-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:44px}
+.chapter-head h2{font-weight:600;font-size:clamp(44px,4.6vw,66px);line-height:.98;letter-spacing:-.045em;margin:0;max-width:620px}
+.chapter-head p{margin:0;color:var(--muted);max-width:480px}
+@media (max-width:900px){.chapter{padding-block:56px}.chapter-head{flex-direction:column;align-items:flex-start;gap:16px}}
+
+/* Case cards (shared) */
+.card{background:#fff;border:1px solid var(--rule);border-radius:20px;padding:34px}
+.copy{display:flex;flex-direction:column;gap:16px;min-width:0}
+.copy h3{font-weight:600;font-size:clamp(26px,2.6vw,38px);line-height:1.04;letter-spacing:-.03em;margin:0}
+.copy .services{color:var(--muted);font-weight:500;font-size:15px;line-height:1.45;margin:0}
+.copy p{margin:0;color:var(--muted)}
+.impact{list-style:none;margin:6px 0 0;padding:0}
+.impact li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--rule);font-weight:500;font-size:16px;line-height:1.5;color:var(--ink)}
+.impact li::before{content:"";flex:none;width:10px;height:2px;background:var(--green);margin-top:11px}
+.copy .collab{font-size:15px}
+
+/* Content: phone stack cases */
+.track{position:relative}
+.stage{position:sticky;top:88px}
+.stage .card{background:#fff}
+.case{display:grid;grid-template-columns:564px minmax(0,1fr);gap:44px;align-items:center}
+.stack{display:grid;grid-template-columns:300px 236px;gap:28px;align-items:center}
+.deck{position:relative;width:300px;height:506px}
+.phone{position:absolute;left:0;top:0;width:236px;height:506px;border-radius:40px;background:var(--phone);box-shadow:0 0 0 1.5px var(--phone-edge),inset 0 0 0 1px rgba(255,255,255,.12),0 30px 60px -24px rgba(0,0,0,.35);z-index:3;cursor:pointer}
+.screen{position:absolute;inset:9px;border-radius:31px;overflow:hidden;background:#000}
+.screen::after{content:"";position:absolute;left:50%;top:14px;transform:translateX(-50%);width:74px;height:22px;border-radius:11px;background:#000;z-index:5}
+/* Liquid reveal: a crisp, gently wobbling blob (clip-path, drawn by JS each frame) grows in from the right edge of the screen, where the next clip is waiting, so the new clip wipes over the old one with a clean but organic line. */
+.slide{position:absolute;inset:0;clip-path:circle(0 at 104% 50%);
+  transform:translateX(6%) scale(1.06);
+  transition:transform 1.05s cubic-bezier(.65,0,.2,1)}
+.slide.on{clip-path:none;transform:translateX(0) scale(1);z-index:2}
+.slide.was{clip-path:none;transform:translateX(0) scale(1);transition:none;z-index:1}
+.chapter-head.pin{position:sticky;z-index:0}
+.slide img,.slide video{width:100%;height:100%;object-fit:cover}
+.next{position:absolute;right:-4px;top:97px;width:176px;height:312px;border-radius:18px;overflow:hidden;background:#ddddda;box-shadow:0 24px 48px -20px rgba(0,0,0,.22);opacity:.95;z-index:1;cursor:pointer;transition:transform .9s cubic-bezier(.7,0,.2,1),opacity .5s ease}
+.next img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transition:opacity .4s ease}
+.next img.on{opacity:1}
+.next.into{transform:translate(-62px,0) scale(1.24);opacity:0}
+.next:hover{transform:translate(4px,-4px)}
+.next .tip{position:absolute;left:0;right:0;bottom:12px;text-align:center;color:#fff;font-size:12px;font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.6);opacity:0;transition:opacity .3s}
+.next:hover .tip{opacity:1}
+.stats{position:relative;width:236px;min-height:260px}
+.set{position:absolute;inset:0 0 auto 0;top:50%;transform:translateY(calc(-50% + 24px));opacity:0;pointer-events:none;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .4s ease}
+.set.on{transform:translateY(-50%);opacity:1;pointer-events:auto}
+.set.past{transform:translateY(calc(-50% - 24px))}
+.set h4{font-weight:600;font-size:17px;letter-spacing:-.01em;line-height:1.25;margin:0}
+.set h4 a{display:inline-flex;gap:6px;align-items:baseline}
+.set h4 a .g{transition:transform .25s}
+.set h4 a:hover .g{transform:translate(2px,-2px)}
+.set .handle{color:var(--muted);font-weight:500;font-size:13px;margin:4px 0 14px}
+.lines{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.lines li{display:flex;justify-content:flex-start;align-items:baseline;gap:8px;padding:10px 0;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.lines li b{font-weight:600;font-size:15px;letter-spacing:-.01em;color:var(--green)}
+.lines li:first-child{padding-block:12px}.lines li:first-child b{font-size:20px}
+.lines li span{color:var(--ink);font-weight:500;font-size:13px}
+.ticks{display:flex;gap:8px;margin-top:18px}
+.ticks i{width:28px;height:2px;background:var(--rule);display:block;transition:background .3s;cursor:pointer}
+.ticks i.on{background:var(--green)}
+.cases{display:flex;flex-direction:column}
+.track + .track,.headwrap + .cases > .track:first-child{margin-top:44px}
+@media (max-width:1100px){
+  .case{grid-template-columns:1fr;gap:28px}
+  .stage{position:static}
+  .stack{grid-template-columns:300px minmax(0,1fr);justify-content:start}
+}
+@media (max-width:640px){
+  .card{padding:22px}
+  .stack{grid-template-columns:1fr;gap:16px}
+  .deck{width:100%;max-width:300px;height:420px}
+  .phone{width:196px;height:420px;border-radius:34px}
+  .screen{inset:8px;border-radius:27px}
+  .next{width:140px;height:248px;top:86px;right:0}
+  .stats{width:100%;min-height:0}
+  .set{position:relative;top:auto;transform:none;display:none}
+  .set.on{display:block;transform:none}
+}
+
+/* Additional work */
+.additional h3{font-weight:600;font-size:38px;letter-spacing:-.03em;margin:44px 0 20px}
+.addrow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
+.addrow a{display:flex;flex-direction:column;gap:10px;min-width:0}
+.addrow .v{aspect-ratio:220/391;border-radius:14px;overflow:hidden;background:#ddddda;max-width:100%}
+.addrow .v img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.addrow a:hover .v img{transform:scale(1.03)}
+.addrow .t{display:flex;justify-content:space-between;gap:6px;font-weight:600;font-size:14px}
+@media (max-width:900px){.addrow{grid-template-columns:repeat(2,minmax(0,1fr))}.addrow a:last-child{grid-column:span 2;max-width:50%}}
+
+/* Product marketing */
+.pm-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pm-grid + .pm-grid{margin-top:16px}
+.titlerow{display:flex;align-items:center;gap:16px}
+.logo{flex:none;width:64px;height:64px;border-radius:14px;display:grid;place-items:center;overflow:hidden}
+.logo img{width:64px;height:64px;object-fit:contain}
+.titlerow h3{margin:0;font-size:30px;letter-spacing:-.03em;line-height:1.04}
+.titlerow .sub{color:var(--muted);font-weight:500;font-size:14px;line-height:1.45;margin:4px 0 0}
+.site{font-weight:600;font-size:14px;display:inline-flex;gap:6px}
+@media (max-width:900px){.pm-grid{grid-template-columns:1fr}}
+
+/* Contact + footer */
+.contact{text-align:center;padding-block:104px;display:flex;flex-direction:column;align-items:center;gap:20px}
+.contact h2{font-weight:600;font-size:clamp(40px,5.5vw,80px);line-height:.98;letter-spacing:-.045em;margin:0;text-wrap:balance}
+.contact p{margin:0;color:var(--muted);max-width:520px}
+.email{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;padding-top:12px}
+.email code{font-family:var(--font);background:var(--band);border:1px solid var(--rule);border-radius:12px;padding:12px 18px;font-weight:500;font-size:clamp(16px,2.2vw,22px);letter-spacing:-.01em;user-select:all}
+.email button{border:0;cursor:pointer;font:inherit}
+.socials{display:flex;gap:26px;padding-top:8px;color:var(--muted);font-weight:500;font-size:15px}
+.footer{background:var(--ink);color:#b9b9b5;font-size:14px}
+.footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:36px;flex-wrap:wrap}
+.footer nav{display:flex;gap:22px;flex-wrap:wrap}
+.footer .mail{color:var(--green);font-weight:500;font-size:17px}
+@media (prefers-reduced-motion:reduce){.slide,.next,.set{transition:opacity .3s ease}.slide{clip-path:none;transform:none;opacity:0}.slide.on,.slide.was{opacity:1}.next.into{transform:none}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="mark" href="#top"><i></i>Andrew Basile</a>
+    <nav class="links">
+      <a href="#about">About</a><a href="#content">Content</a><a href="#product-marketing">Product Marketing</a><a href="skills.html">Skills &amp; Automations</a>
+    </nav>
+    <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="portrait"><img src="assets/headshot.png" alt="Andrew Basile, black and white portrait"></div>
+    <div class="hero-copy">
+      <div>
+        <h1>Andrew<br>Basile</h1>
+        <p class="role">Content Strategist <span class="g">&amp;</span> Product Marketer</p>
+        <p class="lede">lorem ipsum dolor</p>
+      </div>
+      <div><a class="btn fill" href="#content">See the work &nbsp;↓</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <h2>Ideas that resonate<br><span class="g">+</span><br>Content built for the algorithm<br><span class="g">=</span><br>Growth you can count on</h2>
+    <div class="about-body">
+      <p>Here’s my hypothesis. We live in an algorithmic era, which means anyone can reach millions of people tomorrow with the right piece of content. The platforms no longer care who you are. They care whether people watch.</p>
+      <p>My work sits at the intersection of two things that have to happen for that to work. The first is the idea. You need ideas with real context behind them, ideas that come from knowing your brand, your audience, and what is actually happening in your category right now. AI is not great at that yet...trust me, I would’ve built a skill out of it already if it was. Then, those ideas need to be positioned so they land with the exact person you want as a customer, in their language, around what they already care about.</p>
+      <p>The second is the format. A great idea in the wrong package dies in the first two seconds. I’ve spent my career learning which formats travel on the algorithm and which ones stall, across thousands of edits. That is the part most brands skip, and it is the part that decides whether an idea reaches ten people or ten million.</p>
+      <p>Put those together and you get growth you can count on.</p>
+      <div class="open"><i></i><div>Currently open to senior roles in content, product marketing, and partnerships, in-house or embedded with a founding team.</div></div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<section class="chapter" id="content">
+  <div class="wrap">
+    <div class="pinwrap">
+    <div class="chapter-head" id="content-head">
+      <h2>Content<span class="g">.</span></h2>
+      <p>Short-form strategy, series development, clipping, and social video production for creators, athletes, and brands. I contributed strategy, scripting, and/or editing to every video shown here.</p>
+    </div>
+    <div class="cases" id="cases"></div>
+    </div>
+    <div class="additional">
+      <h3>Additional work<span class="g">.</span></h3>
+      <div class="addrow">
+        <a href="https://www.instagram.com/sturniolo.triplets/reels/" target="_blank" rel="noopener"><div class="v"><img src="assets/add-sturniolo.jpg" alt=""></div><div class="t"><span>Sturniolo Triplets</span><span class="g">↗</span></div></a>
+        <a href="https://www.instagram.com/shortgameking/" target="_blank" rel="noopener"><div class="v"><img src="assets/add-sgk.jpg" alt=""></div><div class="t"><span>Short Game King</span><span class="g">↗</span></div></a>
+        <a href="https://www.instagram.com/autograph.io/" target="_blank" rel="noopener"><div class="v"><img src="assets/add-autograph.jpg" alt=""></div><div class="t"><span>Autograph</span><span class="g">↗</span></div></a>
+        <a href="https://www.instagram.com/charlisse.legerwalker/" target="_blank" rel="noopener"><div class="v"><img src="assets/add-charlisse.jpg" alt=""></div><div class="t"><span>Charlisse Leger-Walker</span><span class="g">↗</span></div></a>
+        <a href="https://www.instagram.com/boy.throb/" target="_blank" rel="noopener"><div class="v"><img src="assets/add-boythrob.jpg" alt=""></div><div class="t"><span>Boy Throb</span><span class="g">↗</span></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<section class="chapter" id="product-marketing">
+  <div class="wrap">
+    <div class="chapter-head">
+      <h2>Product Marketing<span class="g">.</span></h2>
+      <p>Positioning, launch campaigns, paid social, and the conversion mechanics underneath them. I have done this for venture-backed startups, a print product launching in a new city, and products I built myself.</p>
+    </div>
+    <div class="pm-grid">
+      <article class="card copy">
+        <div class="titlerow"><div class="logo"><img src="assets/logo-autograph.png" alt=""></div><h3>Autograph</h3></div>
+        <p class="services">Product Marketing Manager, Feb 2024 - Jan 2025.<br>Go-to-Market, Growth Campaigns, Product Marketing, Organic Social</p>
+        <p>Product marketing at Autograph, Tom Brady’s a16z-backed company. Spearheaded go-to-market strategy for three league launches (NBA, MLB, NFL) and two major feature releases, and ran the $1.2M annual marketing budget and a $50K paid social agency account.</p>
+        <p>Led brand marketing for the “Don’t Auto-Draft, use Autograph,” “Gotta Get There” ticket marketplace, and “Autograph Replay” campaigns, and used market research and user feedback to shape Autograph Replay into the product’s highest-retaining feature.</p>
+        <ul class="impact">
+          <li>125,000+ users acquired in 9 months across the three league launches and two feature releases</li>
+          <li>53% reduction in cost per acquisition on a $1.2M budget, with paid social CPA under $3.00</li>
+          <li>Autograph Replay reached 20%+ D7 retention, the highest of any feature</li>
+          <li>The “Fletchair” campaign with Purdue’s Fletcher Loyer set the app’s single-day user acquisition record</li>
+          <li>400%+ TikTok follower growth and 2M+ monthly Instagram impressions from the organic social strategy</li>
+        </ul>
+      </article>
+      <article class="card copy">
+        <div class="titlerow"><div class="logo"><img src="assets/logo-rdb.png" alt=""></div><h3>Red Dining Book</h3></div>
+        <p class="services">Marketing Strategy, Paid Social Content, Market Launch Campaign</p>
+        <p>Led the expansion of the Red Dining Book from Los Angeles to New York City.</p>
+        <p>Worked as a marketing partner across content and distribution, producing paid social campaigns, UGC content partnerships, and digital content designed to drive awareness and sales for the NYC edition.</p>
+        <ul class="impact">
+          <li>$150,000+ revenue generated in the first year of the market launch</li>
+          <li>4x ROAS on paid social campaigns</li>
+          <li>Managed the NYC regional UGC partnership strategy</li>
+        </ul>
+      </article>
+    </div>
+    <div class="pm-grid" id="partnerships">
+      <article class="card copy">
+        <div class="titlerow"><div class="logo"><img src="assets/logo-amplifii.png" alt=""></div><div><h3>Amplifii</h3><p class="sub">Strategic Advisor · UGC creator partnership marketplace</p></div></div>
+        <p>Amplifii is a creator marketing platform where brands post a brief and a reward pool, and hundreds of creators pick it up and post across Instagram, TikTok, YouTube, and X. I advise the founding team on partnerships and product marketing.</p>
+        <p>Most of the work is opening doors: brokering strategic partnerships with brands, agencies, and creator networks that bring supply and demand onto the marketplace. The rest is product input, using what I have learned running UGC partnerships for clients to help the team shape features that creators and brand managers actually want to use, and then helping tell the story of those features once they ship.</p>
+        <ul class="impact">
+          <li>Facilitates strategic partnerships that bring brands and creator supply onto the platform</li>
+          <li>Advises on feature development from hands-on experience running UGC partnership programs</li>
+          <li>Supports go-to-market messaging for new product launches like Bounties and Conductor</li>
+        </ul>
+        <a class="site" href="https://www.amplifiimarket.com/" target="_blank" rel="noopener">amplifiimarket.com <span class="g">↗</span></a>
+      </article>
+      <article class="card copy">
+        <div class="titlerow"><div class="logo"><img src="assets/logo-quix.png" alt=""></div><div><h3>Quix</h3><p class="sub">Head of Marketing, Jun 2021 to Mar 2023 · NFT marketplace on Optimism</p></div></div>
+        <p>First non-technical hire at Quix, where I led marketing, business development, and community for a three-person team that built the third largest NFT marketplace in the world.</p>
+        <p>I onboarded developers, artists, and collectors to a brand new Layer 2 ecosystem, built the brand and community strategy from the product’s value proposition, and ran the campaigns and partnerships that drove volume.</p>
+        <ul class="impact">
+          <li>Scaled the Optimism NFT ecosystem to 150+ collections, $11.7M in volume, 315K unique users, and 550K transactions</li>
+          <li>Grew the brand to 150K Twitter followers, 523K average monthly impressions, and a 20K-member Discord</li>
+          <li>Directed the “OP OG” campaign: $743K single-day volume and a 15x lift in daily average volume</li>
+          <li>Facilitated GTM partnerships with zapper.fi, mirror.xyz, CoinGecko, Rainbow Wallet, and Layer3</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contact wrap" id="contact">
+  <h2>Got a brief? Let's talk<span class="g">.</span></h2>
+  <p>Full-time roles, embedded engagements, or a founder who needs content, product marketing, and partnerships handled by one person.</p>
+  <div class="email"><code id="email">andrew.basile12@gmail.com</code><button class="btn fill" id="copy" type="button">Copy email</button></div>
+  <div class="socials"><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn <span class="g">↗</span></a><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram <span class="g">↗</span></a></div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <nav><a href="#top">Home</a><a href="#about">About</a><a href="#content">Content</a><a href="#product-marketing">Product Marketing</a><a href="skills.html">Skills &amp; Automations</a></nav>
+    <a class="mail" href="#contact">andrew.basile12@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+const CASES=[
+ {id:'lynden-lane',name:'Lynden Lane',services:'Content Strategy, Short-Form Series Development, Editing, Production',
+  paras:['Partnered with Lynden Lane Co. to develop an organic short-form video strategy showcasing their expertise in luxury wedding design and planning.','The content built authority and trust with prospective clients, growing the brand’s audience, generating millions of views, and contributing directly to new business revenue.'],
+  impact:['25,000+ followers acquired on Instagram','2.5M+ organic views generated across the social series','$2,000,000 in revenue driven through organic content'],
+  handle:'@lyndenlane',url:'https://www.instagram.com/lyndenlane/',
+  clips:[{title:'Stay in your (Lynden) Lane',img:'assets/lynden-1.jpg',stats:[['139K','views'],['2.6K','likes'],['145','comments']]},
+         {title:'5 Senses',img:'assets/lynden-2.jpg',stats:[['108K','views'],['437','likes'],['35','comments']]}]},
+ {id:'chad-jt',name:'Chad & JT',services:'Short-Form Strategy, Organic Franchise Development, Editing, Clipping, Social Video Production',
+  paras:['Supported comedians Chad Kroeger and JT Parr with the launch and growth of their YouTube series, Stoked Eye for the Sad Guy, through short-form content production and strategy.','Led clipping and short-form marketing for the series while helping develop new organic content franchises, including JT’s “Brolitical Commentator” format.'],
+  impact:['50+ short-form clips produced','9M+ organic short-form views','100K+ YouTube series views'],collab:'Collaborations with Bobby Lee, Robby Hoffman, Anders Holm, and Zedd.',
+  handle:'@jtparr14',url:'https://www.instagram.com/jtparr14/',
+  clips:[{title:'Brolitical Commentator',img:'assets/chadjt-1.jpg',stats:[['13.3M','views'],['1.1M','likes'],['23.9K','comments'],['28.2K','shares']]},
+         {title:'Nolan @ City Council',img:'assets/chadjt-2.jpg',handle:'@chadgoesdeep',url:'https://www.instagram.com/chadgoesdeep/',stats:[['581K','views'],['13.4K','likes'],['334','comments'],['207','shares']]}]},
+ {id:'charlisse',name:'Charlisse Leger-Walker',services:'Short-Form Strategy, Organic Franchise Development, Editing, Social Video Production',
+  paras:['Led short-form strategy and production for Charlisse Leger-Walker, UCLA WBB point guard and first-round WNBA draft pick, supporting the growth of her personal YouTube channel and social presence.','Developed organic content series, collaborated with official UCLA Athletics accounts, and helped generate content that was featured by ESPN and March Madness.'],
+  impact:['1M+ organic social views','2.5K+ YouTube subscribers','Series coverage from Fox, ESPN, and March Madness'],collab:'Collaborations with and coverage from UCLA Athletics, ESPN, and March Madness.',
+  handle:'@charlisse.legerwalker',url:'https://www.instagram.com/charlisse.legerwalker/',
+  clips:[{title:'Letting frat guys pick my celebration',img:'assets/charlisse-1.jpg',stats:[['538K','views'],['20.8K','likes'],['75','comments'],['107','shares']]},
+         {title:'Undercover Smack Talk',img:'assets/charlisse-2.jpg',stats:[['81K','views'],['4,206','likes'],['96','comments'],['65','shares']]}]}
+];
+const root=document.getElementById('cases');
+const desktop=()=>window.matchMedia('(min-width:1101px)').matches;
+const reducedMotion=window.matchMedia('(prefers-reduced-motion:reduce)');
+// Blob reveal: a near-circle whose edge is bent by three slow sine waves (lava-lamp feel), growing from just past the
+// right edge of the screen until it covers the far corner. Drawn as a clip-path path() every frame for ~1s.
+function smoothPath(p){
+  const n=p.length; let d='M'+p[0][0].toFixed(1)+' '+p[0][1].toFixed(1);
+  for(let i=0;i<n;i++){ const p0=p[(i-1+n)%n],p1=p[i],p2=p[(i+1)%n],p3=p[(i+2)%n];
+    const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6], c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];
+    d+='C'+[c1[0],c1[1],c2[0],c2[1],p2[0],p2[1]].map(v=>v.toFixed(1)).join(' '); }
+  return d+'Z';
+}
+function blobReveal(el){
+  if(reducedMotion.matches){ el.style.clipPath=''; return; }
+  const w=el.offsetWidth, h=el.offsetHeight, cx=w*1.04, cy=h*.5, far=Math.hypot(cx,cy);
+  const AMP=.075, N=60, DUR=1050, seed=Math.random()*Math.PI*2, t0=performance.now();
+  const ease=u=>u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;
+  el.style.clipPath='circle(0 at 104% 50%)';
+  function frame(now){
+    const u=Math.min(1,(now-t0)/DUR), e=ease(u), R=e*far/(1-AMP)+1, pts=[];
+    for(let k=0;k<N;k++){ const a=k/N*Math.PI*2;
+      const wob=.5*Math.sin(3*a+seed+u*2.4)+.32*Math.sin(5*a-seed*1.7-u*1.8)+.18*Math.sin(8*a+seed*.6+u*3.2);
+      const r=R*(1+AMP*wob); pts.push([cx+r*Math.cos(a),cy+r*Math.sin(a)]); }
+    el.style.clipPath='path("'+smoothPath(pts)+'")';
+    if(u<1) el._raf=requestAnimationFrame(frame); else { el.style.clipPath=''; el._raf=0; }
+  }
+  el._raf=requestAnimationFrame(frame);
+}
+
+CASES.forEach(cs=>{
+  const n=cs.clips.length;
+  const track=document.createElement('div'); track.className='track'; track.id=cs.id;
+  track.innerHTML=`<div class="spacer"></div><div class="stage"><article class="card case">
+    <div class="stack">
+      <div class="deck">
+        <div class="next" title="Next clip">${cs.clips.map((c,i)=>`<img data-i="${i}" src="${c.img}" alt="">`).join('')}<div class="tip">Next clip</div></div>
+        <div class="phone" tabindex="0" aria-label="${cs.name} clips, click for next"><div class="screen">${cs.clips.map((c,i)=>`<div class="slide" data-i="${i}"><img src="${c.img}" alt="${c.title}"></div>`).join('')}</div></div>
+      </div>
+      <div class="stats">${cs.clips.map((c,i)=>`<div class="set" data-i="${i}">
+        <h4><a href="${c.url||cs.url}" target="_blank" rel="noopener">${c.title}<span class="g">↗</span></a></h4>
+        <p class="handle">${c.handle||cs.handle}</p>
+        <ul class="lines">${c.stats.map(([v,l])=>`<li><b>${v}</b><span>${l}</span></li>`).join('')}</ul>
+        <div class="ticks">${cs.clips.map((_,j)=>`<i data-go="${j}" class="${j===i?'on':''}"></i>`).join('')}</div>
+      </div>`).join('')}</div>
+    </div>
+    <div class="copy">
+      <h3>${cs.name}</h3>
+      <p class="services">${cs.services}</p>
+      ${cs.paras.map(p=>`<p>${p}</p>`).join('')}
+      <ul class="impact">${cs.impact.map(l=>`<li>${l}</li>`).join('')}</ul>
+      ${cs.collab?`<p class="collab">${cs.collab}</p>`:''}
+    </div>
+  </article></div>`;
+  root.appendChild(track);
+
+  const slides=[...track.querySelectorAll('.slide')], sets=[...track.querySelectorAll('.set')], nextEl=track.querySelector('.next'), nextImgs=[...nextEl.querySelectorAll('img')], phone=track.querySelector('.phone');
+  let active=-1, lock=false;
+  function setActive(i, animate=true){
+    if(i===active) return; const prev=active; active=i;
+    slides.forEach((s,j)=>{ if(s._raf){cancelAnimationFrame(s._raf);s._raf=0;} s.style.clipPath=''; s.classList.remove('on','was'); if(j===i)s.classList.add('on'); else if(j===prev)s.classList.add('was');});
+    if(animate && prev>=0) blobReveal(slides[i]);
+    sets.forEach((s,j)=>{s.classList.toggle('on',j===i); s.classList.toggle('past',j<i);});
+    const other=(i+1)%n;
+    if(animate && prev>=0){
+      nextEl.classList.add('into');
+      setTimeout(()=>{ nextImgs.forEach(im=>im.classList.toggle('on',+im.dataset.i===other)); nextEl.classList.remove('into'); },520);
+    } else nextImgs.forEach(im=>im.classList.toggle('on',+im.dataset.i===other));
+  }
+  setActive(0,false);
+  track._api={n,setActive,get active(){return active}};
+  // Tap or click also advances (the only way on narrow screens)
+  const go=i=>{ if(desktop()){ const s=track._scrollFor?track._scrollFor(i):null; if(s!=null){window.scrollTo({top:s,behavior:'smooth'});return;} } setActive(i); };
+  nextEl.addEventListener('click',()=>go((active+1)%n));
+  phone.addEventListener('click',()=>go((active+1)%n));
+  phone.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();go((active+1)%n);} });
+  track.querySelectorAll('.ticks i').forEach(t=>t.addEventListener('click',()=>go(+t.dataset.go)));
+});
+
+// Pinned scroll sequence (desktop only).
+// Card i pins at TOP while its clip morphs over a scroll distance D. During that stretch card i+1 pins at a PEEK
+// position directly under it, so the next case is always showing. When card i releases, card i+1 is switched to pin
+// at TOP and gets its own D. Track heights and negative margins keep the cards in normal flow positions otherwise.
+(function(){
+  const tracks=[...document.querySelectorAll('.track')]; const GAP=44; let TOP=88, D=0;
+  const nav=document.querySelector('.nav'), chap=document.getElementById('content'), head=document.getElementById('content-head');
+  // Geometry: track i = [spacer D (i>0)] + [card]. Tracks after the first overlap the previous track's hold distance
+  // (margin-top = GAP - D), so while card i-1 is held at TOP, card i's track top sits exactly at the peek position
+  // (TOP + h_prev + GAP). A sticky `bottom` keeps card i parked there until its own natural position arrives, then
+  // sticky `top` holds it at TOP for D while its clip morphs. Pure CSS positioning, so it reverses cleanly.
+  // The heading only sticks for the first case: it shares a wrapper with track 0, so sticky releases when that track
+  // ends. Later cards pin up near the nav (TOP = 88) and slide over the heading as they arrive.
+  const headwrap=document.createElement('div'); headwrap.className='headwrap';
+  head.parentNode.insertBefore(headwrap, head); headwrap.appendChild(head); headwrap.appendChild(tracks[0]);
+  function layout(){
+    const on=desktop(); let prevH=0, prevTop=88;
+    // Pin the first card exactly where it sits when the Content chapter's top meets the nav (heading still showing
+    // above it), and pin the heading with it. If the viewport is too short for that, slide the pin up so the card fits.
+    head.classList.remove('pin'); head.style.top='';
+    if(on){
+      const navH=nav.offsetHeight, chapTop=chap.getBoundingClientRect().top, h0=tracks[0].querySelector('.stage').offsetHeight;
+      const natural=Math.round(navH+(tracks[0].getBoundingClientRect().top-chapTop));
+      TOP=Math.max(88,Math.min(natural, window.innerHeight-h0-24));
+      const headTop=Math.round(navH+(head.getBoundingClientRect().top-chapTop)-(natural-TOP));
+      head.classList.add('pin'); head.style.top=headTop+'px';
+    }
+    tracks.forEach((t,i)=>{
+      const stage=t.querySelector('.stage'), sp=t.querySelector('.spacer'), h=stage.offsetHeight; t._h=h; t._top = i===0 ? TOP : 88;
+      if(!on){ t.style.height=''; t.style.marginTop=''; stage.style.top=''; stage.style.bottom=''; sp.style.height=''; prevH=h; return; }
+      D=Math.round(window.innerHeight*0.6);
+      sp.style.height = i===0 ? '0px' : D+'px';
+      t.style.height = (h + D + (i===0?0:D))+'px';
+      t.style.marginTop = i===0 ? '' : (GAP - D)+'px';
+      stage.style.top = t._top+'px';
+      stage.style.bottom = i===0 ? 'auto' : `calc(100vh - ${prevTop + prevH + GAP + h}px)`;
+      prevH=h; prevTop=t._top;
+    });
+    onScroll();
+  }
+  function onScroll(){
+    if(!desktop()) return;
+    tracks.forEach((t,i)=>{
+      const r=t.getBoundingClientRect(), offset = i===0 ? 0 : D, top=t._top;
+      const p=Math.min(1,Math.max(0,(top - offset - r.top)/D));
+      // The clip switches early in the hold (about a fifth of the way in for two clips) rather than at the midpoint
+      const api=t._api; api.setActive(Math.min(api.n-1,Math.floor(p*api.n+0.6)));
+      t._scrollFor=k=>window.scrollY + r.top - top + offset + (k+0.3)/api.n*D;
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',layout);
+  window.addEventListener('load',layout);
+  layout();
+})();
+
+// Copy email
+const btn=document.getElementById('copy');
+btn.addEventListener('click',async()=>{
+  const v=document.getElementById('email').textContent;
+  try{ await navigator.clipboard.writeText(v); btn.textContent='Copied'; }
+  catch(e){ const r=document.createRange(); r.selectNodeContents(document.getElementById('email')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Select and copy'; }
+  setTimeout(()=>btn.textContent='Copy email',1800);
+});
+</script>
+</body>
+</html>
