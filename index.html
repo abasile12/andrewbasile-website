@@ -43,7 +43,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-.wrap{max-width:1440px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px),calc((100% - 1180px)/2));padding-right:max(16px,env(safe-area-inset-right,0px),calc((100% - 1180px)/2))}
+.wrap{max-width:1440px;margin:0 auto;padding-left:max(env(safe-area-inset-left,0px),clamp(16px,calc(50% - 590px),130px));padding-right:max(env(safe-area-inset-right,0px),clamp(16px,calc(50% - 590px),130px))}
 .g{color:var(--green)}
 .muted{color:var(--muted)}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;line-height:1;white-space:nowrap;transition:transform .2s ease,background .2s ease}
@@ -250,7 +250,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
   <div class="wrap">
     <a class="mark" href="#top">AB<i></i></a>
     <nav class="links">
-      <a href="#content">My work</a><a href="skills.html">Skills &amp; Automations</a><a href="sidequests.html">Side Quests</a>
+      <a href="#content">My work</a><a href="skills.html">Skills &amp; Automations</a><a href="worktogether.html">Work Together</a><a href="sidequests.html">Side Quests</a>
     </nav>
     <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
   </div>
@@ -385,7 +385,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 
 <footer class="footer">
   <div class="wrap">
-    <nav><a href="#top">Home</a><a href="#about">About</a><a href="#content">Content</a><a href="#product-marketing">Product Marketing</a><a href="skills.html">Skills &amp; Automations</a><a href="sidequests.html">Side Quests</a></nav>
+    <nav><a href="#top">Home</a><a href="#about">About</a><a href="#content">Content</a><a href="#product-marketing">Product Marketing</a><a href="skills.html">Skills &amp; Automations</a><a href="worktogether.html">Work Together</a><a href="sidequests.html">Side Quests</a></nav>
     <a class="mail" href="#contact">andrew.basile12@gmail.com</a>
   </div>
 </footer>
@@ -511,41 +511,46 @@ CASES.forEach(cs=>{
   // sticky `top` holds it at TOP for D while its clip morphs. Pure CSS positioning, so it reverses cleanly.
   // The heading only sticks for the first case: it shares a wrapper with track 0, so sticky releases when that track
   // ends. Later cards pin up near the nav (TOP = 88) and slide over the heading as they arrive.
+  // Units: the desktop fit-to-width zoom on <html> means offsetHeight and sticky offsets are in layout px while
+  // innerHeight, scrollY, getBoundingClientRect and vh are in screen px. Everything here is done in layout px:
+  // screen values are divided by the zoom factor, and the viewport height is measured instead of using 100vh.
+  const zoom=()=>parseFloat(getComputedStyle(document.documentElement).zoom)||1;
   const headwrap=document.createElement('div'); headwrap.className='headwrap';
   head.parentNode.insertBefore(headwrap, head); headwrap.appendChild(head); headwrap.appendChild(tracks[0]);
   function layout(){
-    const on=desktop(); let prevH=0, prevTop=88;
+    const on=desktop(), z=zoom(), vh=window.innerHeight/z; let prevH=0, prevTop=88;
     // Pin the first card exactly where it sits when the Content chapter's top meets the nav (heading still showing
     // above it), and pin the heading with it. If the viewport is too short for that, slide the pin up so the card fits.
     head.classList.remove('pin'); head.style.top='';
     if(on){
-      const navH=nav.offsetHeight, chapTop=chap.getBoundingClientRect().top, h0=tracks[0].querySelector('.stage').offsetHeight;
-      const natural=Math.round(navH+(tracks[0].getBoundingClientRect().top-chapTop));
-      TOP=Math.max(88,Math.min(natural, window.innerHeight-h0-24));
-      const headTop=Math.round(navH+(head.getBoundingClientRect().top-chapTop)-(natural-TOP));
+      const navH=nav.offsetHeight, chapTop=chap.getBoundingClientRect().top/z, h0=tracks[0].querySelector('.stage').offsetHeight;
+      const natural=Math.round(navH+(tracks[0].getBoundingClientRect().top/z-chapTop));
+      TOP=Math.max(88,Math.min(natural, vh-h0-24));
+      const headTop=Math.round(navH+(head.getBoundingClientRect().top/z-chapTop)-(natural-TOP));
       head.classList.add('pin'); head.style.top=headTop+'px';
     }
     tracks.forEach((t,i)=>{
       const stage=t.querySelector('.stage'), sp=t.querySelector('.spacer'), h=stage.offsetHeight; t._h=h; t._top = i===0 ? TOP : 88;
       if(!on){ t.style.height=''; t.style.marginTop=''; stage.style.top=''; stage.style.bottom=''; sp.style.height=''; prevH=h; return; }
-      D=Math.round(window.innerHeight*0.6);
+      D=Math.round(vh*0.6);
       sp.style.height = i===0 ? '0px' : D+'px';
       t.style.height = (h + D + (i===0?0:D))+'px';
       t.style.marginTop = i===0 ? '' : (GAP - D)+'px';
       stage.style.top = t._top+'px';
-      stage.style.bottom = i===0 ? 'auto' : `calc(100vh - ${prevTop + prevH + GAP + h}px)`;
+      stage.style.bottom = i===0 ? 'auto' : Math.round(vh - (prevTop + prevH + GAP + h))+'px';
       prevH=h; prevTop=t._top;
     });
     onScroll();
   }
   function onScroll(){
     if(!desktop()) return;
+    const z=zoom();
     tracks.forEach((t,i)=>{
-      const r=t.getBoundingClientRect(), offset = i===0 ? 0 : D, top=t._top;
-      const p=Math.min(1,Math.max(0,(top - offset - r.top)/D));
+      const rTop=t.getBoundingClientRect().top/z, offset = i===0 ? 0 : D, top=t._top;
+      const p=Math.min(1,Math.max(0,(top - offset - rTop)/D));
       // The clip switches early in the hold (about a fifth of the way in for two clips) rather than at the midpoint
       const api=t._api; api.setActive(Math.min(api.n-1,Math.floor(p*api.n+0.6)));
-      t._scrollFor=k=>window.scrollY + r.top - top + offset + (k+0.3)/api.n*D;
+      t._scrollFor=k=>(window.scrollY/z + rTop - top + offset + (k+0.3)/api.n*D)*z;
     });
   }
   window.addEventListener('scroll',onScroll,{passive:true});
