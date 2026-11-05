@@ -59,6 +59,9 @@ img{max-width:100%;display:block}
 .chapter-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:40px}
 .chapter-head h2{font-weight:600;font-size:clamp(40px,4.3vw,62px);line-height:1;letter-spacing:-.04em;margin:0;max-width:560px}
 .chapter-head p{margin:0;color:var(--muted);max-width:480px}
+.chapter-head .title{display:flex;flex-direction:column;gap:14px;max-width:620px}
+.chapter-head .title h2{font-size:clamp(44px,4.6vw,66px);line-height:.98;letter-spacing:-.045em;max-width:none}
+.chapter-head p.subline{color:var(--ink);font-weight:600;font-size:22px;line-height:1.2;letter-spacing:-.015em;max-width:none}
 @media (max-width:900px){.intro .wrap{grid-template-columns:1fr;gap:24px;padding-block:56px 40px}.chapter{padding-block:56px}.chapter-head{flex-direction:column;align-items:flex-start;gap:16px}}
 
 .card{background:#fff;border:1px solid var(--rule);border-radius:20px;padding:34px}
@@ -128,13 +131,20 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .footer nav{display:flex;gap:22px;flex-wrap:wrap}
 .footer .mail{color:var(--green);font-weight:500;font-size:17px}
 </style>
+<style>
+/* Desktop fit: the layout is built on the 1440px Figma canvas (130px gutters, 1180px content). On wider screens the whole page scales up to fill the width, the way "fit to width" does in Figma, so the proportions stay identical to the design. Nothing changes at 1440px and below. */
+@media (min-width:1441px){html{zoom:var(--fit,1)}}
+</style>
+<script>
+(function(){var h=document.documentElement;function fit(){h.style.setProperty('--fit','1');var w=window.innerWidth;h.style.setProperty('--fit',String(w>1440?Math.min(w/1440,1.6):1))}fit();addEventListener('resize',fit)})();
+</script>
 </head>
 <body>
 <header class="nav">
   <div class="wrap">
     <a class="mark" href="./" data-home=""><i></i>Andrew Basile</a>
     <nav class="links">
-      <a href="./" data-home="#about">About</a><a href="./" data-home="#content">Content</a><a href="./" data-home="#product-marketing">Product Marketing</a><a class="active" href="skills.html">Skills &amp; Automations</a>
+      <a href="./" data-home="#about">About</a><a href="./" data-home="#content">Content</a><a href="./" data-home="#product-marketing">Product Marketing</a><a class="active" href="skills.html">Skills &amp; Automations</a><a href="sidequests.html">Side Quests</a>
     </nav>
     <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
   </div>
@@ -153,7 +163,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 <section class="chapter">
   <div class="wrap">
     <div class="chapter-head">
-      <h2>A content engine for personal creators<span class="g">.</span></h2>
+      <div class="title"><h2>The Hook Desk<span class="g">.</span></h2><p class="subline">A content engine for personal creators</p></div>
       <p>Built for Colby Maier, founder of The Good Word and a Christian creator with 800K+ followers on Instagram. Colby wanted to make greenscreen, reaction, and stitch videos every day but had no time to source them. The Hook Desk does the sourcing, the positioning, and the asset prep, so he opens it and films.</p>
     </div>
     <article class="card case">
@@ -280,7 +290,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 
 <footer class="footer">
   <div class="wrap">
-    <nav><a href="./" data-home="">Home</a><a href="./" data-home="#about">About</a><a href="./" data-home="#content">Content</a><a href="./" data-home="#product-marketing">Product Marketing</a><a href="skills.html">Skills &amp; Automations</a></nav>
+    <nav><a href="./" data-home="">Home</a><a href="./" data-home="#about">About</a><a href="./" data-home="#content">Content</a><a href="./" data-home="#product-marketing">Product Marketing</a><a href="skills.html">Skills &amp; Automations</a><a href="sidequests.html">Side Quests</a></nav>
     <a class="mail" href="#contact">andrew.basile12@gmail.com</a>
   </div>
 </footer>
