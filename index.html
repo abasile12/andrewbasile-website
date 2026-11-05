@@ -55,8 +55,8 @@ img{max-width:100%;display:block}
 /* Nav */
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:16px}
-.mark{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.03em}
-.mark i{width:9px;height:9px;background:var(--green);transform:rotate(45deg);display:block}
+.mark{display:flex;align-items:flex-start;gap:3px;font-weight:700;font-size:20px;line-height:1;letter-spacing:-.03em}
+.mark i{width:8px;height:8px;margin-top:1px;background:var(--green);transform:rotate(45deg);display:block}
 .links{display:flex;gap:28px;font-weight:500;font-size:15px;color:var(--muted)}
 .links a:hover{color:var(--ink)}
 @media (max-width:1000px){.links{display:none}}
@@ -248,9 +248,9 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 
 <header class="nav">
   <div class="wrap">
-    <a class="mark" href="#top"><i></i>Andrew Basile</a>
+    <a class="mark" href="#top">AB<i></i></a>
     <nav class="links">
-      <a href="#about">About</a><a href="#content">Content</a><a href="#product-marketing">Product Marketing</a><a href="skills.html">Skills &amp; Automations</a><a href="sidequests.html">Side Quests</a>
+      <a href="#content">My work</a><a href="skills.html">Skills &amp; Automations</a><a href="sidequests.html">Side Quests</a>
     </nav>
     <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
   </div>

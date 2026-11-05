@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Side Quests</title>
 <link rel="canonical" href="https://andrewbasile.work/sidequests.html">
-<meta name="description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, FanXP, soundlog.io and Friend of the Family, with what each one taught him.">
+<meta name="description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, soundlog.io and Friend of the Family, with what each one taught him.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Andrew Basile">
 <meta property="og:title" content="Side Quests | Andrew Basile">
-<meta property="og:description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, FanXP, soundlog.io and Friend of the Family, with what each one taught him.">
+<meta property="og:description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, soundlog.io and Friend of the Family, with what each one taught him.">
 <meta property="og:url" content="https://andrewbasile.work/sidequests.html">
 <meta property="og:image" content="https://andrewbasile.work/assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Side Quests | Andrew Basile">
-<meta name="twitter:description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, FanXP, soundlog.io and Friend of the Family, with what each one taught him.">
+<meta name="twitter:description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, soundlog.io and Friend of the Family, with what each one taught him.">
 <meta name="twitter:image" content="https://andrewbasile.work/assets/og-image.jpg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
 <style>
@@ -43,8 +43,8 @@ img{max-width:100%;display:block}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:16px}
-.mark{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.03em}
-.mark i{width:9px;height:9px;background:var(--green);transform:rotate(45deg);display:block}
+.mark{display:flex;align-items:flex-start;gap:3px;font-weight:700;font-size:20px;line-height:1;letter-spacing:-.03em}
+.mark i{width:8px;height:8px;margin-top:1px;background:var(--green);transform:rotate(45deg);display:block}
 .links{display:flex;gap:28px;font-weight:500;font-size:15px;color:var(--muted)}
 .links a:hover{color:var(--ink)}
 .links a.active{color:var(--ink);display:inline-flex;align-items:center;gap:6px}
@@ -78,6 +78,8 @@ img{max-width:100%;display:block}
 .status i{width:8px;height:8px;border-radius:50%;background:var(--rule);display:block;flex:none}
 .status.live i{background:var(--green)}
 .status img{width:44px;height:44px;border-radius:50%;flex:none}
+.titlerow{display:flex;align-items:center;gap:16px;min-width:0}
+.titlerow .logo{width:44px;height:44px;border-radius:50%;flex:none;object-fit:cover}
 .lesson{border-top:1px solid var(--rule);padding-top:18px;display:flex;flex-direction:column;gap:10px}
 .lesson b{font-weight:600;font-size:17px}
 .action{padding-top:4px}
@@ -108,25 +110,6 @@ img{max-width:100%;display:block}
 .wc .menu div span{color:#8c9a9e}
 @media (max-width:640px){.wc{padding:24px}.wc li{font-size:16px}}
 
-/* FanXP phone mockup */
-.phonewrap{display:flex;justify-content:center;padding-top:8px}
-.phone{background:var(--ink);border-radius:44px;padding:10px;width:300px}
-.screen{background:#fff;border-radius:36px;padding:28px 22px;display:flex;flex-direction:column;gap:18px;font-size:13px}
-.screen .top{display:flex;justify-content:space-between;align-items:center}
-.screen .top b{font-size:18px;font-weight:600;letter-spacing:-.02em}
-.screen .pts{background:var(--green);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:600}
-.screen .artist{background:var(--band);border-radius:16px;padding:84px 16px 16px}
-.screen .artist b{display:block;font-size:20px;font-weight:600;letter-spacing:-.02em}
-.screen .artist span{color:var(--muted);font-weight:500;font-size:12px}
-.screen .prog{display:flex;flex-direction:column;gap:8px}
-.screen .prog div{display:flex;justify-content:space-between}
-.screen .prog b{font-weight:600}
-.screen .prog span{color:var(--muted)}
-.screen .track{height:6px;border-radius:999px;background:var(--band);overflow:hidden}
-.screen .track i{display:block;height:100%;width:80%;background:var(--green);border-radius:999px}
-.screen h6{margin:0 0 6px;font-size:13px;font-weight:600}
-.screen .rows div{display:flex;justify-content:space-between;padding:11px 0;border-top:1px solid var(--rule);font-weight:500}
-.screen .rows span{color:var(--muted)}
 
 hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .contact{text-align:center;padding-block:104px;display:flex;flex-direction:column;align-items:center;gap:20px}
@@ -151,9 +134,9 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 <body>
 <header class="nav">
   <div class="wrap">
-    <a class="mark" href="./" data-home=""><i></i>Andrew Basile</a>
+    <a class="mark" href="./" data-home="">AB<i></i></a>
     <nav class="links">
-      <a href="./" data-home="#about">About</a><a href="./" data-home="#content">Content</a><a href="./" data-home="#product-marketing">Product Marketing</a><a href="skills.html">Skills &amp; Automations</a><a class="active" href="sidequests.html">Side Quests</a>
+      <a href="./" data-home="#content">My work</a><a href="skills.html">Skills &amp; Automations</a><a class="active" href="sidequests.html">Side Quests</a>
     </nav>
     <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
   </div>
@@ -163,8 +146,8 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
   <div class="wrap">
     <h1>Side Quests<span class="g">.</span></h1>
     <div>
-      <p class="l">Not everything I build is for a client. These are the things I started because I could not stop thinking about them: a clothing brand, a music data company, a fan rewards app, and a word game you can play right now.</p>
-      <p>Two of them are gone, one is retired, and one is live. Every one of them was built by a very small team, sometimes a team of one, and every one taught me something I still use every week.</p>
+      <p class="l">Not everything I build is for a client. These are the things I started because I could not stop thinking about them: a clothing brand, a music data company, and a word game you can play right now.</p>
+      <p>One of them is gone, one is retired, and one is live. Every one of them was built by a very small team, sometimes a team of one, and every one taught me something I still use every week.</p>
     </div>
   </div>
 </section>
@@ -195,7 +178,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
         </div>
       </div>
       <div class="copy">
-        <h3>Wordchainer</h3>
+        <div class="titlerow"><img class="logo" src="assets/sq-wordchainer-logo.png" alt=""><h3>Wordchainer</h3></div>
         <div class="status live"><i></i>Live now at wordchainer.fun</div>
         <p class="tag">A daily word game you can finish before the coffee cools.</p>
         <p>Wordchainer started as the TikTok word chain game my friends and I kept playing out loud, so I built it into something you could play alone. Every day there is one public chain: you get the first word, the last word and the first letter of everything in between, and you guess your way across. Share your time, build a chain for a friend, or race someone head to head.</p>
@@ -204,29 +187,6 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
       </div>
     </article>
 
-    <article class="card case flip" id="fanxp">
-      <div class="visual">
-        <div class="phonewrap">
-          <div class="phone" aria-label="FanXP app screen">
-            <div class="screen">
-              <div class="top"><b>FanXP</b><span class="pts">2,450 pts</span></div>
-              <div class="artist"><b>Luna Vale</b><span>Verified artist · You are a Tier 3 fan</span></div>
-              <div class="prog"><div><b>Superfan</b><span>550 to go</span></div><div class="track"><i></i></div></div>
-              <div><h6>Rewards</h6><div class="rows"><div>Early access to tour tickets<span>1,200</span></div><div>Signed vinyl<span>3,000</span></div><div>Meet &amp; greet<span>5,000</span></div></div></div>
-              <div><h6>Earn points</h6><div class="rows"><div>Stream a song<span>+10</span></div><div>Share a post<span>+25</span></div><div>Go to a show<span>+500</span></div></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="copy">
-        <h3>FanXP</h3>
-        <div class="status"><i></i>Sunset in 2024 after a year in beta</div>
-        <p class="tag">Points for being the fan you already are.</p>
-        <p>FanXP was an engagement rewards platform for the music industry. Fans earned points for streaming, sharing and showing up for the artists they loved, then cashed them in for rewards, experiences and content the artist controlled. I designed, built and launched it in three months with 50 artists in the beta.</p>
-        <div class="lesson"><b>What I learned</b><p>A product can end and still pay off. Building FanXP got me in front of the CEO of Autograph, and that conversation turned into my Product Marketing role there.</p></div>
-        <div class="action"><a class="btn line" href="./" data-home="#product-marketing">See the Autograph work <span class="g">↗</span></a></div>
-      </div>
-    </article>
 
     <article class="card case" id="soundlog">
       <div class="visual">
@@ -234,11 +194,9 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
         <div class="pair"><div class="tile sq"><img src="assets/sq-soundlog-dashboard.jpg" alt="The SoundLog dashboard"></div><div class="tile sq"><img src="assets/sq-soundlog-hit.jpg" alt="SoundLogic: the anatomy of a hit song"></div></div>
       </div>
       <div class="copy">
-        <h3>soundlog.io</h3>
-        <div class="status"><img src="assets/sq-soundlog-logo.png" alt="">Retired. The Instagram is still up.</div>
+        <div class="titlerow"><img class="logo" src="assets/sq-soundlog-logo.png" alt=""><h3>soundlog.io</h3></div>
         <p class="tag">Moneyball for music.</p>
         <p>SoundLog took the audio feature metrics Spotify attaches to every song (key, tempo, energy, danceability and more) and turned them into insights the industry could act on. The kind of thing you could not unsee once you saw it: in 2020, 90% of the songs on RapCaviar were in C#. It grew into a catalog management and intelligence tool for publishers and labels, with a songwriter spotlight series on the side.</p>
-        <div class="lesson"><b>What I learned</b><p>A great insight is not the same thing as a product people pay for. The content was the part that travelled, and it is the part I kept doing.</p></div>
         <div class="action"><a class="btn line" href="https://www.instagram.com/soundlog.io/" target="_blank" rel="noopener">@soundlog.io <span class="g">↗</span></a></div>
       </div>
     </article>
@@ -249,11 +207,9 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
         <div class="pair"><div class="tile"><img src="assets/sq-fotf-nero.jpg" alt="The Nero hat"></div><div class="tile"><img src="assets/sq-fotf-cincin.jpg" alt="A Cin Cin cup"></div></div>
       </div>
       <div class="copy">
-        <h3>Friend of the Family</h3>
-        <div class="status"><img src="assets/sq-fotf-logo.png" alt="">Dead, fondly remembered.</div>
+        <div class="titlerow"><img class="logo" src="assets/sq-fotf-logo.png" alt=""><h3>Friend of the Family</h3></div>
         <p class="tag">A clothing brand for the people you would save a seat for.</p>
         <p>Friend of the Family was a hat and apparel brand built around one line: this is your invitation. We shot it like a dinner party, sold out of every hat at our first pop-up, saw our Nero cap on Noah Beck in an Adidas shoot, and ran a collab with Bar Next Door and Prince Street Pizza. Then we let it go.</p>
-        <div class="lesson"><b>What I learned</b><p>Brand is the easy part when you love the people you are making it for. Inventory, margins and the tenth restock are the hard part.</p></div>
         <div class="action"><a class="btn line" href="https://www.instagram.com/imafriendofthefamily/" target="_blank" rel="noopener">@imafriendofthefamily <span class="g">↗</span></a></div>
       </div>
     </article>

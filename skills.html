@@ -43,8 +43,8 @@ img{max-width:100%;display:block}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:16px}
-.mark{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.03em}
-.mark i{width:9px;height:9px;background:var(--green);transform:rotate(45deg);display:block}
+.mark{display:flex;align-items:flex-start;gap:3px;font-weight:700;font-size:20px;line-height:1;letter-spacing:-.03em}
+.mark i{width:8px;height:8px;margin-top:1px;background:var(--green);transform:rotate(45deg);display:block}
 .links{display:flex;gap:28px;font-weight:500;font-size:15px;color:var(--muted)}
 .links a:hover{color:var(--ink)}
 .links a.active{color:var(--ink);display:inline-flex;align-items:center;gap:6px}
@@ -142,9 +142,9 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 <body>
 <header class="nav">
   <div class="wrap">
-    <a class="mark" href="./" data-home=""><i></i>Andrew Basile</a>
+    <a class="mark" href="./" data-home="">AB<i></i></a>
     <nav class="links">
-      <a href="./" data-home="#about">About</a><a href="./" data-home="#content">Content</a><a href="./" data-home="#product-marketing">Product Marketing</a><a class="active" href="skills.html">Skills &amp; Automations</a><a href="sidequests.html">Side Quests</a>
+      <a href="./" data-home="#content">My work</a><a class="active" href="skills.html">Skills &amp; Automations</a><a href="sidequests.html">Side Quests</a>
     </nav>
     <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
   </div>
