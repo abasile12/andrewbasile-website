@@ -61,16 +61,17 @@ img{max-width:100%;display:block}
 
 .quests{display:flex;flex-direction:column;gap:40px}
 .card{background:#fff;border:1px solid var(--rule);border-radius:20px}
-.case{display:grid;grid-template-columns:526px minmax(0,1fr);gap:72px;align-items:start;padding:56px}
-.case.flip{grid-template-columns:minmax(0,1fr) 526px}
+/* Cards match the Content case cards on the home page: 1180 wide, 34px padding, a 564px visual column with a 506px
+   tall visual (the phone deck's height), 44px gap, copy centred beside it. */
+.case{display:grid;grid-template-columns:564px minmax(0,1fr);gap:44px;align-items:center;padding:34px}
+.case.flip{grid-template-columns:minmax(0,1fr) 564px}
 .case.flip .visual{order:2}
-.visual{display:flex;flex-direction:column;gap:14px;min-width:0}
-.visual .tile{border-radius:16px;overflow:hidden;background:var(--band)}
+.visual{height:506px;display:grid;grid-template-columns:minmax(0,1fr) 200px;grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:14px;min-width:0}
+.visual>.tile:first-child{grid-row:1/3}
+.visual .tile{border-radius:16px;overflow:hidden;background:var(--band);min-height:0}
 .visual .tile img{width:100%;height:100%;object-fit:cover}
-.visual .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.visual .pair .tile{aspect-ratio:256/300}
-.visual .pair .tile.sq{aspect-ratio:1}
-.copy{display:flex;flex-direction:column;gap:28px;min-width:0}
+.visual .pair{display:contents}
+.copy{display:flex;flex-direction:column;gap:20px;min-width:0}
 .copy h3{font-weight:600;font-size:clamp(28px,2.6vw,38px);line-height:1.04;letter-spacing:-.03em;margin:0}
 .copy p{margin:0;color:var(--muted)}
 .copy .tag{color:var(--ink);font-weight:600;font-size:22px;line-height:1.25;letter-spacing:-.01em}
@@ -85,19 +86,25 @@ img{max-width:100%;display:block}
 .lesson b{font-weight:600;font-size:17px}
 .action{padding-top:4px}
 @media (max-width:1100px){.case,.case.flip{grid-template-columns:1fr}.case.flip .visual{order:0}}
-@media (max-width:640px){.case{padding:22px}.quests{gap:24px}}
+@media (max-width:640px){.case{padding:22px}.quests{gap:24px}
+  .visual{height:auto;display:flex;flex-direction:column}
+  .visual>.tile:first-child{aspect-ratio:4/3}
+  .visual .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .visual .pair .tile{aspect-ratio:1}}
 
 /* Wordchainer mockup */
-.wc{background:#07171d;color:#f6eedc;border-radius:20px;padding:36px 44px;font-size:14px}
-.wc .brand{font-size:16px;color:#fff;margin-bottom:40px}
+.wc{grid-area:1/1/3/3;background:#07171d;color:#f6eedc;border-radius:16px;padding:28px 32px;font-size:14px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;gap:0 32px;overflow:hidden;min-height:0}
+.wc .brand{grid-column:1/3;font-size:16px;color:#fff;margin-bottom:24px}
+.wc .l{min-width:0}
+.wc .r{align-self:center;min-width:0}
 .wc .brand b{font-weight:600}
 .wc .small{font-size:13px;color:#8c9a9e}
-.wc .num{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
+.wc .num{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}
 .wc .num b{font-size:44px;font-weight:600;letter-spacing:-.03em;line-height:1}
 .wc .num span{text-align:right;font-size:13px;line-height:1.5}
 .wc .num span small{display:block;color:#8c9a9e;font-size:13px}
-.wc ol{list-style:none;margin:0 0 36px;padding:0;display:flex;flex-direction:column;gap:10px}
-.wc li{display:flex;align-items:center;gap:16px;font-size:20px;font-weight:500;letter-spacing:.3em}
+.wc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.wc li{display:flex;align-items:center;gap:14px;font-size:18px;font-weight:500;letter-spacing:.28em;line-height:1.3}
 .wc li i{width:8px;height:8px;border-radius:50%;border:1px solid #8c9a9e;display:block;flex:none}
 .wc li.on i{background:#f6eedc;border-color:#f6eedc}
 .wc li em{font-style:normal;color:#ff9f3a}
@@ -106,10 +113,10 @@ img{max-width:100%;display:block}
 .wc .days span{width:22px;height:22px;border-radius:50%;border:1px solid #334850;display:grid;place-items:center;font-size:10px;font-weight:600}
 .wc .days span.on{background:#ff9f3a;border-color:#ff9f3a;color:#1b1206}
 .wc .play{display:block;background:#ff9f3a;color:#1b1206;text-align:center;border-radius:14px;padding:16px;font-weight:600;font-size:17px}
-.wc .next{text-align:center;font-size:12px;color:#8c9a9e;margin:12px 0 24px}
+.wc .next{text-align:center;font-size:12px;color:#8c9a9e;margin:12px 0 18px}
 .wc .menu div{display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid #213339;font-weight:500}
 .wc .menu div span{color:#8c9a9e}
-@media (max-width:640px){.wc{padding:24px}.wc li{font-size:16px}}
+@media (max-width:640px){.wc{display:block;padding:24px;height:auto}.wc .l{margin-bottom:24px}.wc li{font-size:16px}}
 
 
 hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
@@ -156,6 +163,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
       <div class="visual">
         <div class="wc" aria-label="Wordchainer daily chain screen">
           <div class="brand">word<b>chainer</b></div>
+          <div class="l">
           <div class="small">Daily chain</div>
           <div class="num"><b>No. 66</b><span>Thu, Nov 5<small>8 words</small></span></div>
           <ol>
@@ -168,10 +176,13 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
             <li><i></i><em>A</em> _ _ _ _ _</li>
             <li class="on"><i></i>FILM</li>
           </ol>
+          </div>
+          <div class="r">
           <div class="week"><span>This week</span><div class="days"><span>S</span><span>M</span><span>T</span><span>W</span><span class="on">T</span><span>F</span><span>S</span></div></div>
           <a class="play" href="https://wordchainer.fun" target="_blank" rel="noopener">Play today's chain</a>
           <div class="next">Next chain in 9:24:50</div>
           <div class="menu"><div>Build your own chain<span>›</span></div><div>Head to head<span>›</span></div><div>Archive<span>›</span></div></div>
+          </div>
         </div>
       </div>
       <div class="copy">
@@ -187,7 +198,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 
     <article class="card case" id="soundlog">
       <div class="visual">
-        <div class="tile" style="aspect-ratio:1"><img src="assets/sq-soundlog-rapcaviar.jpg" alt="SoundLog Instagram post: Spotify playlist insights, RapCaviar"></div>
+        <div class="tile"><img src="assets/sq-soundlog-rapcaviar.jpg" alt="SoundLog Instagram post: Spotify playlist insights, RapCaviar"></div>
         <div class="pair"><div class="tile sq"><img src="assets/sq-soundlog-dashboard.jpg" alt="The SoundLog dashboard"></div><div class="tile sq"><img src="assets/sq-soundlog-hit.jpg" alt="SoundLogic: the anatomy of a hit song"></div></div>
       </div>
       <div class="copy">
@@ -200,7 +211,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 
     <article class="card case flip" id="friend-of-the-family">
       <div class="visual">
-        <div class="tile" style="aspect-ratio:526/420"><img src="assets/sq-fotf-cake.jpg" alt="A white cake with Friend of the Family piped in red icing"></div>
+        <div class="tile"><img src="assets/sq-fotf-cake.jpg" alt="A white cake with Friend of the Family piped in red icing"></div>
         <div class="pair"><div class="tile"><img src="assets/sq-fotf-nero.jpg" alt="The Nero hat"></div><div class="tile"><img src="assets/sq-fotf-cincin.jpg" alt="A Cin Cin cup"></div></div>
       </div>
       <div class="copy">
