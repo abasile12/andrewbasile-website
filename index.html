@@ -65,10 +65,13 @@ img{max-width:100%;display:block}
 /* Hero */
 /* The hero fills the window below the nav, and the portrait sits on the window's bottom edge at any size (no gap). */
 .hero .wrap{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:0 40px;align-items:end;min-height:calc(100vh - var(--navh,80px));min-height:calc(100svh - var(--navh,80px));padding-block:0;padding-left:0}
+/* Above 1440px the hero wrap spans the full window and the portrait column absorbs the extra left margin, so the
+   photo's hard left edge is flush with the window edge while the copy column stays where the 1440 design puts it. */
+@media (min-width:1441px){.hero .wrap{max-width:none;grid-template-columns:minmax(0,calc((100% - 1310px)/2 + 560px)) minmax(0,1fr)}}
 .hero-copy{padding-left:57px}
 .portrait{height:auto;position:relative;overflow:hidden;align-self:stretch}
-.portrait img{position:absolute;left:0;bottom:max(-6%,-44px);height:106%;max-height:782px;width:auto;max-width:none} /* 782px keeps the 471x658 cut-out inside the 560px column; on taller windows the extra room is above the head */
-.hero-copy{padding-block:clamp(40px,8vh,124px) 44px;display:flex;flex-direction:column;gap:36px;align-self:center}
+.portrait img{position:absolute;left:0;top:calc(31px - 10%);height:calc(110% + 13px);width:auto;max-width:100%;object-fit:contain;object-position:left bottom} /* the PNG has 9% transparent space above the cap, so this puts the cap ~32px under the nav and the hard bottom edge 44px below the window; never wider than its column (narrower windows show more headroom) */
+.hero-copy{padding-block:0 24px;margin-top:clamp(0px,7vh,80px);display:flex;flex-direction:column;gap:36px;align-self:center} /* centred on the row, nudged down so it sits level with the body of the photo */
 .hero h1{font-weight:500;font-size:clamp(84px,14.6vw,210px);line-height:.84;letter-spacing:-.065em;margin:0}
 .hero .role{font-weight:600;font-size:19px;margin:14px 0 0}
 .hero p.lede{color:var(--muted);font-size:18px;line-height:1.5;max-width:480px;margin:14px 0 0}
