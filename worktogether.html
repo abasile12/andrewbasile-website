@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Work Together</title>
 <link rel="canonical" href="https://andrewbasile.work/worktogether.html">
-<meta name="description" content="Two ways to work with Andrew Basile: make content together through FEED Studios, or bring him in for content strategy, product marketing, a fractional marketing seat or team training.">
+<meta name="description" content="Two ways to work with Andrew Basile: make content together through FEED Studios, or bring him in to consult on content strategy, product marketing, a fractional marketing seat or team training.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
@@ -52,43 +52,45 @@ img{max-width:100%;display:block}
 @media (max-width:1000px){.links{display:none}}
 @media (max-width:640px){.nav .btn{display:none}}
 
-.intro .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);gap:60px;align-items:start;padding-block:88px 72px}
+/* Intro: centred, like the heading of a pricing block */
+.intro .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding-block:88px 56px}
 .intro h1{font-weight:600;font-size:clamp(52px,6.6vw,96px);line-height:.98;letter-spacing:-.045em;margin:0}
-.intro p{margin:0 0 16px;color:var(--muted)}
-.intro p.l{font-size:19px;color:var(--ink)}
-.chapter{padding-block:72px 88px}
-.chapter-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:40px}
-.chapter-head h2{font-weight:600;font-size:clamp(40px,4.3vw,62px);line-height:1;letter-spacing:-.04em;margin:0;max-width:560px}
-.chapter-head p{margin:0;color:var(--muted);max-width:480px}
-@media (max-width:900px){.intro .wrap{grid-template-columns:1fr;gap:24px;padding-block:56px 40px}.chapter{padding-block:56px}.chapter-head{flex-direction:column;align-items:flex-start;gap:16px}}
+.intro h1 span.q{display:block;color:var(--muted)}
+.intro p{margin:0;color:var(--muted);max-width:560px;font-size:19px}
+@media (max-width:900px){.intro .wrap{padding-block:56px 32px;gap:16px}.intro p{font-size:17px}}
 
-.card{background:#fff;border:1px solid var(--rule);border-radius:20px;padding:36px}
-.services{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.service{display:flex;flex-direction:column;gap:16px}
-.service h3{margin:0;font-size:clamp(24px,2.2vw,30px);font-weight:600;letter-spacing:-.025em;line-height:1.1}
-.service p{margin:0;color:var(--muted);font-size:16px}
-.service .out b,.service .for b{display:block;font-size:13px;font-weight:600;margin-bottom:4px;color:var(--ink)}
-.service .out span{font-size:14px;color:var(--muted)}
-.service .for{margin-top:2px}
-.pills{display:flex;flex-wrap:wrap;gap:8px}
-.pill{display:inline-flex;align-items:center;background:var(--band);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;line-height:1.2}
-@media (max-width:900px){.services{grid-template-columns:1fr}}
-@media (max-width:640px){.card{padding:24px}}
-
-.rows{border-top:1px solid var(--rule)}
-.row{display:grid;grid-template-columns:300px minmax(0,1fr);gap:40px;padding:26px 0;border-bottom:1px solid var(--rule)}
-.row b{font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1.2}
-.row p{margin:0;color:var(--muted)}
-.results .row{padding:22px 0}
-.results .row b{font-size:19px;letter-spacing:-.01em;line-height:1.4}
-.results .row p{font-size:19px;line-height:1.4}
-.results .row p strong{color:var(--green);font-weight:600}
-@media (max-width:760px){.row{grid-template-columns:1fr;gap:8px}}
-
-.action{padding-top:32px}
-.clients{margin-top:48px}
-.clients h3{margin:0 0 14px;font-size:22px;font-weight:600;letter-spacing:-.02em}
-.clients .pills{gap:10px}
+/* Two offer cards, after the Glow Pricing layout: a lifted card whose top panel holds the title, the pitch and one
+   full-width pill button, and whose lower half lists what is included with round check marks. FEED Studios is the
+   featured dark card with a green glow; Consulting is the light one. */
+.offers{padding-block:0 104px}
+.offers .grid{display:grid;grid-template-columns:repeat(2,minmax(0,440px));grid-auto-rows:auto;justify-content:center;gap:22px} /* subgrid rows keep the two top panels the same height, so the buttons line up */
+.offer{display:grid;grid-template-rows:subgrid;grid-row:span 2;background:#fff;border:1px solid var(--rule);border-radius:26px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(17,17,17,.04),0 30px 60px -40px rgba(17,17,17,.3)}
+.offer .top{background:var(--band);padding:32px 32px 26px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--rule)}
+.offer h2{margin:0;font-size:30px;font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.offer .top p{margin:0;color:var(--muted);font-size:16px;line-height:1.5}
+.offer .top>p:first-of-type{flex:1}
+.offer .cta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:10px 10px 10px 24px;border-radius:999px;
+  background:var(--ink);color:#fff;font-weight:600;font-size:16px;line-height:1;transition:transform .2s ease}
+.offer .cta:hover{transform:translateY(-1px)}
+.offer .cta i{flex:none;width:38px;height:38px;border-radius:50%;background:var(--green);color:var(--ink);display:grid;place-items:center;font-style:normal;font-size:15px}
+.offer .note{margin:0;text-align:center;font-size:14px;color:var(--muted)}
+.offer .list{padding:26px 32px 32px;display:flex;flex-direction:column;gap:14px}
+.offer .list h3{margin:0 0 4px;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.offer .list ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.offer .list li{display:flex;align-items:flex-start;gap:12px;font-size:16px;line-height:1.4}
+.offer .list li::before{content:"";flex:none;width:22px;height:22px;margin-top:0;border-radius:50%;background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.4l2.6 2.6L12 5.6' fill='none' stroke='%2300ea74' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat}
+.offer .list li a{font-weight:600;border-bottom:1px solid currentColor}
+/* Featured dark card */
+.offer.dark{background:var(--ink);color:#fff;border-color:#2a2a28}
+.offer.dark .top{background:radial-gradient(120% 90% at 50% -20%,rgba(0,234,116,.38),rgba(0,234,116,0) 60%),#161615;border-bottom-color:#2a2a28}
+.offer.dark .top p,.offer.dark .note,.offer.dark .list li{color:#d9d9d4}
+.offer.dark .list li{color:#fff}
+.offer.dark .cta{background:var(--green);color:var(--ink)}
+.offer.dark .cta i{background:var(--ink);color:var(--green)}
+.offer.dark .list li::before{background-color:var(--green);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.4l2.6 2.6L12 5.6' fill='none' stroke='%23111111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+@media (max-width:900px){.offers .grid{grid-template-columns:minmax(0,480px)}.offers{padding-block:0 72px}}
+@media (max-width:640px){.offer .top{padding:26px 22px 22px}.offer .list{padding:22px 22px 26px}.offer h2{font-size:26px}}
 
 hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .contact{text-align:center;padding-block:104px;display:flex;flex-direction:column;align-items:center;gap:20px}
@@ -119,64 +121,51 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 
 <section class="intro">
   <div class="wrap">
-    <h1>Work Together<span class="g">.</span></h1>
-    <div>
-      <p class="l">There are two ways to work with me. FEED Studios is my content studio, where we make the content together: the strategy, the scripts, the shoot days, the edits and the weekly read of the numbers. Consulting is for teams that already make their own content, or are launching a product, and want the strategy without the studio.</p>
-      <p>Pick the one that fits, or book a call and we will work it out together.</p>
-    </div>
+    <h1>Work Together<span class="g">.</span><span class="q">Two ways in.</span></h1>
+    <p>FEED Studios is my content studio, where we make the content together. Consulting is for teams that already have the hands and want the plan. Pick the one that fits, or book a call and we will work it out together.</p>
   </div>
 </section>
 
-<section class="chapter">
+<section class="offers">
   <div class="wrap">
-    <div class="chapter-head">
-      <h2>FEED Studios<span class="g">.</span></h2>
-      <p>The content studio I founded in January 2025. We build the content systems behind brands and creators, and we have driven 40M+ organic impressions for clients this year. Four ways to make content together.</p>
-    </div>
-    <div class="services">
-      <article class="card service">
-        <h3>Short-form production</h3>
-        <p>The full pipeline from a brief to a posted video. We plan the shoot, direct the talent on the day, and run the schedule so a client films one afternoon a month and has clips going out every week.</p>
-        <div class="out"><b>What comes out</b><span>20+ ready-to-post pieces a month, inside the client’s own brand.</span></div>
-        <div class="for"><b>Made for</b><div class="pills"><span class="pill">Lynden Lane Co</span><span class="pill">Chad &amp; JT</span><span class="pill">Charlisse Leger-Walker</span><span class="pill">Short Game King</span></div></div>
+    <div class="grid">
+      <article class="offer dark">
+        <div class="top">
+          <h2>FEED Studios</h2>
+          <p>The content studio I founded in January 2025. We build the content system behind a brand or creator and run it with you: the strategy, the scripts, the shoot days, the edits and the weekly read of the numbers.</p>
+          <a class="cta" href="https://feedstudios.us" target="_blank" rel="noopener">Visit feedstudios.us <i>↗</i></a>
+          <p class="note">40M+ organic impressions for clients in 2025</p>
+        </div>
+        <div class="list">
+          <h3>What you get</h3>
+          <ul>
+            <li>Short-form production: one shoot afternoon a month, clips going out every week</li>
+            <li>Scripting: weekly concepts, beat sheets and briefs in a shared Notion workspace</li>
+            <li>Editing: finished vertical video for TikTok, Reels and Shorts, delivered through a creator portal</li>
+            <li>Performance: a monthly report and the next month’s brief, written from the data</li>
+            <li>Built for Lynden Lane Co, Chad &amp; JT, Charlisse Leger-Walker and Short Game King</li>
+          </ul>
+        </div>
       </article>
-      <article class="card service">
-        <h3>Scripting</h3>
-        <p>Every piece starts as a written beat sheet: hook, turn, payoff, call to action. We study what is winning in the category, pick the formats worth the client’s time, and hand over scripts the talent can read off a phone.</p>
-        <div class="out"><b>What comes out</b><span>Weekly concepts, scripts and briefs, logged in a shared Notion workspace.</span></div>
-        <div class="for"><b>Made for</b><div class="pills"><span class="pill">Lynden Lane Co</span><span class="pill">Boy Throb</span><span class="pill">Rebecca Leigh</span><span class="pill">ReLoom</span></div></div>
-      </article>
-      <article class="card service">
-        <h3>Editing</h3>
-        <p>Cutting for the first second. Our editors work from the brief, pull the hook forward, add the captions and sound that make a clip travel, and deliver in the format each platform wants.</p>
-        <div class="out"><b>What comes out</b><span>Finished vertical video for TikTok, Reels and Shorts, delivered through a creator portal.</span></div>
-        <div class="for"><b>Made for</b><div class="pills"><span class="pill">Chad &amp; JT</span><span class="pill">Sturniolo Triplets</span><span class="pill">Queen of the Court</span><span class="pill">Boxx Products</span></div></div>
-      </article>
-      <article class="card service">
-        <h3>Performance</h3>
-        <p>A weekly read of the numbers. The formats that travel get doubled down on, the ones that do not get cut, and the next brief is written from what we learned, so the library gets sharper every month.</p>
-        <div class="out"><b>What comes out</b><span>A monthly performance report and the next month’s brief, written from the data.</span></div>
-        <div class="for"><b>Made for</b><div class="pills"><span class="pill">Lynden Lane Co</span><span class="pill">Chad &amp; JT</span><span class="pill">Charlisse Leger-Walker</span><span class="pill">Short Game King</span></div></div>
+      <article class="offer">
+        <div class="top">
+          <h2>Consulting</h2>
+          <p>Strategy and advisory scopes I take on directly, for teams that already make their own content or are launching a product and want the strategy without the studio.</p>
+          <a class="cta" href="#contact">Start with a call <i>↗</i></a>
+          <p class="note">Starts with a call and a two-week diagnosis</p>
+        </div>
+        <div class="list">
+          <h3>What you get</h3>
+          <ul>
+            <li>Content strategy: a blueprint for your niche your own team can run without me</li>
+            <li>Product marketing and launches: positioning, go-to-market and the creative testing plan</li>
+            <li>Fractional marketing lead: a standing weekly seat that owns the calendar and the numbers</li>
+            <li>Team training and AI workflows: FEED’s skills and automations set up inside your tools</li>
+            <li>Built for Red Dining Book, Good Measure Studios, Autograph, Quix and Amplifii</li>
+          </ul>
+        </div>
       </article>
     </div>
-    <div class="action"><a class="btn fill" href="https://feedstudios.us" target="_blank" rel="noopener">Visit feedstudios.us <span>↗</span></a></div>
-  </div>
-</section>
-
-
-<section class="chapter">
-  <div class="wrap">
-    <div class="chapter-head">
-      <h2>Consulting<span class="g">.</span></h2>
-      <p>Strategy and advisory scopes I take on directly, for teams that have the hands and want the plan. Each one starts with a call and a two-week diagnosis before anything is signed.</p>
-    </div>
-    <div class="rows">
-      <div class="row"><b>Content strategy<span class="g">.</span></b><p>A content blueprint for your niche: what is winning right now, which formats and hooks are worth your time, references to recreate and a posting plan your own editors and talent can run without me. Built for Red Dining Book and Good Measure Studios.</p></div>
-      <div class="row"><b>Product marketing and launches<span class="g">.</span></b><p>Positioning, go-to-market and the creative testing plan for a consumer product, from paid and organic to the partnerships that put it in front of the right people. Three league launches and 125,000 users in nine months at Autograph, $11.7M in volume at Quix.</p></div>
-      <div class="row"><b>Fractional marketing lead<span class="g">.</span></b><p>A standing weekly seat on your team. I own the marketing calendar, brief the editors and media buyers, read the numbers and decide what gets made next. The Strategic Advisor role at Amplifii runs this way.</p></div>
-      <div class="row"><b>Team training and AI workflows<span class="g">.</span></b><p>Training for in-house editors and talent, plus the skills and automations behind FEED set up inside your own tools, so the content engine keeps running after I leave.</p></div>
-    </div>
-    <div class="action"><a class="btn fill" href="#contact">Start with a call <span>↗</span></a></div>
   </div>
 </section>
 <hr class="rule">
