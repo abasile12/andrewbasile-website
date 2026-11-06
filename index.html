@@ -141,10 +141,11 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .track{position:relative}
 .stage{position:sticky;top:88px}
 .stage .card{background:#fff}
-.case{display:grid;grid-template-columns:564px minmax(0,1fr);gap:44px;align-items:center}
-.stack{display:grid;grid-template-columns:300px 236px;gap:28px;align-items:center}
-.deck{position:relative;width:300px;height:506px}
-.phone{position:absolute;left:0;top:0;width:236px;height:506px;border-radius:40px;background:var(--phone);box-shadow:0 0 0 1.5px var(--phone-edge),inset 0 0 0 1px rgba(255,255,255,.12),0 30px 60px -24px rgba(0,0,0,.35);z-index:3;cursor:pointer;touch-action:pan-y}
+.case{display:grid;grid-template-columns:624px minmax(0,1fr);gap:44px;align-items:center}
+.stack{display:grid;grid-template-columns:360px 236px;gap:28px;align-items:center}
+/* Phone is 293x506 so its screen (275x488) is a true 9:16: clips fill it edge to edge with nothing cropped. */
+.deck{position:relative;width:360px;height:506px}
+.phone{position:absolute;left:0;top:0;width:293px;height:506px;border-radius:40px;background:var(--phone);box-shadow:0 0 0 1.5px var(--phone-edge),inset 0 0 0 1px rgba(255,255,255,.12),0 30px 60px -24px rgba(0,0,0,.35);z-index:3;cursor:pointer;touch-action:pan-y}
 .screen{position:absolute;inset:9px;border-radius:31px;overflow:hidden;background:#000}
 .screen::after{content:"";position:absolute;left:50%;top:14px;transform:translateX(-50%);width:74px;height:22px;border-radius:11px;background:#000;z-index:5}
 /* Liquid reveal: a crisp, gently wobbling blob (clip-path, drawn by JS each frame) grows in from the right edge of the screen, where the next clip is waiting, so the new clip wipes over the old one with a clean but organic line. */
@@ -154,7 +155,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .slide.on{clip-path:none;transform:translateX(0) scale(1);z-index:2}
 .slide.was{clip-path:none;transform:translateX(0) scale(1);transition:none;z-index:1}
 .chapter-head.pin{position:sticky;z-index:0}
-.slide img,.slide video{width:100%;height:100%;object-fit:contain;background:#000} /* the screen is taller than 9:16, so the clip sits whole with black above and below rather than losing its edges */
+.slide img,.slide video{width:100%;height:100%;object-fit:cover;background:#000}
 .next{position:absolute;right:-4px;top:97px;width:176px;height:312px;border-radius:18px;overflow:hidden;background:#ddddda;box-shadow:0 24px 48px -20px rgba(0,0,0,.22);opacity:.95;z-index:1;cursor:pointer;transition:transform .9s cubic-bezier(.7,0,.2,1),opacity .5s ease}
 .next img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transition:opacity .4s ease}
 .next img.on{opacity:1}
@@ -184,7 +185,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 @media (max-width:1100px){
   .case{grid-template-columns:1fr;gap:28px}
   .stage{position:static}
-  .stack{grid-template-columns:300px minmax(0,1fr);justify-content:start}
+  .stack{grid-template-columns:360px minmax(0,1fr);justify-content:start}
 }
 @media (max-width:640px){
   .card{padding:22px}
@@ -192,8 +193,8 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
   /* Phone: the deck is scaled down (--ds, set by the pin script so the whole card fits the viewport) and sits beside
      the stats, mirroring the desktop stack. Negative margins shrink its layout box to match the scaled size. */
   .stack{grid-template-columns:auto minmax(0,1fr);gap:14px;justify-items:start;align-items:center}
-  .deck{--ds:.56;width:300px;max-width:none;height:506px;transform:scale(var(--ds));transform-origin:top left;
-    margin-right:calc(300px*(var(--ds) - 1));margin-bottom:calc(506px*(var(--ds) - 1))}
+  .deck{--ds:.56;width:360px;max-width:none;height:506px;transform:scale(var(--ds));transform-origin:top left;
+    margin-right:calc(360px*(var(--ds) - 1));margin-bottom:calc(506px*(var(--ds) - 1))}
   .stats{width:100%;min-height:0}
   .set{position:relative;top:auto;transform:none;display:none}
   .set.on{display:block;transform:none}
@@ -786,7 +787,7 @@ CASES.forEach(cs=>{
     // Scale the deck so the whole card is at most `avail` tall and the stats column keeps at least 118px.
     const deck=t.querySelector('.deck'), stage=t.querySelector('.stage');
     deck.style.setProperty('--ds','1');
-    const h1=stage.offsetHeight, byH=(avail-(h1-506))/506, byW=(t.clientWidth-44-14-118)/300; // 44 = card padding, 14 = stack gap, 118 = min stats width
+    const h1=stage.offsetHeight, byH=(avail-(h1-506))/506, byW=(t.clientWidth-44-14-118)/360; // 44 = card padding, 14 = stack gap, 118 = min stats width
     const ds=Math.max(.42,Math.min(1,byH,byW));
     deck.style.setProperty('--ds',ds.toFixed(3));
     return ds;
