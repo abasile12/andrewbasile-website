@@ -63,10 +63,11 @@ img{max-width:100%;display:block}
 @media (max-width:640px){.nav .btn{display:none}}
 
 /* Hero */
-.hero .wrap{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:0 40px;align-items:end;min-height:min(780px,88vh);padding-block:0;padding-left:0}
+/* The hero fills the window below the nav, and the portrait sits on the window's bottom edge at any size (no gap). */
+.hero .wrap{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:0 40px;align-items:end;min-height:calc(100vh - var(--navh,80px));min-height:calc(100svh - var(--navh,80px));padding-block:0;padding-left:0}
 .hero-copy{padding-left:57px}
-.portrait{height:min(700px,80vh);position:relative;overflow:hidden;align-self:end}
-.portrait img{position:absolute;left:0;bottom:-6%;height:106%;width:auto;max-width:none}
+.portrait{height:auto;position:relative;overflow:hidden;align-self:stretch}
+.portrait img{position:absolute;left:0;bottom:max(-6%,-44px);height:106%;max-height:782px;width:auto;max-width:none} /* 782px keeps the 471x658 cut-out inside the 560px column; on taller windows the extra room is above the head */
 .hero-copy{padding-block:clamp(40px,8vh,124px) 44px;display:flex;flex-direction:column;gap:36px;align-self:center}
 .hero h1{font-weight:500;font-size:clamp(84px,14.6vw,210px);line-height:.84;letter-spacing:-.065em;margin:0}
 .hero .role{font-weight:600;font-size:19px;margin:14px 0 0}
@@ -783,6 +784,7 @@ CASES.forEach(cs=>{
   }
   function layout(){
     const ph=phone(), on=desktop()||ph, z=ph?1:zoom(), vh=viewH(), navH=nav.offsetHeight; let prevH=0, prevTop=88, prevPinned=false;
+    document.documentElement.style.setProperty('--navh', navH+'px'); // the hero is sized to the window below the nav
     GAP = ph ? 24 : 44;
     // Desktop: pin the first card exactly where it sits when the Content chapter's top meets the nav (heading still
     // showing above it), and pin the heading with it. If the viewport is too short for that, slide the pin up so the
