@@ -184,14 +184,38 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 @media (max-width:640px){
   .card{padding:22px}
   .case{gap:20px}
-  .stack{grid-template-columns:1fr;gap:20px;justify-items:center}
-  .deck{width:100%;max-width:300px;height:506px}
+  /* Phone: the deck is scaled down (--ds, set by the pin script so the whole card fits the viewport) and sits beside
+     the stats, mirroring the desktop stack. Negative margins shrink its layout box to match the scaled size. */
+  .stack{grid-template-columns:auto minmax(0,1fr);gap:14px;justify-items:start;align-items:center}
+  .deck{--ds:.56;width:300px;max-width:none;height:506px;transform:scale(var(--ds));transform-origin:top left;
+    margin-right:calc(300px*(var(--ds) - 1));margin-bottom:calc(506px*(var(--ds) - 1))}
   .stats{width:100%;min-height:0}
   .set{position:relative;top:auto;transform:none;display:none}
   .set.on{display:block;transform:none}
+  .set h4{font-size:15px}
+  .set .handle{margin:4px 0 10px}
+  .lines li{padding:8px 0}
+  .lines li:first-child{padding-block:10px}.lines li:first-child b{font-size:18px}
+  .ticks{margin-top:14px}
+  .track + .track{margin-top:24px}
+  .play{transform:scale(calc(1/var(--ds)));transform-origin:bottom right}
+  .play:active{transform:scale(calc(.92/var(--ds)))}
   .copy h3{font-size:28px}
   .copy{gap:10px}
 }
+
+/* Play / pause control on the phone screen (shown only when the active clip has a video file) */
+.play{position:absolute;right:14px;bottom:16px;width:40px;height:40px;border-radius:50%;border:0;padding:0;cursor:pointer;z-index:6;
+  background:rgba(255,255,255,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px rgba(255,255,255,.35),0 6px 16px rgba(0,0,0,.3);
+  display:none;align-items:center;justify-content:center;color:#fff;transition:transform .2s,background .2s}
+.play.show{display:flex}
+.play:hover{background:rgba(255,255,255,.34)}
+.play:active{transform:scale(.92)}
+.play svg{width:16px;height:16px;fill:#fff;display:block}
+.play .ic-pause{display:none}
+.play.playing .ic-play{display:none}
+.play.playing .ic-pause{display:block}
+.play:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 
 /* Additional work */
 .additional h3{font-weight:600;font-size:38px;letter-spacing:-.03em;margin:44px 0 20px}
@@ -394,25 +418,27 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 </footer>
 
 <script>
+// Each clip takes an optional `video:'assets/<file>.mp4'`. When present the phone screen plays it (muted, looping) behind
+// a small play / pause button; without it the poster `img` is shown and the button stays hidden.
 const CASES=[
  {id:'lynden-lane',name:'Lynden Lane',services:'Content Strategy, Short-Form Series Development, Editing, Production',
   paras:['Partnered with Lynden Lane Co. to develop an organic short-form video strategy showcasing their expertise in luxury wedding design and planning.','The content built authority and trust with prospective clients, growing the brand’s audience, generating millions of views, and contributing directly to new business revenue.'],
   impact:['25,000+ followers acquired on Instagram','2.5M+ organic views generated across the social series','$2,000,000 in revenue driven through organic content'],
-  handle:'@lyndenlane',url:'https://www.instagram.com/lyndenlane/',mobileOpen:true,
-  clips:[{title:'Stay in your (Lynden) Lane',img:'assets/lynden-1.jpg',stats:[['139K','views'],['2.6K','likes'],['145','comments']]},
-         {title:'5 Senses',img:'assets/lynden-2.jpg',stats:[['108K','views'],['437','likes'],['35','comments']]}]},
+  handle:'@lyndenlane',url:'https://www.instagram.com/lyndenlane/',
+  clips:[{title:'Stay in your (Lynden) Lane',img:'assets/lynden-1.jpg',video:'assets/lynden-1.mp4',stats:[['139K','views'],['2.6K','likes'],['145','comments']]},
+         {title:'5 Senses',img:'assets/lynden-2.jpg',video:'assets/lynden-2.mp4',stats:[['108K','views'],['437','likes'],['35','comments']]}]},
  {id:'chad-jt',name:'Chad & JT',services:'Short-Form Strategy, Organic Franchise Development, Editing, Clipping, Social Video Production',
   paras:['Supported comedians Chad Kroeger and JT Parr with the launch and growth of their YouTube series, Stoked Eye for the Sad Guy, through short-form content production and strategy.','Led clipping and short-form marketing for the series while helping develop new organic content franchises, including JT’s “Brolitical Commentator” format.'],
   impact:['50+ short-form clips produced','20M+ organic short-form views','100K+ YouTube series views'],collab:'Collaborations with Bobby Lee, Robby Hoffman, Anders Holm, and Zedd.',
   handle:'@jtparr14',url:'https://www.instagram.com/jtparr14/',
-  clips:[{title:'Brolitical Commentator',img:'assets/chadjt-1.jpg',stats:[['13.3M','views'],['1.1M','likes'],['23.9K','comments'],['28.2K','shares']]},
-         {title:'Nolan @ City Council',img:'assets/chadjt-2.jpg',handle:'@chadgoesdeep',url:'https://www.instagram.com/chadgoesdeep/',stats:[['581K','views'],['13.4K','likes'],['334','comments'],['207','shares']]}]},
+  clips:[{title:'Brolitical Commentator',img:'assets/chadjt-1.jpg',video:'assets/chadjt-1.mp4',stats:[['13.3M','views'],['1.1M','likes'],['23.9K','comments'],['28.2K','shares']]},
+         {title:'Nolan @ City Council',img:'assets/chadjt-2.jpg',video:'assets/chadjt-2.mp4',handle:'@chadgoesdeep',url:'https://www.instagram.com/chadgoesdeep/',stats:[['581K','views'],['13.4K','likes'],['334','comments'],['207','shares']]}]},
  {id:'charlisse',name:'Charlisse Leger-Walker',services:'Short-Form Strategy, Organic Franchise Development, Editing, Social Video Production',
   paras:['Led short-form strategy and production for Charlisse Leger-Walker, UCLA WBB point guard and first-round WNBA draft pick, supporting the growth of her personal YouTube channel and social presence.','Developed organic content series, collaborated with official UCLA Athletics accounts, and helped generate content that was featured by ESPN and March Madness.'],
   impact:['1M+ organic social views','2.5K+ YouTube subscribers','Series coverage from Fox, ESPN, and March Madness'],collab:'Collaborations with and coverage from UCLA Athletics, ESPN, and March Madness.',
   handle:'@charlisse.legerwalker',url:'https://www.instagram.com/charlisse.legerwalker/',
-  clips:[{title:'Letting frat guys pick my celebration',img:'assets/charlisse-1.jpg',stats:[['538K','views'],['20.8K','likes'],['75','comments'],['107','shares']]},
-         {title:'Undercover Smack Talk',img:'assets/charlisse-2.jpg',stats:[['81K','views'],['4,206','likes'],['96','comments'],['65','shares']]}]}
+  clips:[{title:'Letting frat guys pick my celebration',img:'assets/charlisse-1.jpg',video:'assets/charlisse-1.mp4',stats:[['538K','views'],['20.8K','likes'],['75','comments'],['107','shares']]},
+         {title:'Undercover Smack Talk',img:'assets/charlisse-2.jpg',video:'assets/charlisse-2.mp4',stats:[['81K','views'],['4,206','likes'],['96','comments'],['65','shares']]}]}
 ];
 const root=document.getElementById('cases');
 const desktop=()=>window.matchMedia('(min-width:1101px)').matches;
@@ -450,7 +476,8 @@ CASES.forEach(cs=>{
     <div class="stack">
       <div class="deck">
         <div class="next" title="Next clip">${cs.clips.map((c,i)=>`<img data-i="${i}" src="${c.img}" alt="">`).join('')}<div class="tip">Next clip</div></div>
-        <div class="phone" tabindex="0" aria-label="${cs.name} clips, click for next"><div class="screen">${cs.clips.map((c,i)=>`<div class="slide" data-i="${i}"><img src="${c.img}" alt="${c.title}"></div>`).join('')}</div></div>
+        <div class="phone" tabindex="0" aria-label="${cs.name} clips, click for next"><div class="screen">${cs.clips.map((c,i)=>`<div class="slide" data-i="${i}">${c.video?`<video src="${c.video}" poster="${c.img}" muted loop playsinline preload="metadata" aria-label="${c.title}"></video>`:`<img src="${c.img}" alt="${c.title}">`}</div>`).join('')}</div>
+          <button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div>
       </div>
       <div class="stats">${cs.clips.map((c,i)=>`<div class="set" data-i="${i}">
         <h4><a href="${c.url||cs.url}" target="_blank" rel="noopener">${c.title}<span class="g">↗</span></a></h4>
@@ -471,10 +498,25 @@ CASES.forEach(cs=>{
   </article></div>`;
   root.appendChild(track);
 
-  const slides=[...track.querySelectorAll('.slide')], sets=[...track.querySelectorAll('.set')], nextEl=track.querySelector('.next'), nextImgs=[...nextEl.querySelectorAll('img')], phone=track.querySelector('.phone');
+  const slides=[...track.querySelectorAll('.slide')], sets=[...track.querySelectorAll('.set')], nextEl=track.querySelector('.next'), nextImgs=[...nextEl.querySelectorAll('img')], phone=track.querySelector('.phone'), playBtn=track.querySelector('.play');
   let active=-1, lock=false;
+  // Play / pause: one button per phone, acting on the video of the active slide. Switching clips pauses the old one.
+  const videoAt=i=>slides[i]&&slides[i].querySelector('video');
+  function syncPlay(){
+    const v=videoAt(active); playBtn.classList.toggle('show',!!v);
+    const playing=!!v&&!v.paused; playBtn.classList.toggle('playing',playing);
+    playBtn.setAttribute('aria-pressed',String(playing)); playBtn.setAttribute('aria-label',playing?'Pause clip':'Play clip');
+  }
+  // Playing is a deliberate tap, so the clip plays with sound; it starts muted only as a fallback if the browser refuses.
+  playBtn.addEventListener('click',e=>{ e.stopPropagation(); const v=videoAt(active); if(!v) return;
+    if(v.paused){ v.muted=false; v.play().catch(()=>{ v.muted=true; v.play().catch(()=>{}); }); } else v.pause(); syncPlay(); });
+  playBtn.addEventListener('keydown',e=>e.stopPropagation());
+  slides.forEach(s=>{ const v=s.querySelector('video'); if(v){ ['play','pause','ended'].forEach(ev=>v.addEventListener(ev,syncPlay)); } });
+  // A clip that scrolls out of view stops playing
+  if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(en=>{ if(!en.isIntersecting){ const v=videoAt(active); if(v&&!v.paused) v.pause(); } }),{threshold:0}).observe(phone);
   function setActive(i, animate=true){
     if(i===active) return; const prev=active; active=i;
+    const pv=videoAt(prev); if(pv){ pv.pause(); pv.currentTime=0; }
     slides.forEach((s,j)=>{ if(s._raf){cancelAnimationFrame(s._raf);s._raf=0;} s.style.clipPath=''; s.classList.remove('on','was'); if(j===i)s.classList.add('on'); else if(j===prev)s.classList.add('was');});
     if(animate && prev>=0) blobReveal(slides[i]);
     sets.forEach((s,j)=>{s.classList.toggle('on',j===i); s.classList.toggle('past',j<i);});
@@ -483,11 +525,12 @@ CASES.forEach(cs=>{
       nextEl.classList.add('into');
       setTimeout(()=>{ nextImgs.forEach(im=>im.classList.toggle('on',+im.dataset.i===other)); nextEl.classList.remove('into'); },520);
     } else nextImgs.forEach(im=>im.classList.toggle('on',+im.dataset.i===other));
+    syncPlay();
   }
   setActive(0,false);
   track._api={n,setActive,get active(){return active}};
-  // Tap or click also advances (the only way on narrow screens)
-  const go=i=>{ if(desktop()){ const s=track._scrollFor?track._scrollFor(i):null; if(s!=null){window.scrollTo({top:s,behavior:'smooth'});return;} } setActive(i); };
+  // Tap or click also advances (the only way when the card is not pinned)
+  const go=i=>{ if(track._pinned){ const s=track._scrollFor?track._scrollFor(i):null; if(s!=null){window.scrollTo({top:s,behavior:'smooth'});return;} } setActive(i); };
   nextEl.addEventListener('click',()=>go((active+1)%n));
   phone.addEventListener('click',()=>go((active+1)%n));
   phone.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();go((active+1)%n);} });
@@ -501,13 +544,14 @@ CASES.forEach(cs=>{
   mq.addEventListener('change',sync); sync();
 })();
 
-// Pinned scroll sequence (desktop only).
+// Pinned scroll sequence (desktop, and phones up to 640px).
 // Card i pins at TOP while its clip morphs over a scroll distance D. During that stretch card i+1 pins at a PEEK
 // position directly under it, so the next case is always showing. When card i releases, card i+1 is switched to pin
 // at TOP and gets its own D. Track heights and negative margins keep the cards in normal flow positions otherwise.
 (function(){
-  const tracks=[...document.querySelectorAll('.track')]; const GAP=44; let TOP=88, D=0;
+  const tracks=[...document.querySelectorAll('.track')]; let GAP=44, TOP=88, D=0;
   const nav=document.querySelector('.nav'), chap=document.getElementById('content'), head=document.getElementById('content-head');
+  const phoneMQ=window.matchMedia('(max-width:640px)'), phone=()=>phoneMQ.matches;
   // Geometry: track i = [spacer D (i>0)] + [card]. Tracks after the first overlap the previous track's hold distance
   // (margin-top = GAP - D), so while card i-1 is held at TOP, card i's track top sits exactly at the peek position
   // (TOP + h_prev + GAP). A sticky `bottom` keeps card i parked there until its own natural position arrives, then
@@ -517,45 +561,83 @@ CASES.forEach(cs=>{
   // Units: the desktop fit-to-width zoom on <html> means offsetHeight and sticky offsets are in layout px while
   // innerHeight, scrollY, getBoundingClientRect and vh are in screen px. Everything here is done in layout px:
   // screen values are divided by the zoom factor, and the viewport height is measured instead of using 100vh.
+  // Phones: the browser chrome comes and goes, so the viewport height is the small viewport (100svh, via a probe)
+  // and does not change while scrolling. The deck is scaled (--ds) so the closed card fits under the nav; a card
+  // that still does not fit (its "View more" is open) is taken out of the sequence and scrolls normally until it is
+  // closed again, so the copy is always reachable.
   const zoom=()=>parseFloat(getComputedStyle(document.documentElement).zoom)||1;
+  const probe=document.createElement('div'); probe.style.cssText='position:fixed;top:0;left:0;width:1px;height:100vh;height:100svh;visibility:hidden;pointer-events:none';
+  document.body.appendChild(probe);
+  const viewH=()=>phone() ? (probe.offsetHeight||window.innerHeight) : window.innerHeight/zoom();
   const headwrap=document.createElement('div'); headwrap.className='headwrap';
   head.parentNode.insertBefore(headwrap, head); headwrap.appendChild(head); headwrap.appendChild(tracks[0]);
+  function fitDeck(t, avail){
+    // Scale the deck so the whole card is at most `avail` tall and the stats column keeps at least 118px.
+    const deck=t.querySelector('.deck'), stage=t.querySelector('.stage');
+    deck.style.setProperty('--ds','1');
+    const h1=stage.offsetHeight, byH=(avail-(h1-506))/506, byW=(t.clientWidth-44-14-118)/300; // 44 = card padding, 14 = stack gap, 118 = min stats width
+    const ds=Math.max(.42,Math.min(1,byH,byW));
+    deck.style.setProperty('--ds',ds.toFixed(3));
+    return ds;
+  }
   function layout(){
-    const on=desktop(), z=zoom(), vh=window.innerHeight/z; let prevH=0, prevTop=88;
-    // Pin the first card exactly where it sits when the Content chapter's top meets the nav (heading still showing
-    // above it), and pin the heading with it. If the viewport is too short for that, slide the pin up so the card fits.
+    const ph=phone(), on=desktop()||ph, z=ph?1:zoom(), vh=viewH(), navH=nav.offsetHeight; let prevH=0, prevTop=88, prevPinned=false;
+    GAP = ph ? 24 : 44;
+    // Desktop: pin the first card exactly where it sits when the Content chapter's top meets the nav (heading still
+    // showing above it), and pin the heading with it. If the viewport is too short for that, slide the pin up so the
+    // card fits. Phones: every card pins just under the nav and the heading scrolls away.
     head.classList.remove('pin'); head.style.top='';
-    if(on){
-      const navH=nav.offsetHeight, chapTop=chap.getBoundingClientRect().top/z, h0=tracks[0].querySelector('.stage').offsetHeight;
+    if(on && !ph){
+      const chapTop=chap.getBoundingClientRect().top/z, h0=tracks[0].querySelector('.stage').offsetHeight;
       const natural=Math.round(navH+(tracks[0].getBoundingClientRect().top/z-chapTop));
       TOP=Math.max(88,Math.min(natural, vh-h0-24));
       const headTop=Math.round(navH+(head.getBoundingClientRect().top/z-chapTop)-(natural-TOP));
       head.classList.add('pin'); head.style.top=headTop+'px';
-    }
+    } else if(ph){ TOP=navH+12; }
+    const avail=vh-TOP-12;
     tracks.forEach((t,i)=>{
-      const stage=t.querySelector('.stage'), sp=t.querySelector('.spacer'), h=stage.offsetHeight; t._h=h; t._top = i===0 ? TOP : 88;
-      if(!on){ t.style.height=''; t.style.marginTop=''; stage.style.top=''; stage.style.bottom=''; sp.style.height=''; prevH=h; return; }
-      D=Math.round(vh*0.6);
-      sp.style.height = i===0 ? '0px' : D+'px';
-      t.style.height = (h + D + (i===0?0:D))+'px';
-      t.style.marginTop = i===0 ? '' : (GAP - D)+'px';
+      const stage=t.querySelector('.stage'), sp=t.querySelector('.spacer'), deck=t.querySelector('.deck');
+      if(ph) fitDeck(t, avail); else deck.style.removeProperty('--ds');
+      const h=stage.offsetHeight; t._h=h; t._top = (i===0 && !ph) ? TOP : (ph ? TOP : 88);
+      const pinned = on && (!ph || h<=avail); t._pinned=pinned;
+      if(!pinned){ t.style.height=''; t.style.marginTop=''; stage.style.top=''; stage.style.bottom=''; sp.style.height=''; stage.style.position=''; prevH=h; prevPinned=false; return; }
+      stage.style.position='sticky';
+      D=Math.round(vh*0.6); t._D=D;
+      const overlap = i>0 && prevPinned; t._off = overlap ? D : 0;
+      sp.style.height = overlap ? D+'px' : '0px';
+      t.style.height = (h + D + t._off)+'px';
+      t.style.marginTop = i===0 ? '' : (overlap ? (GAP - D) : GAP)+'px';
       stage.style.top = t._top+'px';
-      stage.style.bottom = i===0 ? 'auto' : Math.round(vh - (prevTop + prevH + GAP + h))+'px';
-      prevH=h; prevTop=t._top;
+      stage.style.bottom = overlap ? Math.round(vh - (prevTop + prevH + GAP + h))+'px' : 'auto';
+      prevH=h; prevTop=t._top; prevPinned=true;
     });
     onScroll();
   }
   function onScroll(){
-    if(!desktop()) return;
-    const z=zoom();
+    const z=phone()?1:zoom();
     tracks.forEach((t,i)=>{
-      const rTop=t.getBoundingClientRect().top/z, offset = i===0 ? 0 : D, top=t._top;
+      if(!t._pinned) return;
+      const rTop=t.getBoundingClientRect().top/z, offset=t._off, top=t._top, D=t._D;
       const p=Math.min(1,Math.max(0,(top - offset - rTop)/D));
       // The clip switches early in the hold (about a fifth of the way in for two clips) rather than at the midpoint
       const api=t._api; api.setActive(Math.min(api.n-1,Math.floor(p*api.n+0.6)));
       t._scrollFor=k=>(window.scrollY/z + rTop - top + offset + (k+0.3)/api.n*D)*z;
     });
   }
+  // "View more" changes a card's height: re-run the layout and keep that card where it is on screen.
+  // The card's screen position is taken on the summary click, before the browser applies the open state (a pinned
+  // card can shift the moment it grows past its track), and restored after the new layout.
+  tracks.forEach(t=>t.querySelectorAll('details').forEach(d=>{
+    const stage=t.querySelector('.stage');
+    d.querySelector('summary').addEventListener('click',()=>{ t._before=stage.getBoundingClientRect().top; });
+    d.addEventListener('toggle',()=>{
+      const before=t._before; t._before=null;
+      layout();
+      if(before==null) return;
+      const delta=stage.getBoundingClientRect().top-before;
+      if(Math.abs(delta)>1){ const sb=document.documentElement.style.scrollBehavior; document.documentElement.style.scrollBehavior='auto'; window.scrollBy(0,delta); document.documentElement.style.scrollBehavior=sb; }
+    });
+  }));
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',layout);
   window.addEventListener('load',layout);
