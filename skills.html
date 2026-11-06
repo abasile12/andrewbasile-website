@@ -136,12 +136,8 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .footer .mail{color:var(--green);font-weight:500;font-size:17px}
 </style>
 <style>
-/* Desktop fit: the layout is built on the 1440px Figma canvas (130px gutters, 1180px content). On wider screens the whole page scales up to fill the width, the way "fit to width" does in Figma, so the proportions stay identical to the design. Nothing changes at 1440px and below. */
-@media (min-width:1441px){html{zoom:var(--fit,1)}}
+/* Desktop width: the layout is the 1440px Figma canvas (1180px content, gutters that stop growing at 130px) and stays that size on wider screens, centred with whitespace either side, so every section reads as one contained block. */
 </style>
-<script>
-(function(){var h=document.documentElement;function fit(){h.style.setProperty('--fit','1');var w=window.innerWidth;h.style.setProperty('--fit',String(w>1440?Math.min(w/1440,1.6):1))}fit();addEventListener('resize',fit)})();
-</script>
 </head>
 <body>
 <header class="nav">

@@ -111,7 +111,8 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .disc[open]>summary::after{content:"−"}
 .disc>summary:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
 .disc>.inner{padding-top:16px}
-@media (min-width:641px){.disc>summary{display:none}.disc>.inner{padding-top:0}}
+@media (min-width:641px){.disc:not(.desk)>summary{display:none}.disc:not(.desk)>.inner{padding-top:0}}
+/* .desk rows (the Product Marketing cases) keep the toggle on every screen size and start closed. */
 
 /* Chapter heading */
 .chapter{padding-block:88px}
@@ -312,12 +313,8 @@ html.pl-running .portrait img{visibility:hidden}
 
 </style>
 <style>
-/* Desktop fit: the layout is built on the 1440px Figma canvas (130px gutters, 1180px content). On wider screens the whole page scales up to fill the width, the way "fit to width" does in Figma, so the proportions stay identical to the design. Nothing changes at 1440px and below. */
-@media (min-width:1441px){html{zoom:var(--fit,1)}}
+/* Desktop width: the layout is the 1440px Figma canvas (1180px content, gutters that stop growing at 130px) and stays that size on wider screens, centred with whitespace either side, so every section reads as one contained block. */
 </style>
-<script>
-(function(){var h=document.documentElement;function fit(){h.style.setProperty('--fit','1');var w=window.innerWidth;h.style.setProperty('--fit',String(w>1440?Math.min(w/1440,1.6):1))}fit();addEventListener('resize',fit)})();
-</script>
 </head>
 <body>
 <div class="pl" id="pl" aria-hidden="true">
@@ -516,7 +513,7 @@ html.pl-running .portrait img{visibility:hidden}
     <div class="pm-grid">
       <article class="card copy">
         <div class="titlerow"><div class="logo"><img src="assets/logo-autograph.png" alt=""></div><h3>Autograph</h3></div>
-        <details class="disc"><summary>My work</summary><div class="inner">
+        <details class="disc desk"><summary>Read the case</summary><div class="inner">
         <p class="services">Product Marketing Manager, Feb 2024 - Jan 2025.<br>Go-to-Market, Growth Campaigns, Product Marketing, Organic Social</p>
         <p>Product marketing at Autograph, Tom Brady’s a16z-backed company. Spearheaded go-to-market strategy for three league launches (NBA, MLB, NFL) and two major feature releases, and ran the $1.2M annual marketing budget and a $50K paid social agency account.</p>
         <p>Led brand marketing for the “Don’t Auto-Draft, use Autograph,” “Gotta Get There” ticket marketplace, and “Autograph Replay” campaigns, and used market research and user feedback to shape Autograph Replay into the product’s highest-retaining feature.</p>
@@ -531,7 +528,7 @@ html.pl-running .portrait img{visibility:hidden}
       </article>
       <article class="card copy">
         <div class="titlerow"><div class="logo"><img src="assets/logo-rdb.png" alt=""></div><h3>Red Dining Book</h3></div>
-        <details class="disc"><summary>My work</summary><div class="inner">
+        <details class="disc desk"><summary>Read the case</summary><div class="inner">
         <p class="services">Marketing Strategy, Paid Social Content, Market Launch Campaign</p>
         <p>Led the expansion of the Red Dining Book, a boutique restaurant guidebook, from Los Angeles to New York City, working as the marketing partner across content and distribution for the NYC edition.</p>
         <p>That covered the paid social campaigns and the creative behind them, UGC content partnerships with NYC creators, and the digital content built to drive awareness and sales, including the making-of series shot inside the featured restaurants.</p>
@@ -549,7 +546,7 @@ html.pl-running .portrait img{visibility:hidden}
     <div class="pm-grid" id="partnerships">
       <article class="card copy">
         <div class="titlerow"><div class="logo"><img src="assets/logo-amplifii.png" alt=""></div><div><h3>Amplifii</h3><p class="sub">Strategic Advisor · UGC creator partnership marketplace</p></div></div>
-        <details class="disc" data-mopen><summary>My work</summary><div class="inner">
+        <details class="disc desk"><summary>Read the case</summary><div class="inner">
         <p>Amplifii is a creator marketing platform where brands post a brief and a reward pool, and hundreds of creators pick it up and post across Instagram, TikTok, YouTube, and X. I advise the founding team on partnerships and product marketing.</p>
         <p>Most of the work is opening doors: brokering strategic partnerships with brands, agencies, and creator networks that bring supply and demand onto the marketplace. The rest is product input, using what I have learned running UGC partnerships for clients to help the team shape features that creators and brand managers actually want to use, and then helping tell the story of those features once they ship.</p>
         <ul class="impact">
@@ -562,7 +559,7 @@ html.pl-running .portrait img{visibility:hidden}
       </article>
       <article class="card copy">
         <div class="titlerow"><div class="logo"><img src="assets/logo-quix.png" alt=""></div><div><h3>Quix</h3><p class="sub">Head of Marketing, Jun 2021 to Mar 2023 · NFT marketplace on Optimism</p></div></div>
-        <details class="disc"><summary>My work</summary><div class="inner">
+        <details class="disc desk"><summary>Read the case</summary><div class="inner">
         <p>First non-technical hire at Quix, where I led marketing, business development, and community for a three-person team that built the third largest NFT marketplace in the world.</p>
         <p>I onboarded developers, artists, and collectors to a brand new Layer 2 ecosystem, built the brand and community strategy from the product’s value proposition, and ran the campaigns and partnerships that drove volume.</p>
         <ul class="impact">
@@ -710,13 +707,16 @@ CASES.forEach(cs=>{
   setActive(0,false);
   track._api={n,setActive,get active(){return active}};
   // Tap or click also advances (the only way when the card is not pinned)
-  const go=i=>{ if(track._pinned){ const s=track._scrollFor?track._scrollFor(i):null; if(s!=null){window.scrollTo({top:s,behavior:'smooth'});return;} } setActive(i); };
+  // On phones a pinned card never scrolls the page: the clip switches in place and the choice is held as an override
+  // until the scroll position moves on to a different clip (see onScroll). Desktop scrolls to the clip's hold position.
+  const touchMQ=window.matchMedia('(max-width:640px)');
+  const go=i=>{ if(track._pinned){ if(touchMQ.matches){ track._ov=i; track._ovBase=track._derived; setActive(i); return; } const s=track._scrollFor?track._scrollFor(i):null; if(s!=null){window.scrollTo({top:s,behavior:'smooth'});return;} } setActive(i); };
   nextEl.addEventListener('click',()=>go((active+1)%n));
   // Tap advances; on touch screens a horizontal swipe on the phone goes to the next / previous clip instead.
   let swiped=false, sx=0, sy=0;
   phone.addEventListener('touchstart',e=>{ const t=e.touches[0]; sx=t.clientX; sy=t.clientY; swiped=false; },{passive:true});
   phone.addEventListener('touchend',e=>{ const t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
-    if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)*1.5){ swiped=true; go(dx<0 ? (active+1)%n : (active-1+n)%n); } },{passive:true});
+    if(Math.abs(dx)>30 && Math.abs(dx)>Math.abs(dy)*1.2){ swiped=true; go(dx<0 ? (active+1)%n : (active-1+n)%n); } },{passive:true});
   phone.addEventListener('click',e=>{ if(swiped){ swiped=false; return; } go((active+1)%n); });
   phone.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();go((active+1)%n);} });
   track.querySelectorAll('.ticks i').forEach(t=>t.addEventListener('click',()=>go(+t.dataset.go)));
@@ -737,10 +737,11 @@ CASES.forEach(cs=>{
   });
 })();
 
-// Disclosure rows: always open on desktop (the toggle row is hidden by CSS); on phones, closed unless marked data-mopen.
+// Disclosure rows: open on desktop (the toggle row is hidden by CSS), except .desk rows, which keep their toggle and start
+// closed everywhere; on phones, closed unless marked data-mopen.
 (function(){
   const mq=window.matchMedia('(max-width:640px)');
-  function sync(){ document.querySelectorAll('details.disc').forEach(d=>{ d.open = mq.matches ? d.hasAttribute('data-mopen') : true; }); }
+  function sync(){ document.querySelectorAll('details.disc').forEach(d=>{ d.open = mq.matches ? d.hasAttribute('data-mopen') : !d.classList.contains('desk'); }); }
   mq.addEventListener('change',sync); sync();
 })();
 
@@ -800,7 +801,7 @@ CASES.forEach(cs=>{
       if(ph) fitDeck(t, avail); else deck.style.removeProperty('--ds');
       const h=stage.offsetHeight; t._h=h; t._top = (i===0 && !ph) ? TOP : (ph ? TOP : 88);
       const pinned = on && (!ph || h<=avail); t._pinned=pinned;
-      if(!pinned){ t.style.height=''; t.style.marginTop=''; stage.style.top=''; stage.style.bottom=''; sp.style.height=''; stage.style.position=''; prevH=h; prevPinned=false; return; }
+      if(!pinned){ t._ov=null; t.style.height=''; t.style.marginTop=''; stage.style.top=''; stage.style.bottom=''; sp.style.height=''; stage.style.position=''; prevH=h; prevPinned=false; return; }
       stage.style.position='sticky';
       D=Math.round(vh*0.6); t._D=D;
       const overlap = i>0 && prevPinned; t._off = overlap ? D : 0;
@@ -820,7 +821,9 @@ CASES.forEach(cs=>{
       const rTop=t.getBoundingClientRect().top/z, offset=t._off, top=t._top, D=t._D;
       const p=Math.min(1,Math.max(0,(top - offset - rTop)/D));
       // The clip switches early in the hold (about a fifth of the way in for two clips) rather than at the midpoint
-      const api=t._api; api.setActive(Math.min(api.n-1,Math.floor(p*api.n+0.6)));
+      const api=t._api, derived=Math.min(api.n-1,Math.floor(p*api.n+0.6)); t._derived=derived;
+      // A phone tap or swipe (t._ov) wins while the scroll still points at the clip it was made on; crossing into another clip releases it
+      if(t._ov!=null && derived===t._ovBase) api.setActive(t._ov); else { t._ov=null; api.setActive(derived); }
       t._scrollFor=k=>(window.scrollY/z + rTop - top + offset + (k+0.3)/api.n*D)*z;
     });
   }
