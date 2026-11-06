@@ -407,8 +407,14 @@ html.pl-running .portrait img{visibility:hidden}
       var op=(cs.objectPosition||'50% 50%').split(' ');
       applyGeom(img,coverGeom(br.width,br.height,parseFloat(op[0])||0,parseFloat(op[1])||0));
     }else{
+      // The page img is object-fit:contain inside its element box, so the drawn photo can be smaller than the box
+      // (tall windows): match the drawn rectangle, not the element, or the card lands stretched and snaps on swap.
       var i0=pimg.getBoundingClientRect(),ir={left:i0.left/z,top:i0.top/z,width:i0.width/z,height:i0.height/z};
-      applyGeom(img,{left:(ir.left-br.left)/br.width*100,top:(ir.top-br.top)/br.height*100,width:ir.width/br.width*100,height:ir.height/br.height*100});
+      var dw=ir.width,dh=ir.height;
+      if(cs.objectFit==='contain'||cs.objectFit==='scale-down'){ if(ir.width/ir.height>HERO_RATIO) dw=ir.height*HERO_RATIO; else dh=ir.width/HERO_RATIO; }
+      var op2=(cs.objectPosition||'50% 50%').split(' '),px=parseFloat(op2[0])||0,py=parseFloat(op2[1])||0;
+      var dl=ir.left+(ir.width-dw)*px/100,dt=ir.top+(ir.height-dh)*py/100;
+      applyGeom(img,{left:(dl-br.left)/br.width*100,top:(dt-br.top)/br.height*100,width:dw/br.width*100,height:dh/br.height*100});
     }
   }
 
