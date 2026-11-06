@@ -139,7 +139,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .case{display:grid;grid-template-columns:564px minmax(0,1fr);gap:44px;align-items:center}
 .stack{display:grid;grid-template-columns:300px 236px;gap:28px;align-items:center}
 .deck{position:relative;width:300px;height:506px}
-.phone{position:absolute;left:0;top:0;width:236px;height:506px;border-radius:40px;background:var(--phone);box-shadow:0 0 0 1.5px var(--phone-edge),inset 0 0 0 1px rgba(255,255,255,.12),0 30px 60px -24px rgba(0,0,0,.35);z-index:3;cursor:pointer}
+.phone{position:absolute;left:0;top:0;width:236px;height:506px;border-radius:40px;background:var(--phone);box-shadow:0 0 0 1.5px var(--phone-edge),inset 0 0 0 1px rgba(255,255,255,.12),0 30px 60px -24px rgba(0,0,0,.35);z-index:3;cursor:pointer;touch-action:pan-y}
 .screen{position:absolute;inset:9px;border-radius:31px;overflow:hidden;background:#000}
 .screen::after{content:"";position:absolute;left:50%;top:14px;transform:translateX(-50%);width:74px;height:22px;border-radius:11px;background:#000;z-index:5}
 /* Liquid reveal: a crisp, gently wobbling blob (clip-path, drawn by JS each frame) grows in from the right edge of the screen, where the next clip is waiting, so the new clip wipes over the old one with a clean but organic line. */
@@ -198,20 +198,23 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
   .lines li:first-child{padding-block:10px}.lines li:first-child b{font-size:18px}
   .ticks{margin-top:14px}
   .track + .track{margin-top:24px}
-  .play{transform:scale(calc(1/var(--ds)));transform-origin:bottom right}
-  .play:active{transform:scale(calc(.92/var(--ds)))}
+  .phone .play{transform:translate(-50%,-50%) scale(calc(1/var(--ds)))}
+  .phone .play:active{transform:translate(-50%,-50%) scale(calc(.92/var(--ds)))}
   .copy h3{font-size:28px}
   .copy{gap:10px}
 }
 
 /* Play / pause control on the phone screen (shown only when the active clip has a video file) */
-.play{position:absolute;right:14px;bottom:16px;width:40px;height:40px;border-radius:50%;border:0;padding:0;cursor:pointer;z-index:6;
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;border:0;padding:0;cursor:pointer;z-index:6;
   background:rgba(255,255,255,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px rgba(255,255,255,.35),0 6px 16px rgba(0,0,0,.3);
   display:none;align-items:center;justify-content:center;color:#fff;transition:transform .2s,background .2s}
 .play.show{display:flex}
+.play.playing{opacity:0;transition:opacity .25s}
+.phone:hover .play.playing,.phone.touched .play.playing,.play.playing:focus-visible{opacity:1}
 .play:hover{background:rgba(255,255,255,.34)}
-.play:active{transform:scale(.92)}
-.play svg{width:16px;height:16px;fill:#fff;display:block}
+.play:active{transform:translate(-50%,-50%) scale(.92)}
+.play svg{width:18px;height:18px;fill:#fff;display:block}
+.play .ic-play{margin-left:3px}
 .play .ic-pause{display:none}
 .play.playing .ic-play{display:none}
 .play.playing .ic-pause{display:block}
@@ -508,15 +511,22 @@ CASES.forEach(cs=>{
     playBtn.setAttribute('aria-pressed',String(playing)); playBtn.setAttribute('aria-label',playing?'Pause clip':'Play clip');
   }
   // Playing is a deliberate tap, so the clip plays with sound; it starts muted only as a fallback if the browser refuses.
+  // Buffering: videos start with preload=metadata (nothing heavy loads up front). Once a card's clip is played, every clip
+  // in that card switches to preload=auto, so the next one is buffered by the time it swaps in.
+  const warm=except=>slides.forEach(s=>{ const v=s.querySelector('video'); if(v&&v!==except&&v.preload!=='auto'){ v.preload='auto'; try{v.load();}catch(e){} } });
+  const playVideo=v=>{ v.muted=false; return v.play().catch(()=>{ v.muted=true; return v.play().catch(()=>{}); }); };
   playBtn.addEventListener('click',e=>{ e.stopPropagation(); const v=videoAt(active); if(!v) return;
-    if(v.paused){ v.muted=false; v.play().catch(()=>{ v.muted=true; v.play().catch(()=>{}); }); } else v.pause(); syncPlay(); });
+    if(v.paused){ playVideo(v); warm(v); } else v.pause(); syncPlay(); });
+  let touchT=0; phone.addEventListener('touchstart',()=>{ phone.classList.add('touched'); clearTimeout(touchT); touchT=setTimeout(()=>phone.classList.remove('touched'),1800); },{passive:true});
   playBtn.addEventListener('keydown',e=>e.stopPropagation());
   slides.forEach(s=>{ const v=s.querySelector('video'); if(v){ ['play','pause','ended'].forEach(ev=>v.addEventListener(ev,syncPlay)); } });
   // A clip that scrolls out of view stops playing
   if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(en=>{ if(!en.isIntersecting){ const v=videoAt(active); if(v&&!v.paused) v.pause(); } }),{threshold:0}).observe(phone);
   function setActive(i, animate=true){
     if(i===active) return; const prev=active; active=i;
-    const pv=videoAt(prev); if(pv){ pv.pause(); pv.currentTime=0; }
+    // Carry playback over: if the outgoing clip was playing, the incoming one starts too (muted if the browser insists).
+    const pv=videoAt(prev), wasPlaying=!!pv&&!pv.paused; if(pv){ pv.pause(); pv.currentTime=0; }
+    const nv=videoAt(i); if(nv&&wasPlaying) playVideo(nv);
     slides.forEach((s,j)=>{ if(s._raf){cancelAnimationFrame(s._raf);s._raf=0;} s.style.clipPath=''; s.classList.remove('on','was'); if(j===i)s.classList.add('on'); else if(j===prev)s.classList.add('was');});
     if(animate && prev>=0) blobReveal(slides[i]);
     sets.forEach((s,j)=>{s.classList.toggle('on',j===i); s.classList.toggle('past',j<i);});
@@ -532,7 +542,12 @@ CASES.forEach(cs=>{
   // Tap or click also advances (the only way when the card is not pinned)
   const go=i=>{ if(track._pinned){ const s=track._scrollFor?track._scrollFor(i):null; if(s!=null){window.scrollTo({top:s,behavior:'smooth'});return;} } setActive(i); };
   nextEl.addEventListener('click',()=>go((active+1)%n));
-  phone.addEventListener('click',()=>go((active+1)%n));
+  // Tap advances; on touch screens a horizontal swipe on the phone goes to the next / previous clip instead.
+  let swiped=false, sx=0, sy=0;
+  phone.addEventListener('touchstart',e=>{ const t=e.touches[0]; sx=t.clientX; sy=t.clientY; swiped=false; },{passive:true});
+  phone.addEventListener('touchend',e=>{ const t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
+    if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)*1.5){ swiped=true; go(dx<0 ? (active+1)%n : (active-1+n)%n); } },{passive:true});
+  phone.addEventListener('click',e=>{ if(swiped){ swiped=false; return; } go((active+1)%n); });
   phone.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();go((active+1)%n);} });
   track.querySelectorAll('.ticks i').forEach(t=>t.addEventListener('click',()=>go(+t.dataset.go)));
 });
