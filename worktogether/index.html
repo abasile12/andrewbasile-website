@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Work Together</title>
+<link rel="canonical" href="https://andrewbasile.work/worktogether/">
+<meta name="description" content="Two ways to work with Andrew Basile: make content together through FEED Studios, or bring him in to consult on content strategy, product marketing, a fractional marketing seat or team training.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Andrew Basile">
+<meta property="og:title" content="Work Together | Andrew Basile">
+<meta property="og:description" content="Two ways to work with Andrew Basile: make content together through FEED Studios, or bring him in for content strategy, product marketing, a fractional marketing seat or team training.">
+<meta property="og:url" content="https://andrewbasile.work/worktogether/">
+<meta property="og:image" content="https://andrewbasile.work/assets/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Andrew Basile, Content and Product Marketer">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Work Together | Andrew Basile">
+<meta name="twitter:description" content="Two ways to work with Andrew Basile: make content together through FEED Studios, or bring him in for content strategy, product marketing, a fractional marketing seat or team training.">
+<meta name="twitter:image" content="https://andrewbasile.work/assets/og-image.jpg?v=2">
+<link rel="preload" as="style" id="figtree" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"></noscript>
+<style>
+:root{--ink:#111111;--muted:#6e6e6a;--rule:#e4e4e0;--band:#f7f7f5;--green:#00ea74;--bg:#ffffff;--font:'Figtree',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1440px;margin:0 auto;padding-left:max(env(safe-area-inset-left,0px),clamp(16px,calc(50% - 590px),130px));padding-right:max(env(safe-area-inset-right,0px),clamp(16px,calc(50% - 590px),130px))}
+.g{color:var(--green)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;line-height:1;white-space:nowrap;transition:transform .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.fill{background:var(--green);color:var(--ink)}
+.btn.line{border:1px solid var(--ink)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:16px}
+.mark{display:flex;align-items:flex-start;gap:3px;font-weight:700;font-size:20px;line-height:1;letter-spacing:-.03em}
+.mark i{width:8px;height:8px;margin-top:1px;background:var(--green);transform:rotate(45deg);display:block}
+.links{display:flex;gap:28px;font-weight:500;font-size:15px;color:var(--muted)}
+.links a:hover{color:var(--ink)}
+.links a.active{color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.links a.active::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
+@media (max-width:1000px){.links{display:none}}
+@media (max-width:640px){.nav .btn{display:none}}
+
+/* Intro: centred, like the heading of a pricing block */
+.intro .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding-block:88px 56px}
+.intro h1{font-weight:600;font-size:clamp(52px,6.6vw,96px);line-height:.98;letter-spacing:-.045em;margin:0}
+.intro h1 span.q{display:block;color:var(--muted)}
+.intro p{margin:0;color:var(--muted);max-width:560px;font-size:19px}
+@media (max-width:900px){.intro .wrap{padding-block:56px 32px;gap:16px}.intro p{font-size:17px}}
+
+/* Two offer cards, after the Glow Pricing layout: a lifted card whose top panel holds the title, the pitch and one
+   full-width pill button, and whose lower half lists what is included with round check marks. FEED Studios is the
+   featured dark card with a green glow; Consulting is the light one. */
+.offers{padding-block:0 104px}
+.offers .grid{display:grid;grid-template-columns:repeat(2,minmax(0,440px));grid-auto-rows:auto;justify-content:center;gap:22px} /* subgrid rows keep the two top panels the same height, so the buttons line up */
+.offer{display:grid;grid-template-rows:subgrid;grid-row:span 2;background:#fff;border:1px solid var(--rule);border-radius:26px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(17,17,17,.04),0 30px 60px -40px rgba(17,17,17,.3)}
+.offer .top{background:var(--band);padding:32px 32px 26px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--rule)}
+.offer h2{margin:0;font-size:30px;font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.offer .top p{margin:0;color:var(--muted);font-size:16px;line-height:1.5}
+.offer .top>p:first-of-type{flex:1}
+.offer .cta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:10px 10px 10px 24px;border-radius:999px;
+  background:var(--ink);color:#fff;font-weight:600;font-size:16px;line-height:1;transition:transform .2s ease}
+.offer .cta:hover{transform:translateY(-1px)}
+.offer .cta i{flex:none;width:38px;height:38px;border-radius:50%;background:var(--green);color:var(--ink);display:grid;place-items:center;font-style:normal;font-size:15px}
+.offer .note{margin:0;text-align:center;font-size:14px;color:var(--muted)}
+.offer .list{padding:26px 32px 32px;display:flex;flex-direction:column;gap:14px}
+.offer .list h3{margin:0 0 4px;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.offer .list ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.offer .list li{display:flex;align-items:flex-start;gap:12px;font-size:16px;line-height:1.4}
+.offer .list li::before{content:"";flex:none;width:22px;height:22px;margin-top:0;border-radius:50%;background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.4l2.6 2.6L12 5.6' fill='none' stroke='%2300ea74' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat}
+.offer .list li a{font-weight:600;border-bottom:1px solid currentColor}
+/* Featured dark card */
+.offer.dark{background:var(--ink);color:#fff;border-color:#2a2a28}
+.offer.dark .top{background:radial-gradient(120% 90% at 50% -20%,rgba(0,234,116,.38),rgba(0,234,116,0) 60%),#161615;border-bottom-color:#2a2a28}
+.offer.dark .top p,.offer.dark .note,.offer.dark .list li{color:#d9d9d4}
+.offer.dark .list li{color:#fff}
+.offer.dark .cta{background:var(--green);color:var(--ink)}
+.offer.dark .cta i{background:var(--ink);color:var(--green)}
+.offer.dark .list li::before{background-color:var(--green);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.4l2.6 2.6L12 5.6' fill='none' stroke='%23111111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+@media (max-width:900px){.offers .grid{grid-template-columns:minmax(0,480px)}.offers{padding-block:0 72px}}
+@media (max-width:640px){.offer .top{padding:26px 22px 22px}.offer .list{padding:22px 22px 26px}.offer h2{font-size:26px}}
+
+hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
+.contact{text-align:center;padding-block:104px;display:flex;flex-direction:column;align-items:center;gap:20px}
+.contact h2{font-weight:600;font-size:clamp(40px,5vw,72px);line-height:.98;letter-spacing:-.045em;margin:0}
+.contact p{margin:0;color:var(--muted);max-width:520px}
+.email{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;padding-top:12px}
+.email code{font-family:var(--font);background:var(--band);border:1px solid var(--rule);border-radius:12px;padding:12px 18px;font-weight:500;font-size:clamp(16px,2.2vw,22px);letter-spacing:-.01em;user-select:all}
+.email button{border:0;cursor:pointer;font:inherit}
+.footer{background:var(--ink);color:#b9b9b5;font-size:14px}
+.footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:36px;flex-wrap:wrap}
+.footer nav{display:flex;gap:22px;flex-wrap:wrap}
+.footer .mail{color:var(--green);font-weight:500;font-size:17px}
+</style>
+<style>
+/* Desktop width: the layout is the 1440px Figma canvas (1180px content, gutters that stop growing at 130px) and stays that size on wider screens, centred with whitespace either side, so every section reads as one contained block. */
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="mark" href="/">AB<i></i></a>
+    <nav class="links">
+      <a href="/#content">My work</a><a href="/skills/">Skills &amp; Automations</a><a class="active" href="/worktogether/">Work Together</a><a href="/sidequests/">Side Quests</a>
+    </nav>
+    <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <h1>Work Together<span class="g">.</span><span class="q">Two ways in.</span></h1>
+    <p>FEED Studios is my content studio, where we make the content together. Consulting is for teams that already have the hands and want the plan. Pick the one that fits, or book a call and we will work it out together.</p>
+  </div>
+</section>
+
+<section class="offers">
+  <div class="wrap">
+    <div class="grid">
+      <article class="offer dark">
+        <div class="top">
+          <h2>FEED Studios</h2>
+          <p>The content studio I founded in January 2025. We build the content system behind a brand or creator and run it with you: the strategy, the scripts, the shoot days, the edits and the weekly read of the numbers.</p>
+          <a class="cta" href="https://feedstudios.us" target="_blank" rel="noopener">Visit feedstudios.us <i>↗</i></a>
+          <p class="note">40M+ organic impressions for clients in 2025</p>
+        </div>
+        <div class="list">
+          <h3>What you get</h3>
+          <ul>
+            <li>Short-form production: one shoot afternoon a month, clips going out every week</li>
+            <li>Scripting: weekly concepts, beat sheets and briefs in a shared Notion workspace</li>
+            <li>Editing: finished vertical video for TikTok, Reels and Shorts, delivered through a creator portal</li>
+            <li>Performance: a monthly report and the next month’s brief, written from the data</li>
+            <li>Built for Lynden Lane Co, Chad &amp; JT, Charlisse Leger-Walker and Short Game King</li>
+          </ul>
+        </div>
+      </article>
+      <article class="offer">
+        <div class="top">
+          <h2>Consulting</h2>
+          <p>Strategy and advisory scopes I take on directly, for teams that already make their own content or are launching a product and want the strategy without the studio.</p>
+          <a class="cta" href="#contact">Start with a call <i>↗</i></a>
+          <p class="note">Starts with a call and a two-week diagnosis</p>
+        </div>
+        <div class="list">
+          <h3>What you get</h3>
+          <ul>
+            <li>Content strategy: a blueprint for your niche your own team can run without me</li>
+            <li>Product marketing and launches: positioning, go-to-market and the creative testing plan</li>
+            <li>Fractional marketing lead: a standing weekly seat that owns the calendar and the numbers</li>
+            <li>Team training and AI workflows: FEED’s skills and automations set up inside your tools</li>
+            <li>Built for Red Dining Book, Good Measure Studios, Autograph, Quix and Amplifii</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<section class="contact wrap" id="contact">
+  <h2>Let's talk<span class="g">.</span></h2>
+  <p>Got a project? Send a note with what you are making and where it needs to go, and you leave the first call with one thing worth testing this week.</p>
+  <div class="email"><code id="email">andrew.basile12@gmail.com</code><button class="btn fill" id="copy" type="button">Copy email</button></div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <nav><a href="/">Home</a><a href="/#about">About</a><a href="/#content">Content</a><a href="/#product-marketing">Product Marketing</a><a href="/skills/">Skills &amp; Automations</a><a href="/worktogether/">Work Together</a><a href="/sidequests/">Side Quests</a></nav>
+    <a class="mail" href="#contact">andrew.basile12@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+// Clean URLs: in-page links scroll without writing a # into the address bar, and a # arriving from another page is scrolled to and then removed.
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||e.metaKey||e.ctrlKey)return;const id=a.getAttribute('href').slice(1);e.preventDefault();if(!id||id==='top'){window.scrollTo({top:0,behavior:'smooth'});return;}const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});});
+if(location.hash){const el=document.getElementById(location.hash.slice(1));history.replaceState(null,'',location.pathname+location.search);if(el)requestAnimationFrame(()=>el.scrollIntoView());}
+const btn=document.getElementById('copy');
+btn.addEventListener('click',async()=>{
+  const v=document.getElementById('email').textContent;
+  try{ await navigator.clipboard.writeText(v); btn.textContent='Copied'; }
+  catch(e){ const r=document.createRange(); r.selectNodeContents(document.getElementById('email')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Select and copy'; }
+  setTimeout(()=>btn.textContent='Copy email',1800);
+});
+</script>
+</body>
+</html>

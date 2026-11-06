@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Side Quests</title>
+<link rel="canonical" href="https://andrewbasile.work/sidequests/">
+<meta name="description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, soundlog.io and Friend of the Family, with what each one taught him.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Andrew Basile">
+<meta property="og:title" content="Side Quests | Andrew Basile">
+<meta property="og:description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, soundlog.io and Friend of the Family, with what each one taught him.">
+<meta property="og:url" content="https://andrewbasile.work/sidequests/">
+<meta property="og:image" content="https://andrewbasile.work/assets/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Andrew Basile, Content and Product Marketer">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Side Quests | Andrew Basile">
+<meta name="twitter:description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, soundlog.io and Friend of the Family, with what each one taught him.">
+<meta name="twitter:image" content="https://andrewbasile.work/assets/og-image.jpg?v=2">
+<link rel="preload" as="style" id="figtree" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"></noscript>
+<style>
+:root{--ink:#111111;--muted:#6e6e6a;--rule:#e4e4e0;--band:#f7f7f5;--green:#00ea74;--bg:#ffffff;--font:'Figtree',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1440px;margin:0 auto;padding-left:max(env(safe-area-inset-left,0px),clamp(16px,calc(50% - 590px),130px));padding-right:max(env(safe-area-inset-right,0px),clamp(16px,calc(50% - 590px),130px))}
+.g{color:var(--green)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;line-height:1;white-space:nowrap;transition:transform .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.fill{background:var(--green);color:var(--ink)}
+.btn.line{border:1px solid var(--ink)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:16px}
+.mark{display:flex;align-items:flex-start;gap:3px;font-weight:700;font-size:20px;line-height:1;letter-spacing:-.03em}
+.mark i{width:8px;height:8px;margin-top:1px;background:var(--green);transform:rotate(45deg);display:block}
+.links{display:flex;gap:28px;font-weight:500;font-size:15px;color:var(--muted)}
+.links a:hover{color:var(--ink)}
+.links a.active{color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.links a.active::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
+@media (max-width:1000px){.links{display:none}}
+@media (max-width:640px){.nav .btn{display:none}}
+
+.intro .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);gap:60px;align-items:start;padding-block:88px 72px}
+.intro h1{font-weight:600;font-size:clamp(52px,6.6vw,96px);line-height:.98;letter-spacing:-.045em;margin:0}
+.intro p{margin:0 0 16px;color:var(--muted)}
+.intro p.l{font-size:19px;color:var(--ink)}
+.chapter{padding-block:16px 88px}
+@media (max-width:900px){.intro .wrap{grid-template-columns:1fr;gap:24px;padding-block:56px 40px}.chapter{padding-block:0 56px}}
+
+.quests{display:flex;flex-direction:column;gap:40px}
+.card{background:#fff;border:1px solid var(--rule);border-radius:20px}
+/* Cards match the Content case cards on the home page: 1180 wide, 34px padding, a 564px visual column with a 506px
+   tall visual (the phone deck's height), 44px gap, copy centred beside it. */
+.case{display:grid;grid-template-columns:564px minmax(0,1fr);gap:44px;align-items:center;padding:34px}
+.case.flip{grid-template-columns:minmax(0,1fr) 564px}
+.case.flip .visual{order:2}
+.visual{height:506px;display:grid;grid-template-columns:minmax(0,1fr) 200px;grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:14px;min-width:0}
+.visual>.tile:first-child{grid-row:1/3}
+.visual .tile{border-radius:16px;overflow:hidden;background:var(--band);min-height:0}
+.visual .tile img{width:100%;height:100%;object-fit:cover}
+.visual .pair{display:contents}
+/* Square images (soundlog): the main square sits at the column width and the two small squares stack beside it, all whole */
+.visual.squares{align-content:center;grid-template-rows:auto auto}
+.visual.squares>.tile:first-child{aspect-ratio:1;align-self:center}
+.visual.squares .pair .tile{aspect-ratio:1}
+.copy{display:flex;flex-direction:column;gap:20px;min-width:0}
+.copy h3{font-weight:600;font-size:clamp(28px,2.6vw,38px);line-height:1.04;letter-spacing:-.03em;margin:0}
+.copy p{margin:0;color:var(--muted)}
+.copy .tag{color:var(--ink);font-weight:600;font-size:22px;line-height:1.25;letter-spacing:-.01em}
+.status{display:flex;align-items:center;gap:12px;font-weight:500;font-size:15px;color:var(--muted)}
+.status.live{color:var(--ink)}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--rule);display:block;flex:none}
+.status.live i{background:var(--green)}
+.status img{width:44px;height:44px;border-radius:50%;flex:none}
+.titlerow{display:flex;align-items:center;gap:16px;min-width:0}
+.titlerow .logo{width:44px;height:44px;border-radius:50%;flex:none;object-fit:cover}
+.lesson{border-top:1px solid var(--rule);padding-top:18px;display:flex;flex-direction:column;gap:10px}
+.lesson b{font-weight:600;font-size:17px}
+.action{padding-top:4px}
+@media (max-width:1100px){.case,.case.flip{grid-template-columns:1fr}.case.flip .visual{order:0}}
+@media (max-width:640px){.case{padding:22px}.quests{gap:24px}
+  .visual{height:auto;display:flex;flex-direction:column}
+  .visual>.tile:first-child{aspect-ratio:4/3}
+  .visual .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .visual .pair .tile{aspect-ratio:1}}
+
+/* Wordchainer mockup */
+.wc{grid-area:1/1/3/3;background:#07171d;color:#f6eedc;border-radius:16px;padding:28px 32px;font-size:14px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;gap:0 32px;overflow:hidden;min-height:0}
+.wc .brand{grid-column:1/3;font-size:16px;color:#fff;margin-bottom:24px}
+.wc .l{min-width:0}
+.wc .r{align-self:center;min-width:0}
+.wc .brand b{font-weight:600}
+.wc .small{font-size:13px;color:#8c9a9e}
+.wc .num{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}
+.wc .num b{font-size:44px;font-weight:600;letter-spacing:-.03em;line-height:1}
+.wc .num span{text-align:right;font-size:13px;line-height:1.5}
+.wc .num span small{display:block;color:#8c9a9e;font-size:13px}
+.wc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.wc li{display:flex;align-items:center;gap:14px;font-size:18px;font-weight:500;letter-spacing:.28em;line-height:1.3}
+.wc li i{width:8px;height:8px;border-radius:50%;border:1px solid #8c9a9e;display:block;flex:none}
+.wc li.on i{background:#f6eedc;border-color:#f6eedc}
+.wc li em{font-style:normal;color:#ff9f3a}
+.wc .week{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#8c9a9e;margin-bottom:20px}
+.wc .days{display:flex;gap:6px}
+.wc .days span{width:22px;height:22px;border-radius:50%;border:1px solid #334850;display:grid;place-items:center;font-size:10px;font-weight:600}
+.wc .days span.on{background:#ff9f3a;border-color:#ff9f3a;color:#1b1206}
+.wc .play{display:block;background:#ff9f3a;color:#1b1206;text-align:center;border-radius:14px;padding:16px;font-weight:600;font-size:17px}
+.wc .next{text-align:center;font-size:12px;color:#8c9a9e;margin:12px 0 18px}
+.wc .menu div{display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid #213339;font-weight:500}
+.wc .menu div span{color:#8c9a9e}
+@media (max-width:640px){.wc{display:block;padding:24px;height:auto}.wc .l{margin-bottom:24px}.wc li{font-size:16px}}
+
+
+hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
+.contact{text-align:center;padding-block:104px;display:flex;flex-direction:column;align-items:center;gap:20px}
+.contact h2{font-weight:600;font-size:clamp(40px,5vw,72px);line-height:.98;letter-spacing:-.045em;margin:0}
+.contact p{margin:0;color:var(--muted);max-width:520px}
+.email{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;padding-top:12px}
+.email code{font-family:var(--font);background:var(--band);border:1px solid var(--rule);border-radius:12px;padding:12px 18px;font-weight:500;font-size:clamp(16px,2.2vw,22px);letter-spacing:-.01em;user-select:all}
+.email button{border:0;cursor:pointer;font:inherit}
+.footer{background:var(--ink);color:#b9b9b5;font-size:14px}
+.footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:36px;flex-wrap:wrap}
+.footer nav{display:flex;gap:22px;flex-wrap:wrap}
+.footer .mail{color:var(--green);font-weight:500;font-size:17px}
+</style>
+<style>
+/* Desktop width: the layout is the 1440px Figma canvas (1180px content, gutters that stop growing at 130px) and stays that size on wider screens, centred with whitespace either side, so every section reads as one contained block. */
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="mark" href="/">AB<i></i></a>
+    <nav class="links">
+      <a href="/#content">My work</a><a href="/skills/">Skills &amp; Automations</a><a href="/worktogether/">Work Together</a><a class="active" href="/sidequests/">Side Quests</a>
+    </nav>
+    <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <h1>Side Quests<span class="g">.</span></h1>
+    <div>
+      <p class="l">Not everything I build is for a client. These are the things I started because I could not stop thinking about them: a clothing brand, a music data company, and a word game you can play right now.</p>
+      <p>One of them is gone, one is retired, and one is live. Every one of them was built by a very small team, sometimes a team of one, and every one taught me something I still use every week.</p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter">
+  <div class="wrap quests">
+
+    <article class="card case" id="wordchainer">
+      <div class="visual">
+        <div class="wc" aria-label="Wordchainer daily chain screen">
+          <div class="brand">word<b>chainer</b></div>
+          <div class="l">
+          <div class="small">Daily chain</div>
+          <div class="num"><b>No. 66</b><span>Thu, Nov 5<small>8 words</small></span></div>
+          <ol>
+            <li class="on"><i></i>MATTRESS</li>
+            <li><i></i><em>P</em> _ _ _</li>
+            <li><i></i><em>L</em> _ _ _</li>
+            <li><i></i><em>S</em> _ _ _</li>
+            <li><i></i><em>D</em> _ _ _ _</li>
+            <li><i></i><em>C</em> _ _ _ _</li>
+            <li><i></i><em>A</em> _ _ _ _ _</li>
+            <li class="on"><i></i>FILM</li>
+          </ol>
+          </div>
+          <div class="r">
+          <div class="week"><span>This week</span><div class="days"><span>S</span><span>M</span><span>T</span><span>W</span><span class="on">T</span><span>F</span><span>S</span></div></div>
+          <a class="play" href="https://wordchainer.fun" target="_blank" rel="noopener">Play today's chain</a>
+          <div class="next">Next chain in 9:24:50</div>
+          <div class="menu"><div>Build your own chain<span>›</span></div><div>Head to head<span>›</span></div><div>Archive<span>›</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="copy">
+        <div class="titlerow"><img class="logo" src="/assets/sq-wordchainer-logo.png" alt=""><h3>Wordchainer</h3></div>
+        <div class="status live"><i></i>Live now at wordchainer.fun</div>
+        <p class="tag">A daily word game you can finish before the coffee cools.</p>
+        <p>Wordchainer started as the TikTok word chain game my friends and I kept playing out loud, so I built it into something you could play alone. Every day there is one public chain: you get the first word, the last word and the first letter of everything in between, and you guess your way across. Share your time, build a chain for a friend, or race someone head to head.</p>
+        <div class="lesson"><b>What I learned</b><p>Ship the small version first. The web app went live months before the iOS app I originally planned, and it was the shareable link, not the app store, that got people playing.</p></div>
+        <div class="action"><a class="btn fill" href="https://wordchainer.fun" target="_blank" rel="noopener">Play today's chain <span>↗</span></a></div>
+      </div>
+    </article>
+
+
+    <article class="card case" id="soundlog">
+      <div class="visual squares">
+        <div class="tile"><img src="/assets/sq-soundlog-rapcaviar.jpg" alt="SoundLog Instagram post: Spotify playlist insights, RapCaviar"></div>
+        <div class="pair"><div class="tile sq"><img src="/assets/sq-soundlog-dashboard.jpg" alt="The SoundLog dashboard"></div><div class="tile sq"><img src="/assets/sq-soundlog-hit.jpg" alt="SoundLogic: the anatomy of a hit song"></div></div>
+      </div>
+      <div class="copy">
+        <div class="titlerow"><img class="logo" src="/assets/sq-soundlog-logo.png" alt=""><h3>soundlog.io</h3></div>
+        <p class="tag">Moneyball for music.</p>
+        <p>SoundLog took the audio feature metrics Spotify attaches to every song (key, tempo, energy, danceability and more) and turned them into insights the industry could act on. The kind of thing you could not unsee once you saw it: in 2020, 90% of the songs on RapCaviar were in C#. It grew into a catalog management and intelligence tool for publishers and labels, with a songwriter spotlight series on the side.</p>
+        <div class="action"><a class="btn line" href="https://www.instagram.com/soundlog.io/" target="_blank" rel="noopener">@soundlog.io <span class="g">↗</span></a></div>
+      </div>
+    </article>
+
+    <article class="card case flip" id="friend-of-the-family">
+      <div class="visual">
+        <div class="tile"><img src="/assets/sq-fotf-cake.jpg" alt="A white cake with Friend of the Family piped in red icing"></div>
+        <div class="pair"><div class="tile"><img src="/assets/sq-fotf-nero.jpg" alt="The Nero hat"></div><div class="tile"><img src="/assets/sq-fotf-cincin.jpg" alt="A Cin Cin cup"></div></div>
+      </div>
+      <div class="copy">
+        <div class="titlerow"><img class="logo" src="/assets/sq-fotf-logo.png" alt=""><h3>Friend of the Family</h3></div>
+        <p class="tag">A clothing brand for the people you would save a seat for.</p>
+        <p>Friend of the Family was a hat and apparel brand built around one line: this is your invitation. We shot it like a dinner party, sold out of every hat at our first pop-up, saw our Nero cap on Noah Beck in an Adidas shoot, and ran a collab with Bar Next Door and Prince Street Pizza. Then we let it go.</p>
+        <div class="action"><a class="btn line" href="https://www.instagram.com/imafriendofthefamily/" target="_blank" rel="noopener">@imafriendofthefamily <span class="g">↗</span></a></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+<hr class="rule">
+
+<section class="contact wrap" id="contact">
+  <h2>Let's talk<span class="g">.</span></h2>
+  <p>I build these for clients and for teams I join. If your content operation still runs on a group chat, lets fix that.</p>
+  <div class="email"><code id="email">andrew.basile12@gmail.com</code><button class="btn fill" id="copy" type="button">Copy email</button></div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <nav><a href="/">Home</a><a href="/#about">About</a><a href="/#content">Content</a><a href="/#product-marketing">Product Marketing</a><a href="/skills/">Skills &amp; Automations</a><a href="/worktogether/">Work Together</a><a href="/sidequests/">Side Quests</a></nav>
+    <a class="mail" href="#contact">andrew.basile12@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+// Home links: this page is served beside the home page, so strip our own filename from the address to get back
+// Clean URLs: in-page links scroll without writing a # into the address bar, and a # arriving from another page is scrolled to and then removed.
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||e.metaKey||e.ctrlKey)return;const id=a.getAttribute('href').slice(1);e.preventDefault();if(!id||id==='top'){window.scrollTo({top:0,behavior:'smooth'});return;}const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});});
+if(location.hash){const el=document.getElementById(location.hash.slice(1));history.replaceState(null,'',location.pathname+location.search);if(el)requestAnimationFrame(()=>el.scrollIntoView());}
+const btn=document.getElementById('copy');
+btn.addEventListener('click',async()=>{
+  const v=document.getElementById('email').textContent;
+  try{ await navigator.clipboard.writeText(v); btn.textContent='Copied'; }
+  catch(e){ const r=document.createRange(); r.selectNodeContents(document.getElementById('email')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Select and copy'; }
+  setTimeout(()=>btn.textContent='Copy email',1800);
+});
+</script>
+</body>
+</html>
