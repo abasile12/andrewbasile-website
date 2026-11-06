@@ -264,6 +264,52 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .footer nav{display:flex;gap:22px;flex-wrap:wrap}
 .footer .mail{color:var(--green);font-weight:500;font-size:17px}
 @media (prefers-reduced-motion:reduce){.slide,.next,.set{transition:opacity .3s ease}.slide{clip-path:none;transform:none;opacity:0}.slide.on,.slide.was{opacity:1}.next.into{transform:none}}
+
+/* ===== Intro preloader (plays once per browser session) ===== */
+.pl{position:fixed;inset:0;z-index:100;background:var(--green);color:var(--ink);overflow:hidden;font-family:var(--font);display:block;opacity:1}
+.pl[hidden]{display:none!important}
+html.pl-running{overflow:hidden}
+html.pl-running .portrait img{visibility:hidden}
+.pl.is-out{opacity:0;transition:opacity .3s ease}
+.pl{transition:background-color .9s cubic-bezier(.76,0,.2,1)}
+.pl.is-hero{background-color:rgba(0,234,116,0)}
+.pl-ui{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,3vw,36px) clamp(16px,4vw,56px);pointer-events:none;transition:opacity .4s ease}
+.pl.is-hero .pl-ui{opacity:0}
+.pl-top,.pl-bot{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:500;letter-spacing:.02em;color:rgba(17,17,17,.72)}
+.pl-top b{color:var(--ink);font-weight:600}
+.pl-dot{display:inline-block;width:9px;height:9px;background:var(--ink);transform:rotate(45deg);margin-right:10px;vertical-align:1px}
+.pl-count{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600;font-size:14px}
+.pl-count i{font-style:normal;color:#fff}
+.pl-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(17,17,17,.14);z-index:41;transition:opacity .4s ease}
+.pl-bar b{display:block;height:100%;width:0;background:var(--ink)}
+.pl.is-open .pl-bar b{width:100%;transition:width 2.6s cubic-bezier(.3,.6,.3,1)}
+.pl.is-hero .pl-bar{opacity:0}
+/* Glow behind the dealt deck */
+.pl-glow{position:absolute;left:50%;top:50%;width:min(96vw,1200px);height:min(64vh,560px);border-radius:50%;transform:translate(-50%,-46%) scale(.55);background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,.18) 55%,rgba(255,255,255,0));filter:blur(28px);opacity:0;transition:opacity 1s ease,transform 1.3s cubic-bezier(.22,1,.36,1);pointer-events:none;z-index:1}
+.pl.is-deal .pl-glow{opacity:1;transform:translate(-50%,-46%) scale(1)}
+.pl.is-hero .pl-glow{opacity:0;transition:opacity .6s ease}
+/* Opening text: sits above the deck so the cards deal in behind it */
+.pl-word{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:30;white-space:nowrap;font-weight:500;letter-spacing:-.06em;line-height:.9;font-size:clamp(34px,8.5vw,128px);display:flex;pointer-events:none;color:#fff;font-weight:500;letter-spacing:-.065em;line-height:.84;padding:.15em .12em 0}
+.pl-word i{display:inline-block;font-style:normal;clip-path:inset(-.3em -.3em 0 -.3em)}
+.pl-word span{display:inline-block;transform:translateY(110%);opacity:0;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .4s ease}
+.pl-word span.g{color:#fff}
+.pl.is-open .pl-word span{transform:translateY(0);opacity:1}
+.pl.is-wordout .pl-word span{transform:translateY(-110%);opacity:0;transition:transform .55s cubic-bezier(.7,0,.3,1),opacity .35s ease}
+/* Deck */
+.pl-deck{position:absolute;left:50%;top:50%;width:0;height:0;z-index:10}
+.pl-card{position:absolute;left:0;top:0;width:var(--cw);height:var(--ch);margin-left:calc(var(--cw)/-2);margin-top:calc(var(--ch)/-2);border-radius:14px;overflow:hidden;background:#e8e8e4;box-shadow:0 30px 60px -24px rgba(0,0,0,.35);transform:translate(0,120vh) rotate(0deg) scale(.9);opacity:0;transform-origin:50% 100%;will-change:transform;transition:transform .9s cubic-bezier(.22,1,.36,1),opacity .4s ease,border-radius .7s ease,box-shadow .7s ease,width .9s cubic-bezier(.76,0,.2,1),height .9s cubic-bezier(.76,0,.2,1),margin .9s cubic-bezier(.76,0,.2,1)}
+.pl-card img{width:100%;height:100%;object-fit:cover;display:block}
+.pl-card::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);transition:opacity .4s ease}
+.pl-card .tag{position:absolute;left:12px;bottom:12px;font-size:11px;font-weight:600;letter-spacing:.02em;color:#fff;background:rgba(17,17,17,.7);padding:5px 9px;border-radius:999px;backdrop-filter:blur(6px);opacity:1;transition:opacity .4s ease}
+.pl.is-hero .pl-card .tag{opacity:0}
+/* Hero card: flies to the page's portrait slot, square corners, no shadow, image geometry matches the page's img */
+.pl-card.is-herocard{background:#fff;transition-property:transform,opacity,border-radius,box-shadow,width,height,margin,background-color;transition-duration:.9s,.4s,.7s,.7s,.9s,.9s,.9s,.1s}
+.pl-card.is-herocard img{position:absolute;max-width:none;max-height:none;object-fit:fill;transition:left .9s cubic-bezier(.76,0,.2,1),top .9s cubic-bezier(.76,0,.2,1),width .9s cubic-bezier(.76,0,.2,1),height .9s cubic-bezier(.76,0,.2,1)}
+.pl.is-hero .pl-card.is-herocard{border-radius:0;box-shadow:none;background-color:rgba(255,255,255,0);transition-timing-function:cubic-bezier(.76,0,.2,1)}
+.pl.is-hero .pl-card.is-herocard::after{opacity:0}
+.pl.is-hero .pl-card:not(.is-herocard){opacity:0;transition:transform .7s cubic-bezier(.7,0,.3,1),opacity .5s ease}
+@media (prefers-reduced-motion:reduce){.pl *{transition:none!important}}
+
 </style>
 <style>
 /* Desktop fit: the layout is built on the 1440px Figma canvas (130px gutters, 1180px content). On wider screens the whole page scales up to fill the width, the way "fit to width" does in Figma, so the proportions stay identical to the design. Nothing changes at 1440px and below. */
@@ -274,6 +320,130 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 </script>
 </head>
 <body>
+<div class="pl" id="pl" aria-hidden="true">
+  <div class="pl-glow"></div>
+  <div class="pl-deck" id="pl-deck"></div>
+  <div class="pl-word" id="pl-word"></div>
+  <div class="pl-bar"><b></b></div>
+</div>
+
+<script>
+(function(){
+  var cards=[
+    ['assets/add-sturniolo.jpg','Sturniolo Triplets'],
+    ['assets/chadjt-1.jpg','Chad and JT'],
+    ['assets/charlisse-1.jpg','Charlisse Leger-Walker'],
+    ['assets/add-sgk.jpg','Short Game King'],
+    ['assets/lynden-1.jpg','Lynden Lane'],
+    ['assets/add-autograph.jpg','Autograph'],
+    ['assets/headshot-cut.png',''],
+    ['assets/add-charlisse.jpg','Charlisse Leger-Walker'],
+    ['assets/chadjt-2.jpg','Chad and JT'],
+    ['assets/add-boythrob.jpg','Boy Throb'],
+    ['assets/lynden-2.jpg','Lynden Lane'],
+    ['assets/charlisse-2.jpg','Charlisse Leger-Walker'],
+    ['assets/hd-reel-1.jpg','Colby Maier']
+  ];
+  var HERO=6, HERO_RATIO=471/658; // headshot.png natural aspect
+  var pl=document.getElementById('pl'),deck=document.getElementById('pl-deck'),word=document.getElementById('pl-word'),
+      root=document.documentElement;
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen=false; try{seen=sessionStorage.getItem('ab-intro')==='1';}catch(e){}
+  if(seen||reduced){pl.hidden=true;return;}
+  try{sessionStorage.setItem('ab-intro','1');}catch(e){}
+  // Above 1440px the page is zoomed (html{zoom}); window and rect measurements are in screen px, CSS values in layout px
+  function zoom(){return parseFloat(getComputedStyle(root).zoom)||1;}
+  var timers=[];
+  function t(fn,ms){timers.push(setTimeout(fn,ms));}
+  function clear(){timers.forEach(clearTimeout);timers=[];}
+
+  // Image geometry (percent of its box) for the hero image inside a box of w x h
+  function coverGeom(w,h,px,py){ // object-fit:cover with object-position px%,py%
+    var r=HERO_RATIO,W,H;
+    if(w/h>r){W=100;H=(w/r)/h*100;}else{H=100;W=(r*h)/w*100;}
+    return {left:-(W-100)*px/100,top:-(H-100)*py/100,width:W,height:H};
+  }
+  function applyGeom(img,g){img.style.left=g.left+'%';img.style.top=g.top+'%';img.style.width=g.width+'%';img.style.height=g.height+'%';}
+
+  function build(){
+    deck.innerHTML='';word.innerHTML='';
+    var txt='andrewbasile.work';
+    for(var i=0;i<txt.length;i++){var w=document.createElement('i'),s=document.createElement('span');s.textContent=txt[i];if(i>=txt.indexOf('.'))s.className='g';s.style.transitionDelay=(i*28)+'ms';w.appendChild(s);word.appendChild(w);}
+    var n=cards.length;
+    var z=zoom(),vw=innerWidth/z,vh=innerHeight/z;
+    var cw=Math.max(96,Math.min(170,vw*0.12)),ch=cw*16/9;
+    if(ch>vh*0.46){ch=vh*0.46;cw=ch*9/16;}
+    pl.style.setProperty('--cw',cw+'px');pl.style.setProperty('--ch',ch+'px');
+    var spread=Math.min(vw*0.37,(n-1)*cw*0.5);
+    var maxRot=vw<700?18:28;
+    cards.forEach(function(c,i){
+      var d=document.createElement('div');d.className='pl-card'+(i===HERO?' is-herocard':'');
+      d.innerHTML='<img src="'+c[0]+'" alt="">'+(c[1]?'<span class="tag">'+c[1]+'</span>':'');
+      var k=(i-(n-1)/2)/((n-1)/2);
+      var x=k*spread, rot=k*maxRot, y=Math.abs(k)*Math.abs(k)*vh*0.11-vh*0.02;
+      d.dataset.fan='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+rot.toFixed(1)+'deg) scale(1)';
+      d.style.zIndex=10+(i===HERO?n:i);
+      d.style.transitionDelay=(i*55)+'ms';
+      d.style.transform='translate(0,'+(vh*0.75)+'px) rotate(0) scale(.92)';
+      if(i===HERO) applyGeom(d.querySelector('img'),coverGeom(cw,ch,50,50));
+      deck.appendChild(d);
+    });
+  }
+
+  // Fly the hero card onto the page's real portrait, matching the page img's geometry inside it
+  function landHero(){
+    var hero=deck.children[HERO], img=hero.querySelector('img');
+    var box=document.querySelector('.portrait'), pimg=box&&box.querySelector('img');
+    var z=zoom(),vw=innerWidth/z,vh=innerHeight/z;
+    if(!box||!pimg){hero.style.transform='translate(0,0) rotate(0) scale(1)';return;}
+    var r0=box.getBoundingClientRect(),br={left:r0.left/z,top:r0.top/z,width:r0.width/z,height:r0.height/z};
+    hero.style.transitionDelay='0ms';
+    hero.style.width=br.width+'px';hero.style.height=br.height+'px';
+    hero.style.marginLeft=(-br.width/2)+'px';hero.style.marginTop=(-br.height/2)+'px';
+    hero.style.transform='translate('+(br.left+br.width/2-vw/2)+'px,'+(br.top+br.height/2-vh/2)+'px) rotate(0) scale(1)';
+    var cs=getComputedStyle(pimg);
+    if(cs.objectFit==='cover'){
+      var op=(cs.objectPosition||'50% 50%').split(' ');
+      applyGeom(img,coverGeom(br.width,br.height,parseFloat(op[0])||0,parseFloat(op[1])||0));
+    }else{
+      var i0=pimg.getBoundingClientRect(),ir={left:i0.left/z,top:i0.top/z,width:i0.width/z,height:i0.height/z};
+      applyGeom(img,{left:(ir.left-br.left)/br.width*100,top:(ir.top-br.top)/br.height*100,width:ir.width/br.width*100,height:ir.height/br.height*100});
+    }
+  }
+
+  function run(){
+    clear();
+    scrollTo(0,0);
+    root.classList.add('pl-running');
+    pl.className='pl';
+    build();
+    // 1. wordmark in
+    t(function(){pl.classList.add('is-open');},80);
+    // 2. deck deals in behind the text, glow comes up with it
+    t(function(){
+      pl.classList.add('is-deal');
+      [].forEach.call(deck.children,function(d){d.style.opacity=1;d.style.transform=d.dataset.fan;});
+      t(function(){pl.classList.add('is-fan');},750);
+    },1000);
+    // 3. the text lifts out letter by letter
+    t(function(){pl.classList.add('is-wordout');},3000);
+    // 4. once that exit is about halfway through "work", the green fades, the headshot slides onto the page portrait, the rest clear out
+    t(function(){
+      pl.classList.add('is-hero');
+      [].forEach.call(deck.children,function(d,idx){ if(idx!==HERO){ var dir=idx<HERO?-1:1; d.style.transitionDelay='0ms'; d.style.transform='translate('+(dir*innerWidth/zoom()*0.7)+'px,'+(innerHeight/zoom()*0.25)+'px) rotate('+(dir*25)+'deg) scale(.9)'; } });
+      landHero();
+    },3450);
+    // 5. the green has already faded out during the slide; once the card lands, swap in the real portrait
+    t(function(){root.classList.remove('pl-running');pl.classList.add('is-out');},4420);
+    t(finish,4750);
+  }
+  function finish(){
+    root.classList.remove('pl-running');pl.hidden=true;
+  }
+  run();
+})();
+</script>
+
 
 <header class="nav">
   <div class="wrap">
