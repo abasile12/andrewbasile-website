@@ -27,7 +27,25 @@
 <meta name="twitter:description" content="Ideas that resonate, content built for the algorithm, and growth you can count on. 40M+ organic impressions for creators and brands, product launches at Autograph and Quix, and the AI skills behind the work.">
 <meta name="twitter:image" content="https://andrewbasile.work/assets/og-image.jpg?v=2">
 <meta name="description" content="Andrew Basile, content strategist and product marketer. Short-form strategy, launch campaigns, and the AI skills and automations behind them.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" id="figtree" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"></noscript>
+<!-- Intro card images and the hero portrait start downloading before the body parses -->
+<link rel="preload" as="image" href="assets/add-sturniolo.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/chadjt-1.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/charlisse-1.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/add-sgk.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/lynden-1.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/add-autograph.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/headshot-cut.png" fetchpriority="high">
+<link rel="preload" as="image" href="assets/add-charlisse.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/chadjt-2.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/add-boythrob.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/lynden-2.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/charlisse-2.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/hd-reel-1.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/headshot.png" fetchpriority="high">
 <style>
 /* Built from the Figma frame "andrewbasile.com / Desktop": 1440 canvas, 130px gutters, white page, hairline rules, one spring-green accent used only for pops. Single light theme by design. */
 :root{
@@ -425,25 +443,38 @@ html.pl-running .portrait img{visibility:hidden}
     root.classList.add('pl-running');
     pl.className='pl';
     build();
+    var start=performance.now();
+    // Every card image (and the page portrait) is decoded before the deal starts, so no card ever pops in late on a
+    // slow connection: the wordmark holds on the green until they are ready (capped at 3.5 s, then it deals anyway).
+    var urls=cards.map(function(c){return c[0];}).concat(['assets/headshot.png']);
+    var ready=Promise.all(urls.map(function(u){var i=new Image();i.src=u;return (i.decode?i.decode():new Promise(function(r){i.onload=i.onerror=r;})).catch(function(){});}));
+    // The wordmark types in Figtree, so give the webfont a moment (400 ms at most) before the first letter appears.
+    // The Google Fonts stylesheet is loaded without blocking (preload → stylesheet), so the intro script runs at once
+    // even on a slow connection; the wordmark then waits briefly for the sheet (600 ms) and the face (400 ms) before typing.
+    var sheet=new Promise(function(r){var l=document.getElementById('figtree');if(!l||l.rel==='stylesheet')return r();l.addEventListener('load',r);setTimeout(r,600);});
+    var font=sheet.then(function(){return (document.fonts&&document.fonts.load)?Promise.race([document.fonts.load('500 100px Figtree').catch(function(){}),new Promise(function(r){setTimeout(r,400);})]):null;});
     // 1. wordmark in
-    t(function(){pl.classList.add('is-open');},80);
+    font.then(function(){t(function(){pl.classList.add('is-open');},80);});
+    Promise.race([ready,new Promise(function(r){setTimeout(r,3500);})]).then(function(){
+      t(deal,Math.max(0,1000-(performance.now()-start)));
+    });
+  }
+  function deal(){
     // 2. deck deals in behind the text, glow comes up with it
-    t(function(){
-      pl.classList.add('is-deal');
-      [].forEach.call(deck.children,function(d){d.style.opacity=1;d.style.transform=d.dataset.fan;});
-      t(function(){pl.classList.add('is-fan');},750);
-    },1000);
+    pl.classList.add('is-deal');
+    [].forEach.call(deck.children,function(d){d.style.opacity=1;d.style.transform=d.dataset.fan;});
+    t(function(){pl.classList.add('is-fan');},750);
     // 3. the text lifts out letter by letter
-    t(function(){pl.classList.add('is-wordout');},3000);
+    t(function(){pl.classList.add('is-wordout');},2000);
     // 4. once that exit is about halfway through "work", the green fades, the headshot slides onto the page portrait, the rest clear out
     t(function(){
       pl.classList.add('is-hero');
       [].forEach.call(deck.children,function(d,idx){ if(idx!==HERO){ var dir=idx<HERO?-1:1; d.style.transitionDelay='0ms'; d.style.transform='translate('+(dir*innerWidth/zoom()*0.7)+'px,'+(innerHeight/zoom()*0.25)+'px) rotate('+(dir*25)+'deg) scale(.9)'; } });
       landHero();
-    },3450);
+    },2450);
     // 5. the green has already faded out during the slide; once the card lands, swap in the real portrait
-    t(function(){root.classList.remove('pl-running');pl.classList.add('is-out');},4420);
-    t(finish,4750);
+    t(function(){root.classList.remove('pl-running');pl.classList.add('is-out');},3420);
+    t(finish,3750);
   }
   function finish(){
     root.classList.remove('pl-running');pl.hidden=true;
@@ -504,11 +535,11 @@ html.pl-running .portrait img{visibility:hidden}
     <div class="additional">
       <h3>Additional work<span class="g">.</span></h3>
       <div class="addrow">
-        <div class="add"><div class="v"><video src="assets/add-sturniolo.mp4" poster="assets/add-sturniolo.jpg" muted loop playsinline preload="metadata" aria-label="Sturniolo Triplets"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.youtube.com/shorts/YSGci6H8FDs" target="_blank" rel="noopener"><span>Sturniolo Triplets</span><span class="g">↗</span></a></div>
-        <div class="add"><div class="v"><video src="assets/add-sgk.mp4" poster="assets/add-sgk.jpg" muted loop playsinline preload="metadata" aria-label="Short Game King"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/shortgameking/reel/DRQAVraEtMu/" target="_blank" rel="noopener"><span>Short Game King</span><span class="g">↗</span></a></div>
-        <div class="add"><div class="v"><video src="assets/add-autograph.mp4" poster="assets/add-autograph.jpg" muted loop playsinline preload="metadata" aria-label="Autograph"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/autograph.io/reel/C-tCxbtSq7D/" target="_blank" rel="noopener"><span>Autograph</span><span class="g">↗</span></a></div>
-        <div class="add"><div class="v"><video src="assets/add-charlisse.mp4" poster="assets/add-charlisse.jpg" muted loop playsinline preload="metadata" aria-label="Charlisse Leger-Walker"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/charlisse.legerwalker/reel/DS_AD3pE5MU/" target="_blank" rel="noopener"><span>Charlisse Leger-Walker</span><span class="g">↗</span></a></div>
-        <div class="add"><div class="v"><video src="assets/add-boythrob.mp4" poster="assets/add-boythrob.jpg" muted loop playsinline preload="metadata" aria-label="Boy Throb"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.youtube.com/shorts/EoHLEoxtekE" target="_blank" rel="noopener"><span>Boy Throb</span><span class="g">↗</span></a></div>
+        <div class="add"><div class="v"><video src="assets/add-sturniolo.mp4" poster="assets/add-sturniolo.jpg" muted loop playsinline preload="none" aria-label="Sturniolo Triplets"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.youtube.com/shorts/YSGci6H8FDs" target="_blank" rel="noopener"><span>Sturniolo Triplets</span><span class="g">↗</span></a></div>
+        <div class="add"><div class="v"><video src="assets/add-sgk.mp4" poster="assets/add-sgk.jpg" muted loop playsinline preload="none" aria-label="Short Game King"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/shortgameking/reel/DRQAVraEtMu/" target="_blank" rel="noopener"><span>Short Game King</span><span class="g">↗</span></a></div>
+        <div class="add"><div class="v"><video src="assets/add-autograph.mp4" poster="assets/add-autograph.jpg" muted loop playsinline preload="none" aria-label="Autograph"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/autograph.io/reel/C-tCxbtSq7D/" target="_blank" rel="noopener"><span>Autograph</span><span class="g">↗</span></a></div>
+        <div class="add"><div class="v"><video src="assets/add-charlisse.mp4" poster="assets/add-charlisse.jpg" muted loop playsinline preload="none" aria-label="Charlisse Leger-Walker"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/charlisse.legerwalker/reel/DS_AD3pE5MU/" target="_blank" rel="noopener"><span>Charlisse Leger-Walker</span><span class="g">↗</span></a></div>
+        <div class="add"><div class="v"><video src="assets/add-boythrob.mp4" poster="assets/add-boythrob.jpg" muted loop playsinline preload="none" aria-label="Boy Throb"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.youtube.com/shorts/EoHLEoxtekE" target="_blank" rel="noopener"><span>Boy Throb</span><span class="g">↗</span></a></div>
       </div>
     </div>
   </div>
@@ -523,7 +554,7 @@ html.pl-running .portrait img{visibility:hidden}
     </div>
     <div class="pm-grid">
       <article class="card copy">
-        <div class="titlerow"><div class="logo"><img src="assets/logo-autograph.png" alt=""></div><h3>Autograph</h3></div>
+        <div class="titlerow"><div class="logo"><img src="assets/logo-autograph.png" alt="" loading="lazy" decoding="async"></div><h3>Autograph</h3></div>
         <details class="disc desk"><summary>Read the case</summary><div class="inner">
         <p class="services">Product Marketing Manager, Feb 2024 - Jan 2025.<br>Go-to-Market, Growth Campaigns, Product Marketing, Organic Social</p>
         <p>Product marketing at Autograph, Tom Brady’s a16z-backed company. Spearheaded go-to-market strategy for three league launches (NBA, MLB, NFL) and two major feature releases, and ran the $1.2M annual marketing budget and a $50K paid social agency account.</p>
@@ -538,7 +569,7 @@ html.pl-running .portrait img{visibility:hidden}
         </div></details>
       </article>
       <article class="card copy">
-        <div class="titlerow"><div class="logo"><img src="assets/logo-rdb.png" alt=""></div><h3>Red Dining Book</h3></div>
+        <div class="titlerow"><div class="logo"><img src="assets/logo-rdb.png" alt="" loading="lazy" decoding="async"></div><h3>Red Dining Book</h3></div>
         <details class="disc desk"><summary>Read the case</summary><div class="inner">
         <p class="services">Marketing Strategy, Paid Social Content, Market Launch Campaign</p>
         <p>Led the expansion of the Red Dining Book, a boutique restaurant guidebook, from Los Angeles to New York City, working as the marketing partner across content and distribution for the NYC edition.</p>
@@ -556,7 +587,7 @@ html.pl-running .portrait img{visibility:hidden}
     </div>
     <div class="pm-grid" id="partnerships">
       <article class="card copy">
-        <div class="titlerow"><div class="logo"><img src="assets/logo-amplifii.png" alt=""></div><div><h3>Amplifii</h3><p class="sub">Strategic Advisor · UGC creator partnership marketplace</p></div></div>
+        <div class="titlerow"><div class="logo"><img src="assets/logo-amplifii.png" alt="" loading="lazy" decoding="async"></div><div><h3>Amplifii</h3><p class="sub">Strategic Advisor · UGC creator partnership marketplace</p></div></div>
         <details class="disc desk"><summary>Read the case</summary><div class="inner">
         <p>Amplifii is a creator marketing platform where brands post a brief and a reward pool, and hundreds of creators pick it up and post across Instagram, TikTok, YouTube, and X. I advise the founding team on partnerships and product marketing.</p>
         <p>Most of the work is opening doors: brokering strategic partnerships with brands, agencies, and creator networks that bring supply and demand onto the marketplace. The rest is product input, using what I have learned running UGC partnerships for clients to help the team shape features that creators and brand managers actually want to use, and then helping tell the story of those features once they ship.</p>
@@ -569,7 +600,7 @@ html.pl-running .portrait img{visibility:hidden}
         </div></details>
       </article>
       <article class="card copy">
-        <div class="titlerow"><div class="logo"><img src="assets/logo-quix.png" alt=""></div><div><h3>Quix</h3><p class="sub">Head of Marketing, Jun 2021 to Mar 2023 · NFT marketplace on Optimism</p></div></div>
+        <div class="titlerow"><div class="logo"><img src="assets/logo-quix.png" alt="" loading="lazy" decoding="async"></div><div><h3>Quix</h3><p class="sub">Head of Marketing, Jun 2021 to Mar 2023 · NFT marketplace on Optimism</p></div></div>
         <details class="disc desk"><summary>Read the case</summary><div class="inner">
         <p>First non-technical hire at Quix, where I led marketing, business development, and community for a three-person team that built the third largest NFT marketplace in the world.</p>
         <p>I onboarded developers, artists, and collectors to a brand new Layer 2 ecosystem, built the brand and community strategy from the product’s value proposition, and ran the campaigns and partnerships that drove volume.</p>
@@ -657,8 +688,8 @@ CASES.forEach(cs=>{
   track.innerHTML=`<div class="spacer"></div><div class="stage"><article class="card case">
     <div class="stack">
       <div class="deck">
-        <div class="next" title="Next clip">${cs.clips.map((c,i)=>`<img data-i="${i}" src="${c.img}" alt="">`).join('')}<div class="tip">Next clip</div></div>
-        <div class="phone" tabindex="0" aria-label="${cs.name} clips, click for next"><div class="screen">${cs.clips.map((c,i)=>`<div class="slide" data-i="${i}">${c.video?`<video src="${c.video}" poster="${c.img}" muted loop playsinline preload="metadata" aria-label="${c.title}"></video>`:`<img src="${c.img}" alt="${c.title}">`}</div>`).join('')}</div>
+        <div class="next" title="Next clip">${cs.clips.map((c,i)=>`<img data-i="${i}" src="${c.img}" alt="" decoding="async">`).join('')}<div class="tip">Next clip</div></div>
+        <div class="phone" tabindex="0" aria-label="${cs.name} clips, click for next"><div class="screen">${cs.clips.map((c,i)=>`<div class="slide" data-i="${i}">${c.video?`<video src="${c.video}" poster="${c.img}" muted loop playsinline preload="none" aria-label="${c.title}"></video>`:`<img src="${c.img}" alt="${c.title}">`}</div>`).join('')}</div>
           <button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div>
       </div>
       <div class="stats">${cs.clips.map((c,i)=>`<div class="set" data-i="${i}">
@@ -732,6 +763,15 @@ CASES.forEach(cs=>{
   phone.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();go((active+1)%n);} });
   track.querySelectorAll('.ticks i').forEach(t=>t.addEventListener('click',()=>go(+t.dataset.go)));
 });
+
+// Clips start with preload="none" so a cold first open downloads no video at all (11 open range requests used to
+// compete with the intro's images). A clip switches to preload="metadata" once it comes within 600px of the viewport.
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ const v=en.target; if(v.preload==='none'){ v.preload='metadata'; try{v.load();}catch(e){} } io.unobserve(v); } }),{rootMargin:'600px 0px'});
+  const watch=()=>document.querySelectorAll('video[preload="none"]').forEach(v=>io.observe(v));
+  watch(); window.addEventListener('load',watch);
+})();
 
 // Additional work tiles: tap the tile or its button to play / pause (with sound). Only one plays at a time, and a
 // tile that scrolls out of view pauses.
