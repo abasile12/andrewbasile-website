@@ -209,8 +209,8 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
   background:rgba(255,255,255,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px rgba(255,255,255,.35),0 6px 16px rgba(0,0,0,.3);
   display:none;align-items:center;justify-content:center;color:#fff;transition:transform .2s,background .2s}
 .play.show{display:flex}
-.play.playing{opacity:0;transition:opacity .25s}
-.phone:hover .play.playing,.phone.touched .play.playing,.play.playing:focus-visible{opacity:1}
+.play.playing{opacity:.55;transition:opacity .25s}
+.play.playing:hover,.phone:hover .play.playing,.phone.touched .play.playing,.v:hover .play.playing,.play.playing:focus-visible{opacity:1}
 .play:hover{background:rgba(255,255,255,.34)}
 .play:active{transform:translate(-50%,-50%) scale(.92)}
 .play svg{width:18px;height:18px;fill:#fff;display:block}
@@ -223,19 +223,20 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 /* Additional work */
 .additional h3{font-weight:600;font-size:38px;letter-spacing:-.03em;margin:44px 0 20px}
 .addrow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
-.addrow a{display:flex;flex-direction:column;gap:10px;min-width:0}
-.addrow .v{aspect-ratio:220/391;border-radius:14px;overflow:hidden;background:#ddddda;max-width:100%}
-.addrow .v img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.addrow a:hover .v img{transform:scale(1.03)}
+.addrow .add{display:flex;flex-direction:column;gap:10px;min-width:0}
+.addrow .v{position:relative;aspect-ratio:220/391;border-radius:14px;overflow:hidden;background:#ddddda;max-width:100%;cursor:pointer}
+.addrow .v video{width:100%;height:100%;object-fit:cover;display:block}
 .addrow .t{display:flex;justify-content:space-between;gap:6px;font-weight:600;font-size:14px}
-@media (max-width:900px){.addrow{grid-template-columns:repeat(2,minmax(0,1fr))}.addrow a:last-child{grid-column:span 2;max-width:50%}}
+.addrow .t:hover .g{transform:translate(2px,-2px)}
+.addrow .t .g{display:inline-block;transition:transform .25s}
+@media (max-width:900px){.addrow{grid-template-columns:repeat(2,minmax(0,1fr))}.addrow .add:last-child{grid-column:span 2;max-width:50%}}
 /* Phones: one horizontal scroll row of clips, like the Figma Mobile frame */
 @media (max-width:640px){
   .additional h3{font-size:30px;margin-top:36px}
   .addrow{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 8px;scrollbar-width:none}
   .addrow::-webkit-scrollbar{display:none}
-  .addrow a{flex:0 0 170px;scroll-snap-align:start;max-width:none}
-  .addrow a:last-child{grid-column:auto;max-width:none}
+  .addrow .add{flex:0 0 170px;scroll-snap-align:start;max-width:none}
+  .addrow .add:last-child{grid-column:auto;max-width:none}
 }
 
 /* Product marketing */
@@ -325,11 +326,11 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
     <div class="additional">
       <h3>Additional work<span class="g">.</span></h3>
       <div class="addrow">
-        <a href="https://www.instagram.com/sturniolo.triplets/reels/" target="_blank" rel="noopener"><div class="v"><img src="assets/add-sturniolo.jpg" alt=""></div><div class="t"><span>Sturniolo Triplets</span><span class="g">↗</span></div></a>
-        <a href="https://www.instagram.com/shortgameking/" target="_blank" rel="noopener"><div class="v"><img src="assets/add-sgk.jpg" alt=""></div><div class="t"><span>Short Game King</span><span class="g">↗</span></div></a>
-        <a href="https://www.instagram.com/autograph.io/" target="_blank" rel="noopener"><div class="v"><img src="assets/add-autograph.jpg" alt=""></div><div class="t"><span>Autograph</span><span class="g">↗</span></div></a>
-        <a href="https://www.instagram.com/charlisse.legerwalker/" target="_blank" rel="noopener"><div class="v"><img src="assets/add-charlisse.jpg" alt=""></div><div class="t"><span>Charlisse Leger-Walker</span><span class="g">↗</span></div></a>
-        <a href="https://www.instagram.com/boy.throb/" target="_blank" rel="noopener"><div class="v"><img src="assets/add-boythrob.jpg" alt=""></div><div class="t"><span>Boy Throb</span><span class="g">↗</span></div></a>
+        <div class="add"><div class="v"><video src="assets/add-sturniolo.mp4" poster="assets/add-sturniolo.jpg" muted loop playsinline preload="metadata" aria-label="Sturniolo Triplets"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/sturniolo.triplets/reels/" target="_blank" rel="noopener"><span>Sturniolo Triplets</span><span class="g">↗</span></a></div>
+        <div class="add"><div class="v"><video src="assets/add-sgk.mp4" poster="assets/add-sgk.jpg" muted loop playsinline preload="metadata" aria-label="Short Game King"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/shortgameking/" target="_blank" rel="noopener"><span>Short Game King</span><span class="g">↗</span></a></div>
+        <div class="add"><div class="v"><video src="assets/add-autograph.mp4" poster="assets/add-autograph.jpg" muted loop playsinline preload="metadata" aria-label="Autograph"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/autograph.io/" target="_blank" rel="noopener"><span>Autograph</span><span class="g">↗</span></a></div>
+        <div class="add"><div class="v"><video src="assets/add-charlisse.mp4" poster="assets/add-charlisse.jpg" muted loop playsinline preload="metadata" aria-label="Charlisse Leger-Walker"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/charlisse.legerwalker/" target="_blank" rel="noopener"><span>Charlisse Leger-Walker</span><span class="g">↗</span></a></div>
+        <div class="add"><div class="v"><video src="assets/add-boythrob.mp4" poster="assets/add-boythrob.jpg" muted loop playsinline preload="metadata" aria-label="Boy Throb"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/boy.throb/" target="_blank" rel="noopener"><span>Boy Throb</span><span class="g">↗</span></a></div>
       </div>
     </div>
   </div>
@@ -514,7 +515,7 @@ CASES.forEach(cs=>{
   // Buffering: videos start with preload=metadata (nothing heavy loads up front). Once a card's clip is played, every clip
   // in that card switches to preload=auto, so the next one is buffered by the time it swaps in.
   const warm=except=>slides.forEach(s=>{ const v=s.querySelector('video'); if(v&&v!==except&&v.preload!=='auto'){ v.preload='auto'; try{v.load();}catch(e){} } });
-  const playVideo=v=>{ v.muted=false; return v.play().catch(()=>{ v.muted=true; return v.play().catch(()=>{}); }); };
+  const playVideo=v=>{ document.querySelectorAll('.addrow video').forEach(o=>{ if(!o.paused) o.pause(); }); v.muted=false; return v.play().catch(()=>{ v.muted=true; return v.play().catch(()=>{}); }); };
   playBtn.addEventListener('click',e=>{ e.stopPropagation(); const v=videoAt(active); if(!v) return;
     if(v.paused){ playVideo(v); warm(v); } else v.pause(); syncPlay(); });
   let touchT=0; phone.addEventListener('touchstart',()=>{ phone.classList.add('touched'); clearTimeout(touchT); touchT=setTimeout(()=>phone.classList.remove('touched'),1800); },{passive:true});
@@ -524,9 +525,8 @@ CASES.forEach(cs=>{
   if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(en=>{ if(!en.isIntersecting){ const v=videoAt(active); if(v&&!v.paused) v.pause(); } }),{threshold:0}).observe(phone);
   function setActive(i, animate=true){
     if(i===active) return; const prev=active; active=i;
-    // Carry playback over: if the outgoing clip was playing, the incoming one starts too (muted if the browser insists).
-    const pv=videoAt(prev), wasPlaying=!!pv&&!pv.paused; if(pv){ pv.pause(); pv.currentTime=0; }
-    const nv=videoAt(i); if(nv&&wasPlaying) playVideo(nv);
+    // The outgoing clip stops; the incoming one waits for its own play tap.
+    const pv=videoAt(prev); if(pv){ pv.pause(); pv.currentTime=0; }
     slides.forEach((s,j)=>{ if(s._raf){cancelAnimationFrame(s._raf);s._raf=0;} s.style.clipPath=''; s.classList.remove('on','was'); if(j===i)s.classList.add('on'); else if(j===prev)s.classList.add('was');});
     if(animate && prev>=0) blobReveal(slides[i]);
     sets.forEach((s,j)=>{s.classList.toggle('on',j===i); s.classList.toggle('past',j<i);});
@@ -551,6 +551,21 @@ CASES.forEach(cs=>{
   phone.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();go((active+1)%n);} });
   track.querySelectorAll('.ticks i').forEach(t=>t.addEventListener('click',()=>go(+t.dataset.go)));
 });
+
+// Additional work tiles: tap the tile or its button to play / pause (with sound). Only one plays at a time, and a
+// tile that scrolls out of view pauses.
+(function(){
+  const tiles=[...document.querySelectorAll('.addrow .add')];
+  tiles.forEach(tile=>{
+    const v=tile.querySelector('video'), btn=tile.querySelector('.play'), box=tile.querySelector('.v');
+    btn.classList.add('show');
+    const sync=()=>{ const playing=!v.paused; btn.classList.toggle('playing',playing); btn.setAttribute('aria-pressed',String(playing)); btn.setAttribute('aria-label',playing?'Pause clip':'Play clip'); };
+    const toggle=e=>{ e.stopPropagation(); if(v.paused){ document.querySelectorAll('.addrow video, .phone video').forEach(o=>{ if(o!==v&&!o.paused) o.pause(); }); v.muted=false; v.play().catch(()=>{ v.muted=true; v.play().catch(()=>{}); }); } else v.pause(); sync(); };
+    box.addEventListener('click',toggle);
+    ['play','pause','ended'].forEach(ev=>v.addEventListener(ev,sync));
+    if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(en=>{ if(!en.isIntersecting&&!v.paused) v.pause(); }),{threshold:0}).observe(box);
+  });
+})();
 
 // Disclosure rows: always open on desktop (the toggle row is hidden by CSS); on phones, closed unless marked data-mopen.
 (function(){
