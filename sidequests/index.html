@@ -17,7 +17,7 @@
 <meta property="og:title" content="Side Quests | Andrew Basile">
 <meta property="og:description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, soundlog.io and Friend of the Family, with what each one taught him.">
 <meta property="og:url" content="https://andrewbasile.work/sidequests/">
-<meta property="og:image" content="https://andrewbasile.work/assets/og-image.jpg?v=2">
+<meta property="og:image" content="http://andrewbasile.work/assets/og-image.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Andrew Basile, Content and Product Marketer">
@@ -25,7 +25,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Side Quests | Andrew Basile">
 <meta name="twitter:description" content="The things Andrew Basile built because he could not stop thinking about them: Wordchainer, soundlog.io and Friend of the Family, with what each one taught him.">
-<meta name="twitter:image" content="https://andrewbasile.work/assets/og-image.jpg?v=2">
+<meta name="twitter:image" content="http://andrewbasile.work/assets/og-image.jpg?v=3">
 <link rel="preload" as="style" id="figtree" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"></noscript>
 <style>
@@ -52,6 +52,23 @@ img{max-width:100%;display:block}
 .links a.active::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
 @media (max-width:1000px){.links{display:none}}
 @media (max-width:640px){.nav .btn{display:none}}
+/* Phone / tablet nav: hamburger that opens a panel under the bar */
+.navr{display:flex;align-items:center;gap:12px}
+.burger{display:none;width:44px;height:44px;margin:-6px -8px -6px 0;padding:0;border:0;background:none;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:6px}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+.nav.is-menu .burger span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.nav.is-menu .burger span:nth-child(2){opacity:0}
+.nav.is-menu .burger span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.navmenu{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--rule);box-shadow:0 24px 40px -24px rgba(0,0,0,.18)}
+.nav.is-menu .navmenu{display:block}
+.navmenu .wrap{display:block;padding-block:0}
+.navmenu nav{display:flex;flex-direction:column}
+.navmenu nav a{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-top:1px solid var(--rule);font-weight:600;font-size:17px;color:var(--ink)}
+.navmenu nav a.active::after{content:"";width:8px;height:8px;background:var(--green);transform:rotate(45deg)}
+.nav .navmenu .btn{display:inline-flex;margin:20px 0 24px;width:100%;justify-content:center}
+.nav .navmenu .btn .g{color:inherit}
+@media (max-width:1000px){.burger{display:flex}.nav.is-menu{background:#fff}}
+@media (min-width:641px){.nav .navmenu .btn{display:none}}
 
 .intro .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);gap:60px;align-items:start;padding-block:88px 72px}
 .intro h1{font-weight:600;font-size:clamp(52px,6.6vw,96px);line-height:.98;letter-spacing:-.045em;margin:0}
@@ -147,8 +164,17 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
     <nav class="links">
       <a href="/#content">My work</a><a href="/skills/">Skills &amp; Automations</a><a href="/worktogether/">Work Together</a><a class="active" href="/sidequests/">Side Quests</a>
     </nav>
-    <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
+    <div class="navr">
+      <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
+  <div class="navmenu" id="menu"><div class="wrap">
+    <nav>
+      <a href="/#content">My work</a><a href="/skills/">Skills &amp; Automations</a><a href="/worktogether/">Work Together</a><a class="active" href="/sidequests/">Side Quests</a>
+    </nav>
+    <a class="btn fill" href="#contact">Get in touch <span class="g">↗</span></a>
+  </div></div>
 </header>
 
 <section class="intro">
@@ -246,6 +272,14 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 
 <script>
 // Home links: this page is served beside the home page, so strip our own filename from the address to get back
+// Hamburger menu (phone / tablet)
+(()=>{const nav=document.querySelector('.nav'),b=nav&&nav.querySelector('.burger');if(!b)return;
+const set=o=>{nav.classList.toggle('is-menu',o);b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Close menu':'Open menu');};
+b.addEventListener('click',()=>set(!nav.classList.contains('is-menu')));
+nav.querySelectorAll('.navmenu a').forEach(a=>a.addEventListener('click',()=>set(false)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false);});
+document.addEventListener('click',e=>{if(nav.classList.contains('is-menu')&&!nav.contains(e.target))set(false);});
+matchMedia('(max-width:1000px)').addEventListener('change',m=>{if(!m.matches)set(false);});})();
 // Clean URLs: in-page links scroll without writing a # into the address bar, and a # arriving from another page is scrolled to and then removed.
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||e.metaKey||e.ctrlKey)return;const id=a.getAttribute('href').slice(1);e.preventDefault();if(!id||id==='top'){window.scrollTo({top:0,behavior:'smooth'});return;}const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});});
 if(location.hash){const el=document.getElementById(location.hash.slice(1));history.replaceState(null,'',location.pathname+location.search);if(el)requestAnimationFrame(()=>el.scrollIntoView());}
