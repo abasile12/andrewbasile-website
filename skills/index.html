@@ -459,7 +459,6 @@ const cards=SKILLS.map((s,i)=>{
   a.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(i,a); } });
   grid.appendChild(a); return a;
 });
-const hint=document.createElement('p'); hint.className='skhint'; hint.textContent='Open any build to see what it made'; grid.after(hint);
 
 const layer=document.getElementById('sklayer'), panel=layer.querySelector('.sk-panel'), body=layer.querySelector('.sk-body'), rail=layer.querySelector('.sk-rail');
 const $=q=>layer.querySelector(q);
