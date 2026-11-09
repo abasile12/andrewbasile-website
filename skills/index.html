@@ -131,25 +131,12 @@ img{max-width:100%;display:block}
 .features li span{color:var(--muted);font-size:15px}
 .conn{margin-top:4px}
 .conn h5{margin-bottom:14px}
-.build .conn h5{font-size:13px;letter-spacing:0;margin-bottom:8px}
 .pills{display:flex;flex-wrap:wrap;gap:8px}
 .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--rule);border-radius:999px;padding:5px 12px 5px 6px;font-size:13px;font-weight:500}
 .pill img{width:22px;height:22px;border-radius:50%}
 .pill.txt{padding:6px 12px}
 @media (max-width:1100px){.case{grid-template-columns:1fr}}
 @media (max-width:640px){.card,.case{padding:22px}.reels{grid-template-columns:1fr}}
-
-.builds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.build{display:flex;flex-direction:column;gap:14px}
-.build .dl{margin-top:auto;padding-top:10px}
-.build .dl .btn{padding:12px 20px;font-size:14px}
-.build .ill{border-radius:14px;overflow:hidden;background:var(--band)}
-.build h3{margin:4px 0 0;font-size:24px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
-.build p{margin:0;color:var(--muted);font-size:15px}
-.build .out b{display:block;font-size:13px;font-weight:600;margin-bottom:2px;color:var(--ink)}
-.build .out span{font-size:14px;color:var(--muted)}
-@media (max-width:1000px){.builds{grid-template-columns:1fr 1fr}}
-@media (max-width:640px){.builds{grid-template-columns:1fr}}
 
 .tools h2{font-size:34px;font-weight:600;letter-spacing:-.03em;margin:0 0 14px}
 .tools p{color:var(--muted);max-width:760px;margin:0 0 20px}
@@ -164,6 +151,95 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:36px;flex-wrap:wrap}
 .footer nav{display:flex;gap:22px;flex-wrap:wrap}
 .footer .mail{color:var(--green);font-weight:500;font-size:17px}
+
+/* ===== Skills & Automations: glass overview + glass pop-ups (ported from the FEED Studios v2 glass overview, Nov 9) ===== */
+.skgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+@media (max-width:1000px){.skgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.skgrid{grid-template-columns:1fr;gap:16px}}
+.skc{position:relative;display:flex;flex-direction:column;padding:10px;border-radius:24px;background:#fff;border:1px solid var(--rule);cursor:pointer;text-align:left;
+  box-shadow:0 1px 0 rgba(0,0,0,.02),0 18px 40px -30px rgba(0,0,0,.25);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .3s ease}
+.skc:hover{transform:translateY(-4px);border-color:#d6d6d1;box-shadow:0 1px 0 rgba(0,0,0,.02),0 34px 60px -34px rgba(0,0,0,.32)}
+.skc:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.skc .vis{position:relative;aspect-ratio:388/206;border-radius:16px;overflow:hidden;background:#111;isolation:isolate}
+.skc .vis::before{content:"";position:absolute;left:50%;top:58%;width:78%;height:90%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(0,234,116,.32),rgba(0,234,116,0));z-index:-1;transition:opacity .4s ease,transform .6s cubic-bezier(.22,1,.36,1);opacity:.75}
+.skc:hover .vis::before{opacity:1;transform:translate(-50%,-50%) scale(1.12)}
+.skc .vis img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.skc:hover .vis img{transform:scale(1.03)}
+.skc .txt{display:flex;flex-direction:column;gap:10px;padding:20px 12px 22px}
+.skc h3{margin:0;font-size:24px;font-weight:600;letter-spacing:-.025em;line-height:1.1}
+.skc h3 .n{color:var(--muted);font-weight:500}
+.skc h3 .n i{font-style:normal;color:var(--green);margin:0 .18em}
+.skc p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
+.skc .foot{margin:auto 12px 0;padding:18px 0 4px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--rule)}
+.skc .foot span{font-size:14px;font-weight:600}
+.skc .foot span b{font-weight:500;color:var(--muted)}
+.plus{flex:none;width:34px;height:34px;border-radius:50%;border:0;padding:0;background:var(--green);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.plus svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;stroke-linecap:round;fill:none}
+.skc:hover .plus{transform:rotate(90deg) scale(1.06)}
+.skhint{display:flex;align-items:center;gap:10px;margin:28px 0 0;font-size:14px;font-weight:500;color:var(--muted)}
+.skhint::before{content:"";width:7px;height:7px;background:var(--green);transform:rotate(45deg)}
+
+/* The pop-up layer: page blurs behind a frosted veil, the skill opens on a glass panel */
+html.sk-on{overflow:hidden}
+.sk-layer{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:clamp(16px,4vh,48px) 16px}
+.sk-layer[hidden]{display:none}
+.sk-veil{position:absolute;inset:0;background:rgba(246,246,243,.5);backdrop-filter:blur(16px) saturate(1.15);-webkit-backdrop-filter:blur(16px) saturate(1.15);opacity:0;transition:opacity .45s ease}
+.sk-veil::after{content:"";position:absolute;left:62%;top:52%;width:min(70vw,900px);height:min(70vh,640px);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(0,234,116,.22),rgba(0,234,116,0));pointer-events:none}
+.sk-layer.is-in .sk-veil{opacity:1}
+.sk-panel{position:relative;width:min(1180px,100%);height:min(760px,calc(100svh - 2*clamp(16px,4vh,48px)));border-radius:32px;overflow:hidden;outline:none;
+  background:linear-gradient(140deg,rgba(255,255,255,.86),rgba(255,255,255,.62) 55%,rgba(255,255,255,.74));
+  backdrop-filter:blur(30px) saturate(1.6);-webkit-backdrop-filter:blur(30px) saturate(1.6);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,1),inset 0 0 0 1px rgba(255,255,255,.7),0 0 0 1px rgba(17,17,17,.07),0 50px 120px -40px rgba(0,0,0,.35),0 20px 40px -30px rgba(0,0,0,.2);
+  transform-origin:0 0;opacity:0;overflow-y:auto;overscroll-behavior:contain}
+.sk-sheen{position:absolute;left:-12%;top:-26%;width:62%;height:48%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,0));pointer-events:none}
+.sk-close{position:absolute;top:24px;right:24px;z-index:3;width:46px;height:46px;border-radius:50%;border:0;padding:0;cursor:pointer;display:grid;place-items:center;color:var(--ink);
+  background:rgba(255,255,255,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(17,17,17,.1),0 6px 16px -8px rgba(0,0,0,.25);transition:transform .25s ease,background .2s}
+.sk-close:hover{transform:rotate(90deg);background:#fff}
+.sk-close svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;fill:none}
+.sk-body{position:relative;z-index:1;min-height:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,540px);gap:56px;align-items:center;padding:88px 56px 56px 64px;transition:opacity .22s ease}
+.sk-body.swap{opacity:0}
+.sk-copy{display:flex;flex-direction:column;gap:0;min-width:0}
+.sk-copy h2{margin:0;font-weight:600;font-size:clamp(36px,min(4.2vw,6.6vh),60px);line-height:.98;letter-spacing:-.045em;text-wrap:balance}
+.sk-copy h2 .n{color:var(--muted);font-weight:500}
+.sk-copy h2 .n i{font-style:normal;color:var(--green);margin:0 .16em}
+.sk-desc{margin:20px 0 0;font-size:18px;line-height:1.55;color:#3a3a37;max-width:34em}
+.sk-out{margin-top:28px}
+.sk-out h3,.sk-conn h3{margin:0 0 8px;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--muted)}
+.sk-what{margin:0;font-size:19px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
+.sk-shown{margin:6px 0 0;font-size:15px;color:var(--muted);line-height:1.5}
+.sk-conn{margin-top:24px}
+.sk-conn .pill{background:rgba(255,255,255,.7)}
+.sk-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.sk-acts .btn.line{background:rgba(255,255,255,.55);cursor:pointer;font:inherit;font-weight:600;font-size:15px;color:var(--ink)}
+.sk-stage{position:relative;align-self:stretch;min-height:0;display:grid;place-items:center;padding:28px;border-radius:24px;background:#111;overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.sk-stage::before{content:"";position:absolute;left:50%;top:55%;width:90%;height:80%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(0,234,116,.3),rgba(0,234,116,0));z-index:-1}
+.sk-stage img{max-width:100%;max-height:min(600px,calc(100svh - 260px));width:auto;height:auto;object-fit:contain}
+/* Rail: one tile per skill, beside the panel */
+.sk-rail{position:absolute;left:max(16px,calc(50% - 590px - 76px));top:50%;transform:translate(-12px,-50%);z-index:2;display:flex;flex-direction:column;gap:8px;padding:9px;border-radius:20px;opacity:0;
+  background:rgba(255,255,255,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.8),0 0 0 1px rgba(17,17,17,.07),0 20px 40px -24px rgba(0,0,0,.3);transition:opacity .4s ease .1s,transform .5s cubic-bezier(.22,1,.36,1) .1s}
+.sk-layer.is-in .sk-rail{opacity:1;transform:translate(0,-50%)}
+.sk-rail button{width:38px;height:38px;border-radius:12px;border:0;padding:0;cursor:pointer;font:inherit;font-size:13px;font-weight:600;color:var(--muted);background:transparent;box-shadow:inset 0 0 0 1px var(--rule);transition:background .2s,color .2s,transform .25s}
+.sk-rail button:hover{color:var(--ink);background:#fff}
+.sk-rail button[aria-selected="true"]{background:var(--green);color:var(--ink);box-shadow:none;transform:scale(1.08)}
+@media (max-width:1400px) and (min-width:1001px){
+  .sk-layer{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px}
+  .sk-panel{height:min(740px,calc(100svh - 2*clamp(16px,4vh,48px) - 70px))}
+  .sk-rail{position:relative;left:auto;top:auto;order:2;flex-direction:row;transform:translateY(-10px)}
+  .sk-layer.is-in .sk-rail{transform:none}}
+@media (max-width:1000px){
+  .sk-layer{padding:12px 12px 0;place-items:end center}
+  .sk-panel{height:calc(100svh - 12px);border-radius:28px 28px 0 0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .sk-body{height:auto;grid-template-columns:1fr;gap:28px;padding:84px 24px 120px}
+  .sk-stage{order:-1;padding:18px;min-height:0}
+  .sk-stage img{max-height:60svh}
+  .sk-close{position:fixed;top:24px;right:24px}
+  .sk-rail{position:fixed;bottom:16px;top:auto;left:50%;right:auto;transform:translate(-50%,12px);flex-direction:row}
+  .sk-layer.is-in .sk-rail{transform:translate(-50%,0)}
+  .sk-copy h2{font-size:clamp(34px,9vw,48px)}
+  .sk-desc{font-size:16px}
+}
+@media (max-width:640px){.sk-close{top:22px;right:20px}.sk-rail button{width:36px;height:36px}.sk-acts .btn{flex:1 1 auto;justify-content:center}}
+@media (prefers-reduced-motion:reduce){.skc,.skc .vis img,.plus,.sk-veil,.sk-rail,.sk-body{transition:none}}
 </style>
 <style>
 /* Desktop width: the layout is the 1440px Figma canvas (1180px content, gutters that stop growing at 130px) and stays that size on wider screens, centred with whitespace either side, so every section reads as one contained block. */
@@ -251,64 +327,34 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
   </div>
 </section>
 
-<section class="chapter">
+<section class="chapter" id="skills">
   <div class="wrap">
     <div class="chapter-head">
       <h2>Skills <span class="g">&amp;</span> Automations</h2>
-      <p>Claude Code skills I wrote and run inside FEED Studios. Each one takes a job that used to eat an afternoon and turns it into a conversation, with the output landing where the team already works: Notion, Figma, and Drive.</p>
+      <p>Claude Code skills I wrote and run inside FEED Studios. Open one to see the real output it made for a client and what got built with it.</p>
     </div>
-    <div class="builds">
-      <article class="card build">
-        <div class="ill"><img src="/assets/ill-engine.png" alt=""></div>
-        <h3>FEED Studios content engine</h3>
-        <p>The operating system behind every client: blueprint the niche, source the references, analyze what travels, brief the editor, publish to a creator portal. One pipeline from idea to posted video, run through Claude Code skills and a shared Notion workspace.</p>
-        <div class="out"><b>What comes out</b><span>Weekly briefs, scripts, and a living post library per client</span></div>
-        <div class="conn"><h5>Connectors needed</h5><div class="pills"><span class="pill"><img src="/assets/c-notion.png" alt="">Notion</span><span class="pill"><img src="/assets/c-figma.png" alt="">Figma</span><span class="pill"><img src="/assets/c-drive.png" alt="">Google Drive</span><span class="pill"><img src="/assets/c-slack.png" alt="">Slack</span></div></div>
-        <div class="dl"><a class="btn fill" href="/skills/feed-studios-content-engine.zip" download>Download skill <span>↓</span></a></div>
-      </article>
-      <article class="card build">
-        <div class="ill"><img src="/assets/ill-carousel.png" alt=""></div>
-        <h3>Carousel Builder</h3>
-        <p>Give it a topic and it writes a six-slide carousel in the brand voice, then builds the slides in Figma from the brand’s own template components, checks every slide with a screenshot, and hands back a caption.</p>
-        <div class="out"><b>What comes out</b><span>Designed 1080×1350 carousels, ready to export and post</span></div>
-        <div class="conn"><h5>Connectors needed</h5><div class="pills"><span class="pill"><img src="/assets/c-figma.png" alt="">Figma</span><span class="pill"><img src="/assets/c-higgsfield.png" alt="">Higgsfield</span><span class="pill"><img src="/assets/c-instagram.png" alt="">Instagram</span></div></div>
-        <div class="dl"><a class="btn fill" href="/skills/carousel-builder.zip" download>Download skill <span>↓</span></a></div>
-      </article>
-      <article class="card build">
-        <div class="ill"><img src="/assets/ill-analyzer.png" alt=""></div>
-        <h3>Viral Video Analyzer</h3>
-        <p>Watches short-form videos through Twelve Labs, breaks down the hook, structure, pacing, and why it worked, and logs a structured record to the Viral Video Database so the whole team can search proven formats.</p>
-        <div class="out"><b>What comes out</b><span>A searchable database of what works and why</span></div>
-        <div class="conn"><h5>Connectors needed</h5><div class="pills"><span class="pill"><img src="/assets/c-twelvelabs.png" alt="">Twelve Labs</span><span class="pill"><img src="/assets/c-notion.png" alt="">Notion</span><span class="pill"><img src="/assets/c-instagram.png" alt="">Instagram</span></div></div>
-        <div class="dl"><a class="btn fill" href="/skills/viral-video-analyzer.zip" download>Download skill <span>↓</span></a></div>
-      </article>
-      <article class="card build">
-        <div class="ill"><img src="/assets/ill-blueprint.png" alt=""></div>
-        <h3>Content Blueprint</h3>
-        <p>Researches a niche across TikTok, Reels, and Shorts and delivers the strategic foundation: the formats that dominate, the hook patterns, who is winning and why, and the angles a client should take.</p>
-        <div class="out"><b>What comes out</b><span>A strategy document the team builds from</span></div>
-        <div class="conn"><h5>Connectors needed</h5><div class="pills"><span class="pill"><img src="/assets/c-tiktok.png" alt="">TikTok</span><span class="pill"><img src="/assets/c-instagram.png" alt="">Instagram</span><span class="pill txt">YouTube</span><span class="pill"><img src="/assets/c-notion.png" alt="">Notion</span></div></div>
-        <div class="dl"><a class="btn fill" href="/skills/content-blueprint.zip" download>Download skill <span>↓</span></a></div>
-      </article>
-      <article class="card build">
-        <div class="ill"><img src="/assets/ill-sourcer.png" alt=""></div>
-        <h3>Content Sourcer</h3>
-        <p>Pulls 30 to 50 high-performing videos for a client’s niche with direct links, organized by format and annotated with why each is worth recreating, so editors can rebuild the structure with the client’s footage.</p>
-        <div class="out"><b>What comes out</b><span>A recreatable swipe file with every link</span></div>
-        <div class="conn"><h5>Connectors needed</h5><div class="pills"><span class="pill"><img src="/assets/c-tiktok.png" alt="">TikTok</span><span class="pill"><img src="/assets/c-instagram.png" alt="">Instagram</span><span class="pill txt">YouTube</span><span class="pill"><img src="/assets/c-notion.png" alt="">Notion</span></div></div>
-        <div class="dl"><a class="btn fill" href="/skills/content-sourcer.zip" download>Download skill <span>↓</span></a></div>
-      </article>
-      <article class="card build">
-        <div class="ill"><img src="/assets/ill-shade.png" alt=""></div>
-        <h3>Shade Footage Finder</h3>
-        <p>Hand it a script or brief and it searches the client’s footage library in Shade by meaning, qualifies each candidate clip, reads the transcript for exact timestamps, and returns a pull sheet: for every beat, the clip, the in and out points, and why it fits.</p>
-        <div class="out"><b>What comes out</b><span>A footage pull sheet the editor can open in Shade and cut from</span></div>
-        <div class="conn"><h5>Connectors needed</h5><div class="pills"><span class="pill"><img src="/assets/c-shade.png" alt="">Shade</span><span class="pill"><img src="/assets/c-notion.png" alt="">Notion</span><span class="pill"><img src="/assets/c-drive.png" alt="">Google Drive</span></div></div>
-        <div class="dl"><a class="btn fill" href="/skills/shade-footage-finder.zip" download>Download skill <span>↓</span></a></div>
-      </article>
-    </div>
+    <div class="skgrid" id="skgrid"></div>
   </div>
 </section>
+
+<div class="sk-layer" id="sklayer" hidden>
+  <div class="sk-veil" data-close></div>
+  <div class="sk-rail" role="tablist" aria-label="Skills"></div>
+  <div class="sk-panel" role="dialog" aria-modal="true" aria-labelledby="sk-title" tabindex="-1">
+    <div class="sk-sheen" aria-hidden="true"></div>
+    <button class="sk-close" type="button" data-close aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg></button>
+    <div class="sk-body">
+      <div class="sk-copy">
+        <h2 id="sk-title"></h2>
+        <p class="sk-desc"></p>
+        <div class="sk-out"><h3>What comes out</h3><p class="sk-what"></p><p class="sk-shown"></p></div>
+        <div class="sk-conn"><h3>Connectors needed</h3><div class="pills"></div></div>
+        <div class="sk-acts"><a class="btn fill sk-dl" href="#" download>Download skill <span>↓</span></a><button class="btn line sk-next" type="button"></button></div>
+      </div>
+      <div class="sk-stage"><img alt="" decoding="async"></div>
+    </div>
+  </div>
+</div>
 
 <section class="contact wrap" id="contact">
   <h2>Let's talk<span class="g">.</span></h2>
@@ -336,6 +382,130 @@ document.querySelectorAll('.reel .v').forEach(box=>{
   ['play','pause','ended'].forEach(ev=>v.addEventListener(ev,sync));
   if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(en=>{ if(!en.isIntersecting&&!v.paused) v.pause(); }),{threshold:0}).observe(box);
 });
+// Skills & Automations: glass overview cards that open into a glass pop-up (ported from the FEED Studios v2 glass overview, Nov 9).
+(()=>{
+const IC={Notion:'notion',Figma:'figma','Google Drive':'drive',Slack:'slack',Higgsfield:'higgsfield',Instagram:'instagram','Twelve Labs':'twelvelabs',TikTok:'tiktok',Shade:'shade'};
+const SKILLS=[
+ {name:'FEED Content Engine',slug:'feed-studios-content-engine',shown:'ReLoom',
+  line:'A reference post goes in and a finished edit comes out, with the brief, the script and a living post library built for every client along the way.',
+  desc:'The operating system behind every client. I blueprint the niche, source the references, analyze what travels, brief the editor and publish to a creator portal, all in one pipeline from idea to posted video.',
+  what:'Weekly briefs, scripts and a living post library for every client',
+  here:'One ReLoom video, from the reference post to the angle and beats to the finished cut.',
+  conn:['Notion','Figma','Google Drive','Slack']},
+ {name:'Carousel Builder',slug:'carousel-builder',shown:'Good Measure',
+  line:'One topic becomes a six-slide carousel in the brand’s voice, built in Figma from the brand’s own templates.',
+  desc:'Give it a topic and it writes a six-slide carousel in the brand’s voice, builds the slides in Figma from the brand’s own template components, checks every slide with a screenshot and hands back a caption.',
+  what:'Designed 1080×1350 carousels, ready to export and post',
+  here:'Good Measure’s “Your first AI automation should be boring,” six slides and a caption from one topic.',
+  conn:['Figma','Higgsfield','Instagram']},
+ {name:'Viral Video Analyzer',slug:'viral-video-analyzer',shown:'@chrismansour__',
+  line:'Twelve Labs watches the video, then the skill logs the hook, the structure and the reason it worked.',
+  desc:'Watches short-form videos through Twelve Labs, breaks down the hook, the structure, the pacing and why it worked, then logs a record to the Viral Video Database so the whole team can search proven formats.',
+  what:'A searchable database of what works and why',
+  here:'A record from the Viral Video Database, written by the skill after Twelve Labs watched the Reel.',
+  conn:['Twelve Labs','Notion','Instagram']},
+ {name:'Content Blueprint',slug:'content-blueprint',shown:'Good Measure',
+  line:'The strategic foundation for a client: positioning, topics, a weekly rhythm and the formats that win.',
+  desc:'Researches a niche across TikTok, Reels and Shorts and delivers the strategic foundation: the formats that dominate, the hook patterns, who is winning and why, and the angles a client should take.',
+  what:'A strategy document the whole team builds from',
+  here:'Good Measure’s real blueprint from its October rebrand, published as a page the whole team works from.',
+  conn:['TikTok','Instagram','YouTube','Notion']},
+ {name:'Content Sourcer',slug:'content-sourcer',shown:'Good Measure',
+  line:'Thirty to fifty proven videos from the niche, each with a link and a reason it is worth remaking.',
+  desc:'Pulls 30 to 50 high-performing videos from a client’s niche with direct links, organized by format and annotated with why each one is worth recreating, so editors can rebuild the structure with the client’s own footage.',
+  what:'A recreatable swipe file with every link',
+  here:'Good Measure’s Sourced Video Inspo library, with a beat-for-beat remix script inside every card.',
+  conn:['TikTok','Instagram','YouTube','Notion']},
+ {name:'Shade Footage Finder',slug:'shade-footage-finder',shown:'ReLoom',
+  line:'A script goes in and a pull sheet comes out, with the clip, the in and out points and why it fits for every beat.',
+  desc:'Hand it a script and it searches the client’s footage library in Shade by meaning, reads the transcripts for exact timestamps and returns a pull sheet with the clip, the in and out points and why it fits, beat by beat.',
+  what:'A pull sheet the editor can open in Shade and cut from',
+  here:'The real pull sheet behind ReLoom’s “Your dad is going to cry,” next to the finished edit.',
+  conn:['Shade','Notion','Google Drive']}
+];
+const num=i=>String(i+1).padStart(2,'0');
+const title=(s,i)=>`<span class="n">${num(i)}<i>·</i></span>${s.name}`;
+const plusSvg='<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1.5v11M1.5 7h11"/></svg>';
+
+const grid=document.getElementById('skgrid'); if(!grid) return;
+const cards=SKILLS.map((s,i)=>{
+  const a=document.createElement('article'); a.className='skc'; a.tabIndex=0; a.setAttribute('role','button'); a.setAttribute('aria-haspopup','dialog');
+  a.setAttribute('aria-label',`${s.name}: see the output`);
+  a.innerHTML=`<div class="vis"><img src="/assets/sk-card-${i+1}.webp" alt="" width="776" height="412" loading="lazy" decoding="async"></div>
+    <div class="txt"><h3>${title(s,i)}</h3><p>${s.line}</p></div>
+    <div class="foot"><span><b>Shown:</b> ${s.shown}</span><button class="plus" type="button" tabindex="-1" aria-hidden="true">${plusSvg}</button></div>`;
+  a.addEventListener('click',()=>open(i,a));
+  a.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(i,a); } });
+  grid.appendChild(a); return a;
+});
+const hint=document.createElement('p'); hint.className='skhint'; hint.textContent='Open any skill to see what it made'; grid.after(hint);
+
+const layer=document.getElementById('sklayer'), panel=layer.querySelector('.sk-panel'), body=layer.querySelector('.sk-body'), rail=layer.querySelector('.sk-rail');
+const $=q=>layer.querySelector(q);
+const railBtns=SKILLS.map((s,i)=>{ const b=document.createElement('button'); b.type='button'; b.setAttribute('role','tab'); b.textContent=num(i); b.setAttribute('aria-label',s.name); b.addEventListener('click',()=>show(i,true)); rail.appendChild(b); return b; });
+let cur=-1, opener=null, busy=false;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const preload=i=>{ const im=new Image(); im.src=`/assets/sk-out-${i+1}.webp`; };
+
+function fill(i){
+  const s=SKILLS[i];
+  $('#sk-title').innerHTML=title(s,i);
+  $('.sk-desc').textContent=s.desc; $('.sk-what').textContent=s.what; $('.sk-shown').textContent=s.here;
+  $('.sk-conn .pills').innerHTML=s.conn.map(c=>IC[c]?`<span class="pill"><img src="/assets/c-${IC[c]}.png" alt="">${c}</span>`:`<span class="pill txt">${c}</span>`).join('');
+  const dl=$('.sk-dl'); dl.href=`/skills/${s.slug}.zip`; dl.setAttribute('aria-label',`Download the ${s.name} skill`);
+  $('.sk-next').innerHTML=`Next: ${SKILLS[(i+1)%SKILLS.length].name} <span>→</span>`;
+  const img=$('.sk-stage img'); img.src=`/assets/sk-out-${i+1}.webp`; img.alt=`What the ${s.name} skill made for ${s.shown}`;
+  railBtns.forEach((b,k)=>{ b.setAttribute('aria-selected',String(k===i)); b.tabIndex=k===i?0:-1; });
+  panel.scrollTop=0; preload((i+1)%SKILLS.length);
+}
+function show(i,animate){
+  if(i===cur) return; cur=(i+SKILLS.length)%SKILLS.length;
+  if(!animate||reduce){ fill(cur); return; }
+  body.classList.add('swap'); setTimeout(()=>{ fill(cur); body.classList.remove('swap'); },200);
+}
+// The panel grows out of the card it was opened from: a clip-path that starts on the card's rectangle and opens to the full panel, so nothing stretches.
+function clipFrom(card){
+  const p=panel.getBoundingClientRect(), c=card.getBoundingClientRect(), z=v=>Math.max(0,v).toFixed(1)+'px';
+  return `inset(${z(c.top-p.top)} ${z(p.right-c.right)} ${z(p.bottom-c.bottom)} ${z(c.left-p.left)} round 24px)`;
+}
+function open(i,card){
+  if(busy||!layer.hidden) return; busy=true; opener=card; cur=-1; show(i,false);
+  layer.hidden=false; document.documentElement.classList.add('sk-on');
+  requestAnimationFrame(()=>{
+    layer.classList.add('is-in');
+    const from=clipFrom(card), to='inset(0px 0px 0px 0px round 32px)';
+    if(reduce){ panel.style.opacity=1; busy=false; panel.focus({preventScroll:true}); return; }
+    const an=panel.animate([{clipPath:from,opacity:.4},{clipPath:to,opacity:1}],{duration:560,easing:'cubic-bezier(.22,1,.36,1)',fill:'forwards'});
+    body.animate([{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'none'}],{duration:420,delay:160,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+    an.onfinish=()=>{ panel.style.opacity=1; panel.style.clipPath='none'; an.cancel(); busy=false; panel.focus({preventScroll:true}); };
+  });
+}
+function close(){
+  if(busy||layer.hidden) return; busy=true;
+  const card=cards[cur]||opener, done=()=>{ layer.hidden=true; layer.classList.remove('is-in'); panel.style.opacity=0; panel.style.clipPath=''; document.documentElement.classList.remove('sk-on'); busy=false; (card||opener).focus({preventScroll:true}); };
+  layer.classList.remove('is-in');
+  if(reduce){ done(); return; }
+  const an=panel.animate([{clipPath:'inset(0px 0px 0px 0px round 32px)',opacity:1},{clipPath:clipFrom(card),opacity:0}],{duration:420,easing:'cubic-bezier(.6,0,.2,1)',fill:'forwards'});
+  an.onfinish=()=>{ an.cancel(); done(); };
+}
+layer.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',close));
+$('.sk-next').addEventListener('click',()=>show(cur+1,true));
+document.addEventListener('keydown',e=>{
+  if(layer.hidden) return;
+  if(e.key==='Escape'){ e.preventDefault(); close(); }
+  else if(e.key==='ArrowRight'&&!e.target.closest('input,textarea')){ show(cur+1,true); }
+  else if(e.key==='ArrowLeft'&&!e.target.closest('input,textarea')){ show(cur-1,true); }
+  else if(e.key==='Tab'){ // keep focus inside the pop-up
+    const f=[...layer.querySelectorAll('button:not([tabindex="-1"]),a[href],[tabindex="0"]')].filter(el=>el.offsetParent!==null);
+    if(!f.length) return; const first=f[0], last=f[f.length-1];
+    if(e.shiftKey&&(document.activeElement===first||document.activeElement===panel)){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey&&document.activeElement===last){ e.preventDefault(); first.focus(); }
+  }
+});
+// Swipe between skills inside the pop-up on touch screens
+let tx=0,ty=0; panel.addEventListener('touchstart',e=>{ const t=e.touches[0]; tx=t.clientX; ty=t.clientY; },{passive:true});
+panel.addEventListener('touchend',e=>{ const t=e.changedTouches[0], dx=t.clientX-tx, dy=t.clientY-ty; if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5) show(cur+(dx<0?1:-1),true); },{passive:true});
+})();
 // Hamburger menu (phone / tablet)
 (()=>{const nav=document.querySelector('.nav'),b=nav&&nav.querySelector('.burger');if(!b)return;
 const set=o=>{nav.classList.toggle('is-menu',o);b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Close menu':'Open menu');};
