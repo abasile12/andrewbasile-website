@@ -1,0 +1,53 @@
+/* Contact pop-up (assets/contact.js): frosted glass over a blurred page, matching the Skills pop-up */
+html.ct-on{overflow:hidden}
+.ct-layer{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:clamp(16px,4vh,48px) 16px}
+.ct-layer[hidden]{display:none}
+.ct-veil{position:absolute;inset:0;background:rgba(255,255,255,.55);backdrop-filter:blur(14px) saturate(1.1);-webkit-backdrop-filter:blur(14px) saturate(1.1);opacity:0;transition:opacity .32s ease}
+.ct-veil::after{content:"";position:absolute;left:50%;top:55%;width:min(900px,90vw);height:60vh;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(0,234,116,.22),rgba(0,234,116,0));pointer-events:none}
+.ct-layer.is-in .ct-veil{opacity:1}
+.ct-panel{position:relative;width:min(620px,100%);max-height:calc(100svh - 2*clamp(16px,4vh,48px));overflow-y:auto;-webkit-overflow-scrolling:touch;outline:none;border-radius:30px;
+  background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.72));backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 0 0 1px rgba(17,17,17,.08),0 40px 80px -30px rgba(0,0,0,.35);
+  opacity:0;transform:translateY(18px) scale(.97);transition:opacity .32s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+.ct-layer.is-in .ct-panel{opacity:1;transform:none}
+.ct-close{position:absolute;top:18px;right:18px;width:42px;height:42px;border-radius:50%;border:0;cursor:pointer;background:#fff;box-shadow:0 0 0 1px rgba(17,17,17,.08),0 6px 16px -8px rgba(0,0,0,.3);display:grid;place-items:center;z-index:1}
+.ct-close svg{width:14px;height:14px;stroke:#111;stroke-width:1.8;fill:none;stroke-linecap:round}
+.ct-body{padding:44px 40px 36px}
+.ct-body h2{margin:0;font-weight:600;font-size:clamp(36px,5vw,52px);line-height:1;letter-spacing:-.045em}
+.ct-lede{margin:12px 0 26px;color:#6e6e6a;font-size:17px;line-height:1.5}
+.ct-form{display:flex;flex-direction:column;gap:14px}
+.ct-form[hidden],.ct-done[hidden]{display:none}
+.ct-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ct-f{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#111}
+.ct-f i{font-style:normal;font-weight:500;color:#6e6e6a}
+.ct-f input,.ct-f textarea{width:100%;box-sizing:border-box;border:1px solid rgba(17,17,17,.16);background:rgba(255,255,255,.9);border-radius:14px;padding:13px 15px;font:inherit;font-size:16px;font-weight:400;color:#111;outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical}
+.ct-f textarea{min-height:110px;line-height:1.5}
+.ct-f input:focus,.ct-f textarea:focus{border-color:#111;box-shadow:0 0 0 3px rgba(0,234,116,.35)}
+.ct-f [aria-invalid="true"]{border-color:#d4442e}
+.ct-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.ct-acts{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:6px}
+.ct-send{border:0;cursor:pointer;font:inherit;font-weight:600;font-size:15px}
+.ct-send[disabled]{opacity:.6;cursor:default}
+.ct-msg{margin:0;font-size:14px;line-height:1.45;color:#6e6e6a;flex:1 1 220px}
+.ct-msg:empty{display:none}
+.ct-msg.err{color:#b8341f}
+.ct-msg a{color:#111;text-decoration:underline}
+.ct-done{padding:6px 0 4px}
+.ct-done p{margin:0;font-size:16px;color:#6e6e6a;line-height:1.5}
+.ct-done .ct-done-h{font-size:22px;font-weight:600;color:#111;letter-spacing:-.015em;margin-bottom:4px}
+.ct-done b{color:#111;font-weight:600}
+.ct-cal{margin-top:28px;padding-top:22px;border-top:1px solid rgba(17,17,17,.1);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.ct-cal p{margin:0}
+.ct-cal-h{font-weight:600;font-size:16px;color:#111}
+.ct-cal-p{font-size:14px;color:#6e6e6a;margin-top:2px}
+.ct-cal-btn{background:rgba(255,255,255,.7)}
+.ct-cal-btn.is-soon{border-style:dashed;color:#6e6e6a;border-color:rgba(17,17,17,.3);cursor:default;transform:none}
+@media (max-width:640px){
+  .ct-layer{place-items:end center;padding:12px 8px 0}
+  .ct-panel{border-radius:26px 26px 0 0;max-height:calc(100svh - 12px)}
+  .ct-body{padding:36px 22px 28px}
+  .ct-row{grid-template-columns:1fr}
+  .ct-send{flex:1 1 100%;justify-content:center}
+  .ct-cal-btn{flex:1 1 100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){.ct-veil,.ct-panel{transition:none}}

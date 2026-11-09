@@ -147,7 +147,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .contact p{margin:0;color:var(--muted);max-width:520px}
 .email{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;padding-top:12px}
 .email code{font-family:var(--font);background:var(--band);border:1px solid var(--rule);border-radius:12px;padding:12px 18px;font-weight:500;font-size:clamp(16px,2.2vw,22px);letter-spacing:-.01em;user-select:all}
-.email button{border:0;cursor:pointer;font:inherit}
+.email button{border:0;cursor:pointer;font:inherit;font-weight:600;font-size:15px}
 .footer{background:var(--ink);color:#b9b9b5;font-size:14px}
 .footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:36px;flex-wrap:wrap}
 .footer nav{display:flex;gap:22px;flex-wrap:wrap}
@@ -156,6 +156,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 <style>
 /* Desktop width: the layout is the 1440px Figma canvas (1180px content, gutters that stop growing at 130px) and stays that size on wider screens, centred with whitespace either side, so every section reads as one contained block. */
 </style>
+<link rel="stylesheet" href="/assets/contact.css">
 </head>
 <body>
 <header class="nav">
@@ -165,7 +166,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
       <a href="/#content">My work</a><a href="/skills/">Skills &amp; Automations</a><a href="/worktogether/">Work Together</a><a class="active" href="/sidequests/">Side Quests</a>
     </nav>
     <div class="navr">
-      <a class="btn line" href="#contact">Get in touch <span class="g">↗</span></a>
+      <a class="btn line" href="#contact" data-contact>Get in touch <span class="g">↗</span></a>
       <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -173,7 +174,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
     <nav>
       <a href="/#content">My work</a><a href="/skills/">Skills &amp; Automations</a><a href="/worktogether/">Work Together</a><a class="active" href="/sidequests/">Side Quests</a>
     </nav>
-    <a class="btn fill" href="#contact">Get in touch <span class="g">↗</span></a>
+    <a class="btn fill" href="#contact" data-contact>Get in touch <span class="g">↗</span></a>
   </div></div>
 </header>
 
@@ -258,7 +259,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 <section class="contact wrap" id="contact">
   <h2>Let's talk<span class="g">.</span></h2>
   <p>I build these for clients and for teams I join. If your content operation still runs on a group chat, let’s fix that.</p>
-  <div class="email"><code id="email">andrew.basile12@gmail.com</code><button class="btn fill" id="copy" type="button">Copy email</button></div>
+  <div class="email"><code id="email">andrew.basile12@gmail.com</code><button class="btn fill" type="button" data-contact>Get in touch <span>↗</span></button></div>
 </section>
 
 <footer class="footer">
@@ -282,12 +283,13 @@ matchMedia('(max-width:1000px)').addEventListener('change',m=>{if(!m.matches)set
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||e.metaKey||e.ctrlKey)return;const id=a.getAttribute('href').slice(1);e.preventDefault();if(!id||id==='top'){window.scrollTo({top:0,behavior:'smooth'});return;}const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});});
 if(location.hash){const el=document.getElementById(location.hash.slice(1));history.replaceState(null,'',location.pathname+location.search);if(el)requestAnimationFrame(()=>el.scrollIntoView());}
 const btn=document.getElementById('copy');
-btn.addEventListener('click',async()=>{
+if(btn) btn.addEventListener('click',async()=>{
   const v=document.getElementById('email').textContent;
   try{ await navigator.clipboard.writeText(v); btn.textContent='Copied'; }
   catch(e){ const r=document.createRange(); r.selectNodeContents(document.getElementById('email')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Select and copy'; }
   setTimeout(()=>btn.textContent='Copy email',1800);
 });
 </script>
+<script src="/assets/contact.js" defer></script>
 </body>
 </html>
