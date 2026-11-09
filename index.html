@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Andrew Basile</title>
 <link rel="canonical" href="https://andrewbasile.work/">
-<meta name="description" content="Andrew Basile, content strategist and product marketer. Short-form strategy, launch campaigns, and the AI skills and automations behind them.">
+<meta name="description" content="Andrew Basile, content strategist and product marketer. Short-form strategy, launch campaigns, and marketing skills and automations.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
@@ -26,7 +26,7 @@
 <meta name="twitter:title" content="Andrew Basile | Content & Product Marketer">
 <meta name="twitter:description" content="Ideas that resonate, content built for the algorithm, and growth you can count on. 40M+ organic impressions for creators and brands, product launches at Autograph and Quix, and the AI skills behind the work.">
 <meta name="twitter:image" content="http://andrewbasile.work/assets/og-image.jpg?v=3">
-<meta name="description" content="Andrew Basile, content strategist and product marketer. Short-form strategy, launch campaigns, and the AI skills and automations behind them.">
+<meta name="description" content="Andrew Basile, content strategist and product marketer. Short-form strategy, launch campaigns, and marketing skills and automations.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" id="figtree" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -67,6 +67,16 @@ img{max-width:100%;display:block}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;line-height:1;white-space:nowrap;transition:transform .2s ease,background .2s ease}
 .btn:hover{transform:translateY(-1px)}
 .btn.fill{background:var(--green);color:var(--ink)}
+/* Jelly button (hero "See work"): gummy green pill that wobbles on hover and squishes on press */
+.btn.jelly{position:relative;padding:16px 26px;font-size:16px;gap:10px;box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -4px 0 rgba(0,0,0,.12),0 10px 24px -10px rgba(0,180,90,.65);transform-origin:50% 60%;will-change:transform}
+.btn.jelly::after{content:"";position:absolute;left:14%;right:14%;top:5px;height:36%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,0));pointer-events:none}
+.btn.jelly .ja{display:inline-block;transition:transform .25s ease}
+.btn.jelly:hover{transform:none;animation:jelly .7s cubic-bezier(.3,.7,.4,1)}
+.btn.jelly:hover .ja{transform:translateY(3px)}
+.btn.jelly:active{animation:none;transform:scale(1.08,.88);transition:transform .08s ease}
+@keyframes jelly{0%{transform:scale(1,1)}25%{transform:scale(1.12,.86)}40%{transform:scale(.9,1.1)}55%{transform:scale(1.05,.95)}70%{transform:scale(.98,1.02)}85%{transform:scale(1.01,.99)}100%{transform:scale(1,1)}}
+@media (prefers-reduced-motion:reduce){.btn.jelly:hover{animation:none}.btn.jelly:active{transform:none}}
+@media (max-width:640px){.hmt{display:none}}
 .btn.line{border:1px solid var(--ink)}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
 
@@ -532,7 +542,7 @@ html.pl-running .portrait img{visibility:hidden}
         <p class="role">Content <span class="g">&amp;</span> Product Marketer</p>
         <p class="lede">lorem ipsum dolor</p>
       </div>
-      <div><a class="btn fill" href="#content">See the work &nbsp;↓</a></div>
+      <div><a class="btn fill jelly" href="#content"><span class="jl">See work</span><span class="ja" aria-hidden="true">↓</span></a></div>
     </div>
   </div>
 </section>
@@ -542,7 +552,7 @@ html.pl-running .portrait img{visibility:hidden}
     <h2>Ideas that resonate<br><span class="g">+</span><br>Content built for the algorithm<br><span class="g">=</span><br>Growth you can count on</h2>
     <div class="about-body">
       <details class="disc"><summary>Here’s my take</summary><div class="inner">
-      <p>Here’s my take. We live in an algorithmic era, which means anyone can reach millions of people tomorrow with the right piece of content. The platforms no longer care who you are. They care whether people watch.</p>
+      <p><span class="hmt">Here’s my take. </span>We live in an algorithmic era, which means anyone can reach millions of people tomorrow with the right piece of content. The platforms no longer care who you are. They care whether people watch.</p>
       <p>My work sits at the intersection of two things that have to happen for that to work. The first is the idea. You need ideas with real context behind them, ideas that come from knowing your brand, your audience, and what is actually happening in your category right now. AI is not great at that yet...trust me, I would’ve built a skill out of it already if it was. Then, those ideas need to be positioned so they land with the exact person you want as a customer, in their language, around what they already care about.</p>
       <p>The second is the format. A great idea in the wrong package dies in the first two seconds. I’ve spent my career learning which formats travel on the algorithm and which ones stall, across thousands of edits. That is the part most brands skip, and it is the part that decides whether an idea reaches ten people or ten million.</p>
       <p>Put those together and you get growth you can count on.</p>
@@ -557,7 +567,7 @@ html.pl-running .portrait img{visibility:hidden}
     <div class="pinwrap">
     <div class="chapter-head" id="content-head">
       <h2>Content<span class="g">.</span></h2>
-      <p>Short-form strategy, series development, clipping, and social video production for creators, athletes, and brands. I contributed strategy, scripting, and/or editing to every video shown here.</p>
+      <p>Short-form strategy, series development, clipping, and social video production for creators, athletes, and brands. I contributed strategy, scripting, production, and/or editing to every video shown here.</p>
     </div>
     <div class="cases" id="cases"></div>
     </div>
@@ -579,11 +589,11 @@ html.pl-running .portrait img{visibility:hidden}
   <div class="wrap">
     <div class="chapter-head">
       <h2>Product Marketing<span class="g">.</span></h2>
-      <p>Product positioning, launch campaigns, paid social, and the conversion mechanics underneath venture-backed startups, consumer goods, boostrapped builds, and plenty of companies in between.</p>
+      <p>I’ve led product positioning, GTM campaigns, brand marketing, paid social, and the conversion mechanics underneath venture-backed startups, consumer goods, bootstrapped builds, and plenty of companies in between.</p>
     </div>
     <div class="pm-grid">
       <article class="card copy">
-        <div class="titlerow"><div class="logo"><img src="assets/logo-autograph.png" alt="" loading="lazy" decoding="async"></div><div><h3>Autograph</h3><p class="sub"><b>Product Marketing Manager</b><span>Feb 2024 – Jan 2025 · Tom Brady’s sports app</span></p></div></div>
+        <div class="titlerow"><div class="logo"><img src="assets/logo-autograph.png" alt="" loading="lazy" decoding="async"></div><div><h3>Autograph</h3><p class="sub"><b>Product Marketing Manager</b><span>Feb 2024 – Jan 2025</span></p></div></div>
         <details class="disc desk"><summary>Read more</summary><div class="inner">
         <p class="services">Go-to-Market, Growth Campaigns, Product Marketing, Organic Social</p>
         <p>Product marketing at Autograph, Tom Brady’s a16z-backed company. Spearheaded go-to-market strategy for three league launches (NBA, MLB, NFL) and two major feature releases, and ran the $1.2M annual marketing budget and a $50K paid social agency account.</p>
@@ -598,18 +608,17 @@ html.pl-running .portrait img{visibility:hidden}
         </div></details>
       </article>
       <article class="card copy">
-        <div class="titlerow"><div class="logo"><img src="assets/logo-rdb.png" alt="" loading="lazy" decoding="async"></div><div><h3>Red Dining Book</h3><p class="sub"><b>Marketing Partner</b><span>LA, NYC and SF editions · Restaurant guidebook</span></p></div></div>
+        <div class="titlerow"><div class="logo"><img src="assets/logo-rdb.png" alt="" loading="lazy" decoding="async"></div><div><h3>Red Dining Book</h3><p class="sub"><b>Partnerships Lead &amp; Growth Marketing</b><span>2024 – Present · Restaurant guidebook</span></p></div></div>
         <details class="disc desk"><summary>Read more</summary><div class="inner">
         <p class="services">Marketing Strategy, Paid Social Content, Market Launch Campaign</p>
         <p>Led the expansion of the Red Dining Book, a boutique restaurant guidebook, from Los Angeles to New York City, working as the marketing partner across content and distribution for the NYC edition. We are about to launch the second NYC edition and the inaugural San Francisco edition in November 2026.</p>
         <p>That covered the paid social campaigns and the creative behind them, UGC content partnerships with NYC creators, and the digital content built to drive awareness and sales, including the making-of series shot inside the featured restaurants.</p>
         <p>I also built the restaurant side of the launch: sourcing and onboarding the restaurants featured in the edition, running an Instagram-first outreach flow with automated follow-up, and managing the wholesale and retail conversations that put the book in stores.</p>
         <ul class="impact">
-          <li>$150,000+ revenue generated in the first year of the market launch</li>
-          <li>4x ROAS on paid social campaigns</li>
-          <li>Managed the NYC regional UGC partnership strategy</li>
-          <li>Built the restaurant outreach, onboarding, and follow-up system behind the NYC edition</li>
-          <li>Produced the paid social creative and the NYC making-of content series</li>
+          <li>$200,000+ revenue generated in the first year of market launch</li>
+          <li>Achieved 4x ROAS on paid social campaigns</li>
+          <li>Managed all NYC regional expansion and UGC partnership strategy</li>
+          <li>Produced paid social creative and the NYC making-of content series</li>
         </ul>
         </div></details>
       </article>
@@ -629,7 +638,7 @@ html.pl-running .portrait img{visibility:hidden}
         </div></details>
       </article>
       <article class="card copy">
-        <div class="titlerow"><div class="logo"><img src="assets/logo-quix.png" alt="" loading="lazy" decoding="async"></div><div><h3>Quix</h3><p class="sub"><b>Head of Marketing</b><span>Jun 2021 – Mar 2023 · NFT marketplace on Optimism</span></p></div></div>
+        <div class="titlerow"><div class="logo"><img src="assets/logo-quix.png" alt="" loading="lazy" decoding="async"></div><div><h3>Quix</h3><p class="sub"><b>Head of Marketing</b><span>Jun 2021 – Mar 2023 · NFT marketplace</span></p></div></div>
         <details class="disc desk"><summary>Read more</summary><div class="inner">
         <p>First non-technical hire at Quix, where I led marketing, business development, and community for a three-person team that built the third largest NFT marketplace in the world.</p>
         <p>I onboarded developers, artists, and collectors to a brand new Layer 2 ecosystem, built the brand and community strategy from the product’s value proposition, and ran the campaigns and partnerships that drove trade volume.</p>
@@ -669,15 +678,15 @@ const CASES=[
   handle:'@lyndenlane',url:'https://www.instagram.com/lyndenlane/',
   clips:[{title:'Stay in your (Lynden) Lane',url:'https://www.instagram.com/lyndenlane/reel/C38cz7MS9vq/',img:'assets/lynden-1.jpg',video:'assets/lynden-1.mp4',stats:[['139K','views'],['2.6K','likes'],['145','comments']]},
          {title:'5 Senses',url:'https://www.instagram.com/lyndenlane/reel/DS8LaFOAXdO/',img:'assets/lynden-2.jpg',video:'assets/lynden-2.mp4',stats:[['108K','views'],['437','likes'],['35','comments']]}]},
- {id:'chad-jt',name:'Chad & JT',services:'Short-Form Strategy, Organic Franchise Development, Editing, Clipping, Social Video Production',
+ {id:'chad-jt',name:'Chad & JT',services:'Short-Form Strategy, Editing, Clipping',
   paras:['Supported comedians Chad Kroeger and JT Parr with the launch and growth of their YouTube series, Stoked Eye for the Sad Guy, through short-form content production and strategy.','Led clipping and short-form marketing for the series while helping develop new organic content franchises, including JT’s “Brolitical Commentator” format.'],
   impact:['50+ short-form clips produced','20M+ organic short-form views','100K+ YouTube series views'],collab:'Collaborations with Bobby Lee, Robby Hoffman, Anders Holm, and Zedd.',
   handle:'@jtparr14',url:'https://www.instagram.com/jtparr14/',
   clips:[{title:'Brolitical Commentator',url:'https://www.instagram.com/jtparr14/reel/DYsN2CBPabQ/',img:'assets/chadjt-1.jpg',video:'assets/chadjt-1.mp4',stats:[['13.3M','views'],['1.1M','likes'],['23.9K','comments'],['28.2K','shares']]},
          {title:'Nolan @ City Council',img:'assets/chadjt-2.jpg',video:'assets/chadjt-2.mp4',handle:'@chadgoesdeep',url:'https://www.instagram.com/chadgoesdeep/reel/DTqUzswEYJ-/',stats:[['581K','views'],['13.4K','likes'],['334','comments'],['207','shares']]}]},
  {id:'charlisse',name:'Charlisse Leger-Walker',services:'Short-Form Strategy, Organic Franchise Development, Editing, Social Video Production',
-  paras:['Led short-form strategy and production for Charlisse Leger-Walker, UCLA WBB point guard and first-round WNBA draft pick, supporting the growth of her personal YouTube channel and social presence.','Developed organic content series, collaborated with official UCLA Athletics accounts, and helped generate content that was featured by ESPN and March Madness.'],
-  impact:['1M+ organic social views','2.5K+ YouTube subscribers','Series coverage from Fox, ESPN, and March Madness'],collab:'Collaborations with and coverage from UCLA Athletics, ESPN, and March Madness.',
+  paras:['Led short-form editing and clipping for Charlisse Leger-Walker, UCLA WBB point guard and first-round WNBA draft pick, supporting the growth of her personal YouTube channel and social presence.','Developed organic content series, collaborated with official UCLA Athletics accounts, and helped generate content that was featured by ESPN and NCAA March Madness.'],
+  impact:['1M+ organic social views','2.5K+ YouTube subscribers','Series coverage from Fox Sports, ESPN, and March Madness'],collab:'Collaborations with and coverage from UCLA Athletics, ESPN, and March Madness.',
   handle:'@charlisse.legerwalker',url:'https://www.instagram.com/charlisse.legerwalker/',
   clips:[{title:'Letting frat guys pick my celebration',url:'https://www.instagram.com/charlisse.legerwalker/reel/DURbhMdEs7P/',img:'assets/charlisse-1.jpg',video:'assets/charlisse-1.mp4',stats:[['538K','views'],['20.8K','likes'],['75','comments'],['107','shares']]},
          {title:'Undercover Smack Talk',url:'https://www.instagram.com/charlisse.legerwalker/reel/DToLS9MEpxv/',img:'assets/charlisse-2.jpg',video:'assets/charlisse-2.mp4',stats:[['81K','views'],['4,206','likes'],['96','comments'],['65','shares']]}]}
