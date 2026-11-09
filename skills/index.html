@@ -170,9 +170,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .skc h3 .n{color:var(--muted);font-weight:500}
 .skc h3 .n i{font-style:normal;color:var(--green);margin:0 .18em}
 .skc p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
-.skc .foot{margin:auto 12px 0;padding:18px 0 4px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--rule)}
-.skc .foot span{font-size:14px;font-weight:600}
-.skc .foot span b{font-weight:500;color:var(--muted)}
+.skc .foot{margin:auto 12px 0;padding:16px 0 4px;display:flex;justify-content:flex-end;align-items:center;gap:12px;border-top:1px solid var(--rule)}
 .plus{flex:none;width:34px;height:34px;border-radius:50%;border:0;padding:0;background:var(--green);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:transform .4s cubic-bezier(.22,1,.36,1)}
 .plus svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;stroke-linecap:round;fill:none}
 .skc:hover .plus{transform:rotate(90deg) scale(1.06)}
@@ -204,7 +202,7 @@ html.sk-on{overflow:hidden}
 .sk-copy h2 .n i{font-style:normal;color:var(--green);margin:0 .16em}
 .sk-desc{margin:20px 0 0;font-size:18px;line-height:1.55;color:#3a3a37;max-width:34em}
 .sk-out{margin-top:28px}
-.sk-out h3,.sk-conn h3{margin:0 0 8px;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--muted)}
+.sk-out h3,.sk-conn h3,.sk-feats h3{margin:0 0 8px;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--muted)}
 .sk-what{margin:0;font-size:19px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
 .sk-shown{margin:6px 0 0;font-size:15px;color:var(--muted);line-height:1.5}
 .sk-conn{margin-top:24px}
@@ -239,6 +237,45 @@ html.sk-on{overflow:hidden}
   .sk-desc{font-size:16px}
 }
 @media (max-width:640px){.sk-close{top:22px;right:20px}.sk-rail button{width:36px;height:36px}.sk-acts .btn{flex:1 1 auto;justify-content:center}}
+
+/* Hook Desk as card 01: spans the full row as a horizontal card, same card language */
+.skc .side{display:flex;flex-direction:column;flex:1;min-width:0}
+.skc .who{margin-top:6px;gap:12px}
+.skc .who img{width:44px;height:44px}
+.skc .who b{font-size:15px}.skc .who span{font-size:13.5px}
+.skc.wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:8px;align-items:stretch}
+.skc.wide .vis{aspect-ratio:auto;min-height:340px}
+.skc.wide .txt{padding:28px 24px 22px}
+.skc.wide h3{font-size:clamp(26px,2.4vw,34px)}
+.skc.wide p{font-size:16px}
+.skc.wide .foot{margin:auto 24px 0;padding-bottom:12px}
+.hdvis{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:14px;padding:26px 28px}
+.skc .vis .hdvis .hdmock{position:static;inset:auto;flex:1 1 0;min-width:0;width:100%;height:100%;max-width:none;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(0,0,0,.45))}
+.hdvis .hdph{flex:none;height:min(76%,280px);aspect-ratio:236/406;padding:5px;border-radius:22px;background:#050505;box-shadow:inset 0 0 0 1.5px #2a2a2a,0 24px 40px -18px rgba(0,0,0,.7)}
+.skc .vis .hdvis .hdph img{position:static;inset:auto;width:100%;height:100%;object-fit:cover;border-radius:17px}
+.hdvis .hdph:nth-child(3){margin-top:36px}
+.skc:hover .hdvis img{transform:none}
+@media (max-width:1000px){.skc.wide{grid-template-columns:1fr}.skc.wide .vis{min-height:0;aspect-ratio:16/9}.skc.wide .txt{padding:20px 12px 22px}.skc.wide .foot{margin:auto 12px 0}}
+@media (max-width:640px){.skc.wide .vis{aspect-ratio:4/3}.hdvis{padding:16px;gap:12px}.hdvis .hdph:nth-child(3){display:none}.skc.wide h3{font-size:24px}.skc.wide p{font-size:15px}}
+/* Hook Desk pop-up: Colby row, key features, and a stage with the desk and two playable reels */
+.sk-who{margin-top:22px}.sk-who[hidden],.sk-feats[hidden],.sk-dl[hidden]{display:none}
+.sk-feats{margin-top:24px}
+.sk-feats ul{margin:0}
+.sk-feats li{padding:11px 0;border-top:1px solid rgba(17,17,17,.1)}
+.sk-feats li b{font-size:15.5px;margin-bottom:2px}
+.sk-feats li span{font-size:14px;line-height:1.45}
+.sk-stage.custom{display:block;padding:24px;align-self:start}
+.hdstage{display:flex;flex-direction:column;gap:20px;align-items:center}
+.hdstage .hdmock{width:100%;max-width:400px;height:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.5))}
+.hdstage .reels{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.hdstage .reel .v{width:min(100%,150px);margin:0 auto;border-radius:30px;padding:7px;background:#050505}
+.hdstage .reel .v img,.hdstage .reel .v video{border-radius:24px}
+.hdstage .reel .v::before{top:14px;width:46px;height:13px;margin-left:-23px}
+.hdstage .reel .v::after{bottom:11px;width:60px;margin-left:-30px}
+.hdstage .reel .t{color:#f3f3f0;font-size:13px}
+.hdstage .reel .stats{color:#a6a6a1;font-size:12px;line-height:1.5}
+.hdstage .reel .stats b{font-size:13px}
+@media (max-width:1000px){.hdstage .reel .v{width:min(100%,190px)}}
 @media (prefers-reduced-motion:reduce){.skc,.skc .vis img,.plus,.sk-veil,.sk-rail,.sk-body{transition:none}}
 </style>
 <style>
@@ -275,63 +312,11 @@ html.sk-on{overflow:hidden}
   </div>
 </section>
 
-<section class="chapter">
-  <div class="wrap">
-    <div class="chapter-head">
-      <div class="title"><h2>The Hook Desk<span class="g">.</span></h2><p class="subline">A content engine for personal creators</p></div>
-      <p>Built for Colby Maier, founder of The Good Word and a Christian creator with 800K+ followers on Instagram. Colby wanted to make greenscreen, reaction, and stitch videos every day but had no time to source them. The Hook Desk does the sourcing, the positioning, and the asset prep, so he opens it and films.</p>
-    </div>
-    <article class="card case">
-      <div class="screens">
-        <img src="/assets/hd-mockups.png" alt="Colby's Hook Desk interface, a headline card and an article view">
-        <div class="caps"><span>The desk, with a stitch, a greenscreen story, and a topic</span><span>Article view, ready to film against</span></div>
-        <a class="open" href="#" title="Link to the live desk goes here">Open Colby’s Hook Desk <span class="g">↗</span></a>
-        <div class="made">
-          <h4>Made with the desk</h4>
-          <div class="reels">
-            <div class="reel">
-              <div class="v"><video src="/assets/hd-reel-1.mp4" poster="/assets/hd-reel-1.jpg" muted loop playsinline preload="none"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div>
-              <a class="t" href="https://www.instagram.com/colbyfmaier/reel/DdM_yKgyOvm/" target="_blank" rel="noopener"><span>Your feed is making you depressed. Harvard just proved it.</span><span class="g">↗</span></a>
-              <p>Greenscreen reaction to a Harvard study on social media and sleep, built from the desk’s headline card. Posted September 12.</p>
-              <hr>
-              <div class="stats"><b class="g">157K</b> views<br><span class="g">109</span> comments · <span class="g">554</span> shares</div>
-            </div>
-            <div class="reel">
-              <div class="v"><video src="/assets/hd-reel-2.mp4" poster="/assets/hd-reel-2.jpg" muted loop playsinline preload="none"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div>
-              <a class="t" href="https://www.instagram.com/colbyfmaier/reel/Ddkn2jUONrf/" target="_blank" rel="noopener"><span>He worked inside Anthropic. Now he’s warning us all.</span><span class="g">↗</span></a>
-              <p>Stitch of the CNN interview with a former Anthropic researcher, the same story shown in the desk mockups above. Colby added the clip to the desk himself. Posted September 21.</p>
-              <hr>
-              <div class="stats"><b class="g">87.4K</b> views<br><span class="g">166</span> comments · <span class="g">267</span> shares</div>
-            </div>
-          </div>
-          <p class="note">Likes are hidden on the account, so only comments and shares show publicly.</p>
-        </div>
-      </div>
-      <div class="copy">
-        <h3>Colby’s Hook Desk</h3>
-        <div class="who"><img src="/assets/colby.png" alt="Colby Maier"><div><b>Colby Maier</b><span>Founder of The Good Word · <span class="g">837K</span> followers on Instagram</span></div></div>
-        <p>Every morning the desk is stocked with the news stories and viral clips worth reacting to, each one already positioned in Colby’s voice with an Open, a Turn, and a Close, plus a caption that carries his ManyChat keyword. He picks a card, saves the assets, and films.</p>
-        <h4>Key Features</h4>
-        <ul class="features">
-          <li><b>Greenscreen asset generator</b><span>Every article becomes two ready-to-film images: a 1920×1080 headline card and a 1080×1920 article view with the masthead, headline, and real opening paragraphs, sized to read on a phone. Press and hold to save.</span></li>
-          <li><b>Positioning in his voice</b><span>Open, Turn, and Close for each story, written against a voice profile built from his own content, so the take sounds like Colby, not a template.</span></li>
-          <li><b>A sourced desk, not a blank page</b><span>28 news stories, 37 react and stitch clips, 34 hook formulas, and 20 evergreen topics, refreshed on a schedule, with a link to a reference video on every card.</span></li>
-          <li><b>Captions that convert</b><span>Every card ships with a caption and a comment keyword wired to a ManyChat flow, so the download link goes out automatically.</span></li>
-          <li><b>He can add to it</b><span>Colby drops in clips he finds himself and they land on the desk with a preview, the same way the sourced ones do.</span></li>
-        </ul>
-        <div class="conn"><h5>Connectors needed</h5><div class="pills">
-          <span class="pill"><img src="/assets/c-instagram.png" alt="">Instagram</span><span class="pill"><img src="/assets/c-manychat.png" alt="">ManyChat</span><span class="pill"><img src="/assets/c-notion.png" alt="">Notion</span>
-        </div></div>
-      </div>
-    </article>
-  </div>
-</section>
-
 <section class="chapter" id="skills">
   <div class="wrap">
     <div class="chapter-head">
       <h2>Skills <span class="g">&amp;</span> Automations</h2>
-      <p>Claude Code skills I wrote and run inside FEED Studios. Open one to see the real output it made for a client and what got built with it.</p>
+      <p>A creator portal and the Claude Code skills I run inside FEED Studios. Open one to see the real output it made for a client and what got built with it.</p>
     </div>
     <div class="skgrid" id="skgrid"></div>
   </div>
@@ -347,6 +332,8 @@ html.sk-on{overflow:hidden}
       <div class="sk-copy">
         <h2 id="sk-title"></h2>
         <p class="sk-desc"></p>
+        <div class="sk-who"></div>
+        <div class="sk-feats"><h3>Key features</h3><ul class="features"></ul></div>
         <div class="sk-out"><h3>What comes out</h3><p class="sk-what"></p><p class="sk-shown"></p></div>
         <div class="sk-conn"><h3>Connectors needed</h3><div class="pills"></div></div>
         <div class="sk-acts"><a class="btn fill sk-dl" href="#" download>Download skill <span>↓</span></a><button class="btn line sk-next" type="button"></button></div>
@@ -371,58 +358,64 @@ html.sk-on{overflow:hidden}
 
 <script>
 // Home links: this page is served beside the home page, so strip our own filename from the address to get back
-// Reels load nothing until they are near the viewport (preload none → metadata at 600px out).
-if('IntersectionObserver' in window){ const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ const v=en.target; if(v.preload==='none'){ v.preload='metadata'; try{v.load();}catch(e){} } io.unobserve(v); } }),{rootMargin:'600px 0px'}); document.querySelectorAll('video[preload="none"]').forEach(v=>io.observe(v)); }
-// Hook Desk reels: tap the screen or its button to play with sound / pause; one at a time; pause when scrolled away.
-document.querySelectorAll('.reel .v').forEach(box=>{
-  const v=box.querySelector('video'), btn=box.querySelector('.play'); if(!v||!btn) return;
-  const sync=()=>{ const playing=!v.paused; btn.classList.toggle('playing',playing); btn.setAttribute('aria-pressed',String(playing)); btn.setAttribute('aria-label',playing?'Pause clip':'Play clip'); };
-  const toggle=e=>{ e.stopPropagation(); if(v.paused){ document.querySelectorAll('.reel video').forEach(o=>{ if(o!==v&&!o.paused) o.pause(); }); v.muted=false; v.play().catch(()=>{ v.muted=true; v.play().catch(()=>{}); }); } else v.pause(); sync(); };
-  box.addEventListener('click',toggle);
-  ['play','pause','ended'].forEach(ev=>v.addEventListener(ev,sync));
-  if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(en=>{ if(!en.isIntersecting&&!v.paused) v.pause(); }),{threshold:0}).observe(box);
-});
 // Skills & Automations: glass overview cards that open into a glass pop-up (ported from the FEED Studios v2 glass overview, Nov 9).
 (()=>{
-const IC={Notion:'notion',Figma:'figma','Google Drive':'drive',Slack:'slack',Higgsfield:'higgsfield',Instagram:'instagram','Twelve Labs':'twelvelabs',TikTok:'tiktok',Shade:'shade'};
+const IC={ManyChat:'manychat',Notion:'notion',Figma:'figma','Google Drive':'drive',Slack:'slack',Higgsfield:'higgsfield',Instagram:'instagram','Twelve Labs':'twelvelabs',TikTok:'tiktok',Shade:'shade'};
 const SKILLS=[
- {name:'FEED Content Engine',slug:'feed-studios-content-engine',shown:'ReLoom',
+ {img:1,name:'FEED Content Engine',slug:'feed-studios-content-engine',shown:'ReLoom',
   line:'A reference post goes in and a finished edit comes out, with the brief, the script and a living post library built for every client along the way.',
   desc:'The operating system behind every client. I blueprint the niche, source the references, analyze what travels, brief the editor and publish to a creator portal, all in one pipeline from idea to posted video.',
   what:'Weekly briefs, scripts and a living post library for every client',
   here:'One ReLoom video, from the reference post to the angle and beats to the finished cut.',
   conn:['Notion','Figma','Google Drive','Slack']},
- {name:'Carousel Builder',slug:'carousel-builder',shown:'Good Measure',
+ {img:2,name:'Carousel Builder',slug:'carousel-builder',shown:'Good Measure',
   line:'One topic becomes a six-slide carousel in the brand’s voice, built in Figma from the brand’s own templates.',
   desc:'Give it a topic and it writes a six-slide carousel in the brand’s voice, builds the slides in Figma from the brand’s own template components, checks every slide with a screenshot and hands back a caption.',
   what:'Designed 1080×1350 carousels, ready to export and post',
   here:'Good Measure’s “Your first AI automation should be boring,” six slides and a caption from one topic.',
   conn:['Figma','Higgsfield','Instagram']},
- {name:'Viral Video Analyzer',slug:'viral-video-analyzer',shown:'@chrismansour__',
+ {img:3,name:'Viral Video Analyzer',slug:'viral-video-analyzer',shown:'@chrismansour__',
   line:'Twelve Labs watches the video, then the skill logs the hook, the structure and the reason it worked.',
   desc:'Watches short-form videos through Twelve Labs, breaks down the hook, the structure, the pacing and why it worked, then logs a record to the Viral Video Database so the whole team can search proven formats.',
   what:'A searchable database of what works and why',
   here:'A record from the Viral Video Database, written by the skill after Twelve Labs watched the Reel.',
   conn:['Twelve Labs','Notion','Instagram']},
- {name:'Content Blueprint',slug:'content-blueprint',shown:'Good Measure',
+ {img:4,name:'Content Blueprint',slug:'content-blueprint',shown:'Good Measure',
   line:'The strategic foundation for a client: positioning, topics, a weekly rhythm and the formats that win.',
   desc:'Researches a niche across TikTok, Reels and Shorts and delivers the strategic foundation: the formats that dominate, the hook patterns, who is winning and why, and the angles a client should take.',
   what:'A strategy document the whole team builds from',
   here:'Good Measure’s real blueprint from its October rebrand, published as a page the whole team works from.',
   conn:['TikTok','Instagram','YouTube','Notion']},
- {name:'Content Sourcer',slug:'content-sourcer',shown:'Good Measure',
+ {img:5,name:'Content Sourcer',slug:'content-sourcer',shown:'Good Measure',
   line:'Thirty to fifty proven videos from the niche, each with a link and a reason it is worth remaking.',
   desc:'Pulls 30 to 50 high-performing videos from a client’s niche with direct links, organized by format and annotated with why each one is worth recreating, so editors can rebuild the structure with the client’s own footage.',
   what:'A recreatable swipe file with every link',
   here:'Good Measure’s Sourced Video Inspo library, with a beat-for-beat remix script inside every card.',
   conn:['TikTok','Instagram','YouTube','Notion']},
- {name:'Shade Footage Finder',slug:'shade-footage-finder',shown:'ReLoom',
+ {img:6,name:'Shade Footage Finder',slug:'shade-footage-finder',shown:'ReLoom',
   line:'A script goes in and a pull sheet comes out, with the clip, the in and out points and why it fits for every beat.',
   desc:'Hand it a script and it searches the client’s footage library in Shade by meaning, reads the transcripts for exact timestamps and returns a pull sheet with the clip, the in and out points and why it fits, beat by beat.',
   what:'A pull sheet the editor can open in Shade and cut from',
   here:'The real pull sheet behind ReLoom’s “Your dad is going to cry,” next to the finished edit.',
   conn:['Shade','Notion','Google Drive']}
 ];
+const PLAY='<button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button>';
+const REEL=(n,url,t,views,com,sh)=>`<div class="reel"><div class="v"><video src="/assets/hd-reel-${n}.mp4" poster="/assets/hd-reel-${n}.jpg" muted loop playsinline preload="none"></video>${PLAY}</div><a class="t" href="${url}" target="_blank" rel="noopener"><span>${t}</span><span class="g">↗</span></a><div class="stats"><b class="g">${views}</b> views · <span class="g">${com}</span> comments · <span class="g">${sh}</span> shares</div></div>`;
+const HOOKDESK={name:'The Hook Desk',slug:null,shown:'Colby Maier',wide:true,
+  line:'A content engine for personal creators. Every morning the desk is stocked with the stories and clips worth reacting to, already positioned in Colby’s voice, so he opens it and films.',
+  cardVis:`<div class="hdvis"><img class="hdmock" src="/assets/hd-mockups.png" alt="" loading="lazy" decoding="async"><div class="hdph"><img src="/assets/hd-reel-1.jpg" alt="" loading="lazy" decoding="async"></div><div class="hdph"><img src="/assets/hd-reel-2.jpg" alt="" loading="lazy" decoding="async"></div></div>`,
+  cardWho:`<div class="who"><img src="/assets/colby.png" alt=""><div><b>Built for Colby Maier</b><span>Founder of The Good Word · <span class="g">837K</span> followers on Instagram</span></div></div>`,
+  desc:'Built for Colby Maier, founder of The Good Word and a Christian creator with 837K followers on Instagram. He wanted to post greenscreen, reaction and stitch videos every day with no time to source them, so the desk does the sourcing, the positioning in his voice and the asset prep, and he picks a card, saves the assets and films.',
+  what:'A stocked desk every morning, with ready-to-film assets and a caption on every card',
+  here:'Two of Colby’s posts made from the desk, playable on the right.',
+  features:[['Greenscreen asset generator','Every article becomes a 1920×1080 headline card and a 1080×1920 article view, sized to read on a phone.'],
+    ['Positioning in his voice','An Open, a Turn and a Close for each story, written against a voice profile built from his own content.'],
+    ['A desk that is already stocked','28 news stories, 37 react and stitch clips, 34 hook formulas and 20 evergreen topics, refreshed on a schedule.'],
+    ['Captions that convert','Every card ships with a caption and a comment keyword wired to a ManyChat flow.'],
+    ['He can add to it','Clips Colby finds himself land on the desk with a preview, the same as the sourced ones.']],
+  stage:`<div class="hdstage"><img class="hdmock" src="/assets/hd-mockups.png" alt="Colby’s Hook Desk with three story cards, a saved headline card and an article view"><div class="reels">${REEL(1,'https://www.instagram.com/colbyfmaier/reel/DdM_yKgyOvm/','Your feed is making you depressed. Harvard just proved it.','157K','109','554')}${REEL(2,'https://www.instagram.com/colbyfmaier/reel/Ddkn2jUONrf/','He worked inside Anthropic. Now he’s warning us all.','87.4K','166','267')}</div></div>`,
+  conn:['Instagram','ManyChat','Notion']};
+SKILLS.unshift(HOOKDESK);
 const num=i=>String(i+1).padStart(2,'0');
 const title=(s,i)=>`<span class="n">${num(i)}<i>·</i></span>${s.name}`;
 const plusSvg='<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1.5v11M1.5 7h11"/></svg>';
@@ -430,31 +423,41 @@ const plusSvg='<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1.5v11M1.
 const grid=document.getElementById('skgrid'); if(!grid) return;
 const cards=SKILLS.map((s,i)=>{
   const a=document.createElement('article'); a.className='skc'; a.tabIndex=0; a.setAttribute('role','button'); a.setAttribute('aria-haspopup','dialog');
-  a.setAttribute('aria-label',`${s.name}: see the output`);
-  a.innerHTML=`<div class="vis"><img src="/assets/sk-card-${i+1}.webp" alt="" width="776" height="412" loading="lazy" decoding="async"></div>
-    <div class="txt"><h3>${title(s,i)}</h3><p>${s.line}</p></div>
-    <div class="foot"><span><b>Shown:</b> ${s.shown}</span><button class="plus" type="button" tabindex="-1" aria-hidden="true">${plusSvg}</button></div>`;
+  a.setAttribute('aria-label',`${s.name}: see more`);
+  if(s.wide) a.classList.add('wide');
+  a.innerHTML=`<div class="vis">${s.cardVis||`<img src="/assets/sk-card-${s.img}.webp" alt="" width="776" height="412" loading="lazy" decoding="async">`}</div>
+    <div class="side"><div class="txt"><h3>${title(s,i)}</h3><p>${s.line}</p>${s.cardWho||''}</div>
+    <div class="foot"><button class="plus" type="button" tabindex="-1" aria-hidden="true">${plusSvg}</button></div></div>`;
   a.addEventListener('click',()=>open(i,a));
   a.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(i,a); } });
   grid.appendChild(a); return a;
 });
-const hint=document.createElement('p'); hint.className='skhint'; hint.textContent='Open any skill to see what it made'; grid.after(hint);
+const hint=document.createElement('p'); hint.className='skhint'; hint.textContent='Open any build to see what it made'; grid.after(hint);
 
 const layer=document.getElementById('sklayer'), panel=layer.querySelector('.sk-panel'), body=layer.querySelector('.sk-body'), rail=layer.querySelector('.sk-rail');
 const $=q=>layer.querySelector(q);
 const railBtns=SKILLS.map((s,i)=>{ const b=document.createElement('button'); b.type='button'; b.setAttribute('role','tab'); b.textContent=num(i); b.setAttribute('aria-label',s.name); b.addEventListener('click',()=>show(i,true)); rail.appendChild(b); return b; });
 let cur=-1, opener=null, busy=false;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const preload=i=>{ const im=new Image(); im.src=`/assets/sk-out-${i+1}.webp`; };
+const preload=i=>{ if(SKILLS[i].img){ const im=new Image(); im.src=`/assets/sk-out-${SKILLS[i].img}.webp`; } };
+const pauseAll=()=>layer.querySelectorAll('video').forEach(v=>{ if(!v.paused) v.pause(); });
+// Reels in the pop-up: tap the screen or its button to play with sound / pause, one at a time.
+function bindReels(root){ root.querySelectorAll('.reel .v').forEach(box=>{ const v=box.querySelector('video'), btn=box.querySelector('.play'); if(!v||!btn) return;
+  const sync=()=>{ const p=!v.paused; btn.classList.toggle('playing',p); btn.setAttribute('aria-pressed',String(p)); btn.setAttribute('aria-label',p?'Pause clip':'Play clip'); };
+  box.addEventListener('click',e=>{ e.stopPropagation(); if(v.paused){ root.querySelectorAll('video').forEach(o=>{ if(o!==v&&!o.paused) o.pause(); }); v.muted=false; v.play().catch(()=>{ v.muted=true; v.play().catch(()=>{}); }); } else v.pause(); sync(); });
+  ['play','pause','ended'].forEach(ev=>v.addEventListener(ev,sync)); }); }
 
 function fill(i){
   const s=SKILLS[i];
   $('#sk-title').innerHTML=title(s,i);
   $('.sk-desc').textContent=s.desc; $('.sk-what').textContent=s.what; $('.sk-shown').textContent=s.here;
   $('.sk-conn .pills').innerHTML=s.conn.map(c=>IC[c]?`<span class="pill"><img src="/assets/c-${IC[c]}.png" alt="">${c}</span>`:`<span class="pill txt">${c}</span>`).join('');
-  const dl=$('.sk-dl'); dl.href=`/skills/${s.slug}.zip`; dl.setAttribute('aria-label',`Download the ${s.name} skill`);
+  const dl=$('.sk-dl'); dl.hidden=!s.slug; if(s.slug){ dl.href=`/skills/${s.slug}.zip`; dl.setAttribute('aria-label',`Download the ${s.name} skill`); }
+  $('.sk-feats').hidden=!s.features; $('.sk-feats ul').innerHTML=(s.features||[]).map(f=>`<li><b>${f[0]}</b><span>${f[1]}</span></li>`).join('');
+  $('.sk-who').innerHTML=s.cardWho||''; $('.sk-who').hidden=!s.cardWho;
   $('.sk-next').innerHTML=`Next: ${SKILLS[(i+1)%SKILLS.length].name} <span>→</span>`;
-  const img=$('.sk-stage img'); img.src=`/assets/sk-out-${i+1}.webp`; img.alt=`What the ${s.name} skill made for ${s.shown}`;
+  pauseAll(); const st=$('.sk-stage'); st.classList.toggle('custom',!!s.stage);
+  st.innerHTML=s.stage||`<img src="/assets/sk-out-${s.img}.webp" alt="What the ${s.name} skill made for ${s.shown}" decoding="async">`; bindReels(st);
   railBtns.forEach((b,k)=>{ b.setAttribute('aria-selected',String(k===i)); b.tabIndex=k===i?0:-1; });
   panel.scrollTop=0; preload((i+1)%SKILLS.length);
 }
@@ -481,7 +484,7 @@ function open(i,card){
   });
 }
 function close(){
-  if(busy||layer.hidden) return; busy=true;
+  if(busy||layer.hidden) return; busy=true; pauseAll();
   const card=cards[cur]||opener, done=()=>{ layer.hidden=true; layer.classList.remove('is-in'); panel.style.opacity=0; panel.style.clipPath=''; document.documentElement.classList.remove('sk-on'); busy=false; (card||opener).focus({preventScroll:true}); };
   layer.classList.remove('is-in');
   if(reduce){ done(); return; }
