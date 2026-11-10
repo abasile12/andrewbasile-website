@@ -271,6 +271,11 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .play.playing .ic-pause{display:block}
 .play:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 
+/* Client logos under Additional work */
+.clients{list-style:none;margin:36px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.clients li{display:inline-flex;align-items:center;gap:10px;padding:5px 16px 5px 5px;border:1px solid var(--rule);border-radius:999px;font-size:14px;font-weight:500;white-space:nowrap;background:#fff}
+.clients img{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+@media (max-width:640px){.clients{margin-top:28px;gap:8px}.clients li{font-size:13px;padding-right:13px;gap:8px}.clients img{width:30px;height:30px}}
 /* Additional work */
 .additional h3{font-weight:600;font-size:38px;letter-spacing:-.03em;margin:44px 0 20px}
 .addrow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
@@ -581,6 +586,23 @@ html.pl-running .portrait img{visibility:hidden}
         <div class="add"><div class="v"><video src="assets/add-charlisse.mp4" poster="assets/add-charlisse.jpg" muted loop playsinline preload="none" aria-label="Charlisse Leger-Walker"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.instagram.com/charlisse.legerwalker/reel/DS_AD3pE5MU/" target="_blank" rel="noopener"><span>Charlisse Leger-Walker</span><span class="g">↗</span></a></div>
         <div class="add"><div class="v"><video src="assets/add-boythrob.mp4" poster="assets/add-boythrob.jpg" muted loop playsinline preload="none" aria-label="Boy Throb"></video><button class="play" type="button" aria-label="Play clip" aria-pressed="false"><svg class="ic-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg><svg class="ic-pause" viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg></button></div><a class="t" href="https://www.youtube.com/shorts/EoHLEoxtekE" target="_blank" rel="noopener"><span>Boy Throb</span><span class="g">↗</span></a></div>
       </div>
+      <ul class="clients" aria-label="Brands and creators">
+        <li><img src="assets/clients/cl-autograph.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Autograph</li>
+        <li><img src="assets/clients/cl-sturniolo.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Sturniolo Triplets</li>
+        <li><img src="assets/clients/cl-chadjt.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Chad &amp; JT</li>
+        <li><img src="assets/clients/cl-charlisse.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Charlisse Leger-Walker</li>
+        <li><img src="assets/clients/cl-lyndenlane.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Lynden Lane Co.</li>
+        <li><img src="assets/clients/cl-sgk.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Short Game King</li>
+        <li><img src="assets/clients/cl-ucla.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">UCLA Athletics</li>
+        <li><img src="assets/clients/cl-rdb.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Red Dining Book</li>
+        <li><img src="assets/clients/cl-boythrob.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Boy Throb</li>
+        <li><img src="assets/clients/cl-goodmeasure.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Good Measure Studios</li>
+        <li><img src="assets/clients/cl-uninterrupted.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Uninterrupted</li>
+        <li><img src="assets/clients/cl-range.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Range Media Partners</li>
+        <li><img src="assets/clients/cl-rebeccaleigh.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Rebecca Leigh</li>
+        <li><img src="assets/clients/cl-motorsport.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Motorsport Network</li>
+        <li><img src="assets/clients/cl-taskrabbit.jpg" alt="" width="36" height="36" loading="lazy" decoding="async">Taskrabbit</li>
+      </ul>
     </div>
   </div>
 </section>
