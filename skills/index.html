@@ -170,7 +170,11 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .skc h3 .n{color:var(--muted);font-weight:500}
 .skc h3 .n i{font-style:normal;color:var(--green);margin:0 .18em}
 .skc p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
-.skc .foot{margin:auto 12px 0;padding:16px 0 4px;display:flex;justify-content:flex-end;align-items:center;gap:12px;border-top:1px solid var(--rule)}
+.skc .foot{margin:auto 12px 0;padding:16px 0 4px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--rule)}
+.skc .conn{display:flex;align-items:center;min-width:0}
+.skc .conn img{width:30px;height:30px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--rule);transition:margin .45s cubic-bezier(.22,1,.36,1)}
+.skc .conn img+img{margin-left:-5px}
+.skc:hover .conn img+img{margin-left:6px}
 .plus{flex:none;width:34px;height:34px;border-radius:50%;border:0;padding:0;background:var(--green);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:transform .4s cubic-bezier(.22,1,.36,1)}
 .plus svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;stroke-linecap:round;fill:none}
 .skc:hover .plus{transform:rotate(90deg) scale(1.06)}
@@ -387,7 +391,7 @@ html.sk-on{overflow:hidden}
 // Home links: this page is served beside the home page, so strip our own filename from the address to get back
 // Skills & Automations: glass overview cards that open into a glass pop-up (ported from the FEED Studios v2 glass overview, Nov 9).
 (()=>{
-const IC={ManyChat:'manychat',Notion:'notion',Figma:'figma','Google Drive':'drive',Slack:'slack',Higgsfield:'higgsfield',Instagram:'instagram','Twelve Labs':'twelvelabs',TikTok:'tiktok',Shade:'shade'};
+const IC={ManyChat:'manychat',Notion:'notion',Figma:'figma','Google Drive':'drive',Slack:'slack',Higgsfield:'higgsfield',Instagram:'instagram','Twelve Labs':'twelvelabs',TikTok:'tiktok',Shade:'shade',YouTube:'youtube'};
 const SKILLS=[
  {img:1,name:'FEED Content Engine',slug:'feed-studios-content-engine',shown:'ReLoom',
   line:'A reference post goes in and a finished edit comes out, with the brief, the script and a living post library built for every client along the way.',
@@ -445,6 +449,7 @@ const HOOKDESK={name:'The Hook Desk',slug:null,shown:'Colby Maier',wide:true,
 SKILLS.unshift(HOOKDESK);
 const num=i=>String(i+1).padStart(2,'0');
 const title=(s,i)=>`<span class="n">${num(i)}<i>·</i></span>${s.name}`;
+const connStack=c=>`<div class="conn" role="img" aria-label="Connectors needed: ${c.join(', ')}">${c.map(n=>IC[n]?`<img src="/assets/c-${IC[n]}.png" alt="" title="${n}" width="30" height="30" loading="lazy" decoding="async">`:'').join('')}</div>`;
 const plusSvg='<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1.5v11M1.5 7h11"/></svg>';
 
 const grid=document.getElementById('skgrid'); if(!grid) return;
@@ -454,7 +459,7 @@ const cards=SKILLS.map((s,i)=>{
   if(s.wide) a.classList.add('wide');
   a.innerHTML=`<div class="vis">${s.cardVis||`<img src="/assets/sk-card-${s.img}.webp" alt="" width="776" height="412" loading="lazy" decoding="async">`}</div>
     <div class="side"><div class="txt"><h3>${title(s,i)}</h3><p>${s.line}</p>${s.cardWho||''}</div>
-    <div class="foot"><button class="plus" type="button" tabindex="-1" aria-hidden="true">${plusSvg}</button></div></div>`;
+    <div class="foot">${connStack(s.conn)}<button class="plus" type="button" tabindex="-1" aria-hidden="true">${plusSvg}</button></div></div>`;
   a.addEventListener('click',()=>open(i,a));
   a.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(i,a); } });
   grid.appendChild(a); return a;

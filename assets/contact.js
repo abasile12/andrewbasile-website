@@ -4,7 +4,7 @@
 (() => {
   const ENDPOINT = 'https://formsubmit.co/ajax/andrew.basile12@gmail.com';
   const MAIL = 'andrew.basile12@gmail.com';
-  const CALENDLY_URL = ''; // e.g. 'https://calendly.com/your-handle/intro'
+  const CALENDLY_URL = 'https://calendly.com/andrewbasile12/andrew-basile-intro';
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const wrap = document.createElement('div');
